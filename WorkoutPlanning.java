@@ -9,6 +9,7 @@ public class WorkoutPlanning {
     // double weight,
     // goal,name, cal goal string
     // what's your main focus
+    //hey
 
 
 }
