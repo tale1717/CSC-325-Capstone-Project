@@ -12,5 +12,6 @@ public class WorkoutPlanning {
         System.out.println("Goal: " + user.getGoal());
         System.out.println("Calories intake per day: " + calories);
         System.out.println("Workout plan: " + workout);
+        //bleh
     }
 }
