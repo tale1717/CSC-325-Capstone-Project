@@ -9,9 +9,15 @@ public class WorkoutPlanning {
         double calories = calculator.calculateCalories(user);
         String workout = planner.getWorkoutPlan(user.getGoal());
 
+
+        System.out.println("\n--- Personalized Workout Plan ---");
+        System.out.println("Age: " + age);
+        System.out.println("Height: " + String.format("%.1f", heightCm) + " cm (" + feetPart + " ft " + String.format("%.1f", inchesPart) + " in)");
+        System.out.println("Weight: " + weightPounds + " lbs (" + String.format("%.1f", weightKg) + " kg)");
         System.out.println("Goal: " + user.getGoal());
-        System.out.println("Calories intake per day: " + calories);
+        System.out.println("Calories intake per day: " + String.format("%.1f", calories));
         System.out.println("Workout plan: " + workout);
-        //bleh
+
+        scanner.close();
     }
 }
