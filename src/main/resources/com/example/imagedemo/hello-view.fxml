@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21"
+xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.MyImgController">
+    <ImageView fx:id="myImageView" pickOnBounds="true"
+               preserveRatio="true"/>
+</AnchorPane>
+
+
+
+
+
+
