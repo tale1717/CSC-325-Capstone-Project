@@ -32,7 +32,7 @@ public class MyImgControllerTest {
             labelTreadmill.setManaged(true);
 
             labelBench.setTranslateX(50);
-            labelBench.setTranslateY(-80);
+            labelBench.setTranslateY(-200);
 
             labelTreadmill.setTranslateX(-160);
             labelTreadmill.setTranslateY(-25);

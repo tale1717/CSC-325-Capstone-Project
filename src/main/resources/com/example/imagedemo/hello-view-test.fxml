@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-
-<AnchorPane prefHeight="450.0" prefWidth="650.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.imagedemo.MyImgControllerTest">
-
-    <StackPane AnchorPane.topAnchor="0.0"
-               AnchorPane.bottomAnchor="0.0"
-               AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0">
-
-        <ImageView fx:id="myImageView"
-                   pickOnBounds="true"
-                   preserveRatio="true"/>
-
-        <Label fx:id="labelBench" text="Bench Area" visible="false" managed="false" />
-        <Label fx:id="labelTreadmill" text="Treadmills" visible="false" managed="false" />
-    </StackPane>
-
-</AnchorPane>
 
 <!--
 <StackPane ...>
@@ -32,7 +12,14 @@
 </StackPane>
 -->
 
+<AnchorPane prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.MyImgControllerTest">
+   <ImageView fitHeight="451.0" fitWidth="650.0">
+      <image>
+         <Image url="@gym-design-floor-plan.png" />
+      </image>
+   </ImageView>
+   <Label fx:id="labelBench1" layoutX="338.0" layoutY="-1.0" managed="true" prefHeight="26.0" prefWidth="81.0" text="Bench Area" visible="true" />
+   <Label layoutX="135.0" layoutY="188.0" text="Treadmills" />
+   <Label layoutX="369.0" layoutY="134.0" text="B1" />
 
-
-
-
+</AnchorPane>
