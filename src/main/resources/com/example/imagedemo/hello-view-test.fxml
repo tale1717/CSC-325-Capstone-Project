@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+<AnchorPane prefHeight="450.0" prefWidth="650.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.imagedemo.MyImgControllerTest">
+
+    <StackPane AnchorPane.topAnchor="0.0"
+               AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0">
+
+        <ImageView fx:id="myImageView"
+                   pickOnBounds="true"
+                   preserveRatio="true"/>
+
+        <Label fx:id="labelBench" text="Bench Area" visible="false" managed="false" />
+        <Label fx:id="labelTreadmill" text="Treadmills" visible="false" managed="false" />
+    </StackPane>
+
+</AnchorPane>
+
+<!--
+<StackPane ...>
+    <Image View .../>
+    <Label text="This is a hidden label" visible="false" managed="false"/>
+</StackPane>
+-->
+
+
+
+
+

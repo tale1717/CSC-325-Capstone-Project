@@ -12,6 +12,12 @@ xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.MyImgCo
                preserveRatio="true"/>
 </AnchorPane>
 
+<!--
+<StackPane ...>
+    <Image View .../>
+    <Label text="This is a hidden label" visible="false" managed="false"/>
+</StackPane>
+-->
 
 
 

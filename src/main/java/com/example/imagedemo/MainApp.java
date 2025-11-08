@@ -11,9 +11,9 @@ import java.io.IOException;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("hello-view-test.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Image Display");
+        stage.setTitle("Gym Layout Map Display");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
