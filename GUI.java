@@ -131,20 +131,28 @@ public class GUI {
     static class ResultPage extends JFrame {
         public ResultPage(String name, double height, double weight, int age, String goal) {
             setTitle("Fitness Planner - Results");
-            setSize(400, 300);
+            setSize(400, 380);
             setLayout(new BorderLayout());
             setLocationRelativeTo(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
 
             double bmi = weight / Math.pow(height / 100.0, 2);
-
             String plan;
+            String tip;
+            String workouts;
+
             if (goal.equals("Lose Weight")) {
                 plan = "Focus on calorie deficit and cardio 4–5x/week.";
+                tip = "Try eating more whole foods and tracking your steps.";
+                workouts = "Cardio (30 mins)\nStretching\nCycling";
             } else if (goal.equals("Gain Muscle")) {
                 plan = "Eat in a calorie surplus and lift weights 3–4x/week.";
+                tip = "Increase protein intake and focus on compound lifts.";
+                workouts = "Weight Training\nHigh Protein Meals\nProper Rest";
             } else {
                 plan = "Maintain a balanced diet and exercise 3x/week.";
+                tip = "Stay consistent and get enough sleep.";
+                workouts = "Walking\nYoga\nLight Strength Training";
             }
 
             JTextArea resultArea = new JTextArea();
@@ -156,10 +164,21 @@ public class GUI {
                             "Weight: " + weight + " kg\n" +
                             "Age: " + age + "\n\n" +
                             String.format("Your BMI: %.1f\n\n", bmi) +
-                            "Recommended Plan:\n" + plan
+                            "Recommended Plan:\n" + plan +
+                            "\n\nHealth Tip:\n" + tip +
+                            "\n\nWorkout Suggestions:\n" + workouts
             );
 
             add(new JScrollPane(resultArea), BorderLayout.CENTER);
+
+            // Back Button
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(e -> {
+                dispose();
+                new InputPage();
+            });
+            add(backButton, BorderLayout.SOUTH);
+
             setVisible(true);
         }
     }
