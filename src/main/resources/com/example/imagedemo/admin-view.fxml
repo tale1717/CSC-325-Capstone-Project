@@ -7,7 +7,8 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="600.0" style="-fx-border-color: purple;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.imagedemo.AdminController">
    <children>
-      <Button layoutX="247.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: yellow; -fx-font-size: 14; -fx-font-weight: bold; -fx-border-color: red;" text="Return To Home" />
+      <Button layoutX="247.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: yellow; -fx-font-size: 14; -fx-font-weight: bold; -fx-border-color: red;"
+              text="Return To Home" />
       <Label layoutX="256.0" layoutY="17.0" style="-fx-font-size: 22;" text="Admin View" />
       <Label alignment="CENTER" layoutX="129.0" layoutY="85.0" prefHeight="26.0" prefWidth="65.0" style="-fx-border-color: blue; -fx-border-width: 2px;" text="Treadmills" />
       <Label alignment="CENTER" layoutX="426.0" layoutY="84.0" prefHeight="27.0" prefWidth="61.0" style="-fx-border-color: blue; -fx-border-width: 2px;" text="Benches" />
