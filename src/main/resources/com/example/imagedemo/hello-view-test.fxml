@@ -13,18 +13,14 @@
 </StackPane>
 -->
 
-<AnchorPane prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.GymLayoutController">
+<AnchorPane prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.MyImgControllerTest">
    <ImageView fitHeight="451.0" fitWidth="650.0">
       <image>
          <Image url="@gym-design-floor-plan.png" />
       </image>
    </ImageView>
-   <Label fx:id="labelBench1" alignment="CENTER" layoutX="339.0" managed="true" prefHeight="27.0" prefWidth="81.0" style="-fx-border-color: black;" text="Bench Area" visible="true" />
-   <Label alignment="CENTER" layoutX="132.0" layoutY="186.0" prefHeight="27.0" prefWidth="64.0" style="-fx-border-color: black;" text="Treadmills" />
-   <Label alignment="CENTER" layoutX="363.0" layoutY="112.0" prefHeight="19.0" prefWidth="27.0" style="-fx-font-weight: bold; -fx-border-color: black;" text="B1" />
-   <Button layoutX="88.0" layoutY="392.0" mnemonicParsing="false" onAction="#returnBackToHome" text="Return To Home" />
-   <Label alignment="CENTER" layoutX="147.0" layoutY="157.0" prefHeight="19.0" prefWidth="26.0" style="-fx-font-weight: bold; -fx-border-color: black;" text="T1" />
-   <Label alignment="CENTER" layoutX="202.0" layoutY="156.0" prefHeight="20.0" prefWidth="30.0" style="-fx-border-color: black;" text="Y/N" />
-   <Label alignment="CENTER" layoutX="362.0" layoutY="138.0" prefHeight="20.0" prefWidth="30.0" style="-fx-border-color: black;" text="Y/N" />
+   <Label fx:id="labelBench1" layoutX="338.0" layoutY="-1.0" managed="true" prefHeight="26.0" prefWidth="81.0" text="Bench Area" visible="true" />
+   <Label layoutX="135.0" layoutY="188.0" text="Treadmills" />
+   <Label layoutX="369.0" layoutY="134.0" text="B1" />
 
 </AnchorPane>
