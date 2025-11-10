@@ -14,7 +14,7 @@
 -->
 
 <AnchorPane prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.GymLayoutController">
-   <ImageView fitHeight="451.0" fitWidth="650.0">
+   <ImageView fitHeight="450.0" fitWidth="650.0">
       <image>
          <Image url="@gym-design-floor-plan.png" />
       </image>

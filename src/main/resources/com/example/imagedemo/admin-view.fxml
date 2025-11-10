@@ -4,21 +4,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="600.0" style="-fx-border-color: purple;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.imagedemo.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" style="-fx-border-color: purple;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.AdminController">
    <children>
-      <Button layoutX="247.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: yellow; -fx-font-size: 14; -fx-font-weight: bold; -fx-border-color: red;"
-              text="Return To Home" />
-      <Label layoutX="256.0" layoutY="17.0" style="-fx-font-size: 22;" text="Admin View" />
+      <Button layoutX="265.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="32.0" prefWidth="121.0" style="-fx-background-color: yellow; -fx-font-size: 14; -fx-font-weight: bold; -fx-border-color: red;" text="Return To Home" />
+      <Label layoutX="270.0" layoutY="14.0" style="-fx-font-size: 22;" text="Admin View" />
       <Label alignment="CENTER" layoutX="129.0" layoutY="85.0" prefHeight="26.0" prefWidth="65.0" style="-fx-border-color: blue; -fx-border-width: 2px;" text="Treadmills" />
-      <Label alignment="CENTER" layoutX="426.0" layoutY="84.0" prefHeight="27.0" prefWidth="61.0" style="-fx-border-color: blue; -fx-border-width: 2px;" text="Benches" />
+      <Label alignment="CENTER" layoutX="444.0" layoutY="85.0" prefHeight="27.0" prefWidth="61.0" style="-fx-border-color: blue; -fx-border-width: 2px;" text="Benches" />
       <Label alignment="CENTER" layoutX="64.0" layoutY="148.0" prefHeight="30.0" prefWidth="25.0" style="-fx-border-color: purple;" text="T1" />
       <Label layoutX="115.0" layoutY="120.0" style="-fx-border-color: black;" text="Fully Functional?" />
-      <Label layoutX="412.0" layoutY="120.0" style="-fx-border-color: black;" text="Fully Functional?" />
+      <Label layoutX="428.0" layoutY="120.0" style="-fx-border-color: black;" text="Fully Functional?" />
       <Label alignment="CENTER" layoutX="117.0" layoutY="154.0" prefHeight="19.0" prefWidth="36.0" style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;" text="YES" />
       <Label alignment="CENTER" layoutX="167.0" layoutY="154.0" prefHeight="19.0" prefWidth="36.0" style="-fx-border-color: darkred; -fx-background-color: red; -fx-font-weight: bold;" text="NO" />
-      <Label alignment="CENTER" layoutX="362.0" layoutY="148.0" prefHeight="30.0" prefWidth="29.0" style="-fx-border-color: purple;" text="B1" />
-      <Label alignment="CENTER" layoutX="412.0" layoutY="154.0" prefHeight="19.0" prefWidth="36.0" style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;" text="YES" />
-      <Label alignment="CENTER" layoutX="462.0" layoutY="154.0" prefHeight="19.0" prefWidth="36.0" style="-fx-border-color: darkred; -fx-background-color: red; -fx-font-weight: bold;" text="NO" />
+      <Label alignment="CENTER" layoutX="372.0" layoutY="148.0" prefHeight="30.0" prefWidth="29.0" style="-fx-border-color: purple;" text="B1" />
+      <Label alignment="CENTER" layoutX="426.0" layoutY="154.0" prefHeight="19.0" prefWidth="36.0" style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;" text="YES" />
+      <Label alignment="CENTER" layoutX="485.0" layoutY="154.0" prefHeight="19.0" prefWidth="36.0" style="-fx-border-color: darkred; -fx-background-color: red; -fx-font-weight: bold;" text="NO" />
    </children>
 </AnchorPane>

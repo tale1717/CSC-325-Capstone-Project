@@ -4,10 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.imagedemo.HomeController">
    <children>
-      <Button layoutX="176.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleGymLayoutClick" prefHeight="32.0" prefWidth="101.0" text="Gym Layout" />
-      <Button layoutX="328.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleAdminClick" prefHeight="32.0" prefWidth="83.0" text="Admin" />
-      <Label layoutX="142.0" layoutY="94.0" prefHeight="26.0" prefWidth="316.0" text=" Click to view either the Admin Setting or Map of Gym" />
+      <Button layoutX="187.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleGymLayoutClick" prefHeight="32.0" prefWidth="101.0" text="Gym Layout" />
+      <Button layoutX="362.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleAdminClick" prefHeight="32.0" prefWidth="83.0" text="Admin" />
+      <Label layoutX="170.0" layoutY="93.0" prefHeight="26.0" prefWidth="316.0" text=" Click to view either the Admin Setting or Map of Gym" />
    </children>
 </AnchorPane>
