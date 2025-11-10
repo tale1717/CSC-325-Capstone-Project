@@ -7,6 +7,9 @@ module com.example.firebaseadminjavafx {
     requires com.google.auth.oauth2;  // google-auth-library-oauth2-http
     requires google.cloud.firestore;
 
+    requires com.google.api.apicommon; // com.google.api.core.ApiFuture
+    requires google.cloud.core;
+
     opens com.example.firebaseadminjavafx to javafx.fxml;
     exports com.example.firebaseadminjavafx;
 }
