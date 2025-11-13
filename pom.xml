@@ -17,21 +17,21 @@
     </properties>
 
     <dependencies>
-        <!-- Firebase Admin SDK -->
+
         <dependency>
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
             <version>9.2.0</version>
         </dependency>
 
-        <!-- (Optional but helpful) Firestore client explicit -->
+        <!-- Firestore client explicit -->
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-firestore</artifactId>
             <version>3.15.0</version>
         </dependency>
 
-        <!-- JavaFX -->
+   <!--     JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -46,8 +46,7 @@
 
     <build>
         <plugins>
-
-            <!-- Ensure Java 21 release; helps Maven place JavaFX on the module path -->
+     <!-- Ensure Java 21 release; helps Maven place JavaFX on the module path -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -63,7 +62,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <!-- Update to match your actual app class -->
+                    <!-- Update  -->
                     <mainClass>com.example.firebaseadminjavafx.Main</mainClass>
                 </configuration>
             </plugin>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.firebaseadminjavafx.GymAppHomeController"
+      alignment="CENTER"
+      spacing="15"
+      prefWidth="400"
+      prefHeight="400">
+    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+
+    <Label fx:id="welcomeLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <Label text="Gym layout goes here"/>
+    <HBox spacing="10">
+        <Button fx:id="goAdminButton" text="Admin" onAction="#handleGoAdmin" prefWidth="120"/>
+        <Button fx:id="signOutButton" text="Sign Out" onAction="#handleSignOut" prefWidth="120"/>
+    </HBox>
+</VBox>

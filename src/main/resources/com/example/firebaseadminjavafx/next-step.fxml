@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.firebaseadminjavafx.NextStepController"
+      alignment="CENTER"
+      spacing="15"
+      prefWidth="400"
+      prefHeight="400">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <children>
+        <Label text="Signed In!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="6" alignment="CENTER">
+            <Label text="Email:"/>
+            <Label fx:id="emailValue" text="(loading)"/>
+        </HBox>
+
+        <HBox spacing="6" alignment="CENTER">
+            <Label text="UID:"/>
+            <Label fx:id="uidValue" text="(loading)"/>
+        </HBox>
+
+        <Button fx:id="signOutButton"
+                text="Sign Out"
+                onAction="#handleSignOut"
+                prefWidth="120"/>
+    </children>
+</VBox>

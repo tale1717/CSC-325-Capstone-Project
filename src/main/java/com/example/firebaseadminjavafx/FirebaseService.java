@@ -7,13 +7,13 @@ import com.google.firebase.FirebaseOptions;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class FirebaseService {
+public final class FirebaseService {
     private static boolean initialized = false;
 
-    public static void initialize() {
+    public static synchronized void initialize() {
         if (initialized) return;
         try {
-            // Dev: keep the key next to pom.xml
+            // Use your service-account key. You said it is named key.json in project root.
             FileInputStream serviceAccount = new FileInputStream("key.json");
 
             FirebaseOptions options = FirebaseOptions.builder()
@@ -27,4 +27,6 @@ public class FirebaseService {
             throw new RuntimeException("Failed to initialize Firebase: " + e.getMessage(), e);
         }
     }
+
+    private FirebaseService() {}
 }

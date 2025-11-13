@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.firebaseadminjavafx.WelcomeController"
+      alignment="CENTER"
+      spacing="15"
+      prefWidth="400"
+      prefHeight="400">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <children>
+        <Label text="Welcome Screen" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <TextField fx:id="emailID"
+                   promptText="Email"
+                   prefWidth="250"
+                   maxWidth="250"/>
+
+        <PasswordField fx:id="passwordID"
+                       promptText="Password"
+                       prefWidth="250"
+                       maxWidth="250"/>
+
+        <!-- Used for both success & error messages -->
+        <Label fx:id="errorLabel"
+               wrapText="true"
+               textFill="#c62828"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"
+               maxWidth="250"
+               alignment="CENTER"/>
+
+        <Button fx:id="registerButton"
+                text="Register"
+                onAction="#registerButtonClicked"
+                prefWidth="120"/>
+
+        <Button fx:id="signInButton"
+                text="Sign In"
+                onAction="#signInButtonClicked"
+                defaultButton="true"
+                prefWidth="120"/>
+    </children>
+</VBox>

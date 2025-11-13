@@ -10,6 +10,8 @@ module com.example.firebaseadminjavafx {
     requires com.google.api.apicommon; // com.google.api.core.ApiFuture
     requires google.cloud.core;
 
+    requires java.logging; // adds updates to intellij logs
+
     opens com.example.firebaseadminjavafx to javafx.fxml;
     exports com.example.firebaseadminjavafx;
 }

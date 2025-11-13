@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<VBox alignment="CENTER" spacing="15.0"
+      xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.firebaseadminjavafx.HelloController"
-      alignment="CENTER" spacing="10">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+      fx:controller="com.example.firebaseadminjavafx.WelcomeController">
 
-    <Label text="GymApp • Firestore Demo" style="-fx-font-size: 18;" />
-    <TextField fx:id="nameField" promptText="Enter name"/>
-    <TextField fx:id="emailField" promptText="Enter email"/>
-    <Button text="Add User" onAction="#handleAddUser"/>
-    <Button text="Load Users" onAction="#handleLoadUsers"/>
-    <ListView fx:id="userList" prefWidth="320" prefHeight="200"/>
+    <children>
+        <Label text="Welcome Screen" style="-fx-font-size: 18px;" />
+        <TextField fx:id="emailID" promptText="Email" />
+        <PasswordField fx:id="passwordID" promptText="Password" />
+        <Label fx:id="errorLabel" textFill="#c62828" />
+        <Button fx:id="registerButton" text="Register" onAction="#registerButtonClicked" />
+        <Button fx:id="signInButton" text="Sign In" onAction="#signInButtonClicked" defaultButton="true"/>
+    </children>
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
 </VBox>
