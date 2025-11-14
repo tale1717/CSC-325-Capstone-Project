@@ -28,7 +28,7 @@
     </Label>
 
     <!-- Instruction -->
-    <Label text="Enter your email to sign up for this Gym Prototype" wrapText="true" />
+    <Label text="Enter your email and password to sign up for this Gym Prototype" wrapText="true" />
 
     <!-- Email Field -->
     <TextField fx:id="emailField" promptText="email@domain.com" prefWidth="300.0" prefHeight="40.0">
@@ -37,15 +37,21 @@
         </font>
     </TextField>
 
-    <!-- Password Field (NEW) -->
+    <!-- Password Field -->
     <PasswordField fx:id="passwordField" promptText="Enter your password" prefWidth="300.0" prefHeight="40.0">
         <font>
             <Font size="14.0" />
         </font>
     </PasswordField>
 
-    <!-- Sign Up Button -->
-    <Button fx:id="signUpButton" text="Sign up with email" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-weight: bold;">
+    <!-- Register and Sign In Buttons -->
+    <Button fx:id="registerButton" text="Register" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-weight: bold;">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+
+    <Button fx:id="signInButton" text="Sign In" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #f0f0f0; -fx-text-fill: #000000; -fx-border-color: #cccccc; -fx-font-weight: bold;">
         <font>
             <Font size="14.0" />
         </font>
@@ -55,7 +61,7 @@
     <Label fx:id="orLabel" text="or continue with" />
 
     <!-- Google Button -->
-    <Button fx:id="googleButton" text="Google" prefWidth="300.0" prefHeight="40.0" style="-fx-border-color: #cccccc; -fx-background-color: white; -fx-font-weight: bold;">
+    <Button fx:id="googleButton" text="Google" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #4285f4; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #4285f4;">
         <font>
             <Font size="14.0" />
         </font>

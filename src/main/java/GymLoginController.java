@@ -29,7 +29,10 @@ public class GymLoginController implements Initializable {
     private PasswordField passwordField;
 
     @FXML
-    private Button signUpButton;
+    private Button registerButton;
+
+    @FXML
+    private Button signInButton;
 
     @FXML
     private Label orLabel;
@@ -54,11 +57,12 @@ public class GymLoginController implements Initializable {
         termsLabel.setWrapText(true);
 
         // Add event handlers for buttons
-        signUpButton.setOnAction(event -> handleSignUp());
+        registerButton.setOnAction(event -> handleRegister());
+        signInButton.setOnAction(event -> handleSignIn());
         googleButton.setOnAction(event -> handleGoogleSignIn());
     }
 
-    private void handleSignUp() {
+    private void handleRegister() {
         String email = emailField.getText();
         String password = passwordField.getText();
 
@@ -67,18 +71,16 @@ public class GymLoginController implements Initializable {
             if (isValidEmail(email)) {
                 // Validate password
                 if (isValidPassword(password)) {
-                    System.out.println("Signing up with email: " + email);
+                    System.out.println("Registering with email: " + email);
 
                     // Create user in Firebase
                     String userId = FirebaseService.createUserWithEmail(email, password);
                     if (userId != null) {
                         System.out.println("User created successfully with ID: " + userId);
-                        // Show success message to user
                         showSuccessMessage("Account created successfully!");
                         clearFields();
                     } else {
                         System.out.println("Failed to create user");
-                        // Show error message to user
                         showErrorMessage("Failed to create account. Please try again.");
                     }
                 } else {
@@ -91,6 +93,29 @@ public class GymLoginController implements Initializable {
             }
         } else {
             System.out.println("Please enter both email and password");
+            showErrorMessage("Please enter both email and password.");
+        }
+    }
+
+    private void handleSignIn() {
+        String email = emailField.getText();
+        String password = passwordField.getText();
+
+        if (email != null && !email.trim().isEmpty() && password != null && !password.trim().isEmpty()) {
+            if (isValidEmail(email)) {
+                System.out.println("Signing in with email: " + email);
+                // Add your sign-in logic here
+                boolean signedIn = FirebaseService.signInWithEmail(email, password);
+                if (signedIn) {
+                    showSuccessMessage("Signed in successfully!");
+                    clearFields();
+                } else {
+                    showErrorMessage("Invalid email or password.");
+                }
+            } else {
+                showErrorMessage("Please enter a valid email address.");
+            }
+        } else {
             showErrorMessage("Please enter both email and password.");
         }
     }
