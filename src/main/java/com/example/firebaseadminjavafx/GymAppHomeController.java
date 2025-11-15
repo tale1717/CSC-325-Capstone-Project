@@ -2,35 +2,32 @@ package com.example.firebaseadminjavafx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 public class GymAppHomeController {
 
-    @FXML private Label headerLabel;
-    @FXML private Button gymLayoutButton;
-    @FXML private Button workoutPlanningButton;
-    @FXML private Button backButton;
+    @FXML
+    private Button gymLayoutButton;
 
     @FXML
-    private void initialize() {
-        String email = (Main.currentUserEmail != null) ? Main.currentUserEmail : "(unknown)";
-        headerLabel.setText("Gym Home — " + email);
-    }
+    private Button workoutPlanningButton;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private void handleGymLayout() {
-        System.out.println("Gym Layout clicked for: " + Main.currentUserEmail);
 
+        System.out.println("Gym Layout button clicked.");
     }
 
     @FXML
     private void handleWorkoutPlanning() {
-        System.out.println("Workout Planning clicked for: " + Main.currentUserEmail);
-
+        System.out.println("Workout Planning button clicked.");
+        Main.setRoot("workout-planning.fxml", workoutPlanningButton);
     }
 
     @FXML
     private void handleBack() {
-        Main.setRoot("NextStep", backButton);
+        Main.setRoot("next-step.fxml", backButton);
     }
 }

@@ -7,13 +7,19 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class WelcomeController {
+
+    private static final Logger log = Logger.getLogger(WelcomeController.class.getName());
 
     @FXML private TextField emailID;
     @FXML private PasswordField passwordID;
@@ -22,13 +28,13 @@ public class WelcomeController {
     @FXML private Label errorLabel;
 
     @FXML
-    void registerButtonClicked(ActionEvent event) {
+    private void registerButtonClicked(ActionEvent event) {
         clearError();
         registerUser();
     }
 
     @FXML
-    void signInButtonClicked(ActionEvent event) {
+    private void signInButtonClicked(ActionEvent event) {
         clearError();
 
         String email = safeTrim(emailID.getText());
@@ -40,43 +46,45 @@ public class WelcomeController {
         }
 
         try {
-            ApiFuture<QuerySnapshot> future = FirestoreContext.fstore
-                    .collection("Users")
+            ApiFuture<QuerySnapshot> future = Main.fstore.collection("Users")
                     .whereEqualTo("email", email)
                     .get();
-            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            List<QueryDocumentSnapshot> docs = future.get().getDocuments();
 
-            if (!documents.isEmpty()) {
-                QueryDocumentSnapshot doc = documents.get(0);
-                String storedPassword = doc.getString("password");
-                if (password.equals(storedPassword)) {
-                    FirestoreContext.currentUserUid = doc.getId();
-                    FirestoreContext.currentUserEmail = email;
-                    Main.currentUserUid = doc.getId();
-                    Main.currentUserEmail = email;
-
-                    System.out.println("INFO: User signed in successfully: example - " + email);
-
-                    Main.setRoot("NextStep", signInButton);
-                } else {
-                    setError("Incorrect password.");
-                }
-            } else {
+            if (docs.isEmpty()) {
                 setError("No account found with this email.");
+                log.info("Sign in failed (no account): " + email);
+                return;
+            }
+
+            QueryDocumentSnapshot doc = docs.get(0);
+            String storedPassword = doc.getString("password");
+            if (storedPassword != null && storedPassword.equals(password)) {
+                Main.currentUserUid = doc.getId();   // uid stored as document id at register
+                Main.currentUserEmail = email;
+
+                log.info("User signed in successfully: " + Main.currentUserEmail);
+                Main.setRoot("next-step.fxml", signInButton);
+            } else {
+                setError("Incorrect password.");
+                log.info("Sign in failed (bad password): " + email);
             }
         } catch (Exception e) {
             e.printStackTrace();
             setError("Sign-in failed. See console.");
+            log.info("Sign in failed (exception) for: " + email);
         }
     }
 
-    public void registerUser() {
+    // --- Helpers & Registration ---
+
+    private boolean registerUser() {
         String email = safeTrim(emailID.getText());
         String password = safeTrim(passwordID.getText());
 
         if (email.isEmpty() || password.length() < 6) {
             setError("Email is invalid or password must be at least 6 characters.");
-            return;
+            return false;
         }
 
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
@@ -84,41 +92,32 @@ public class WelcomeController {
                 .setPassword(password);
 
         try {
-            UserRecord userRecord = FirestoreContext.fauth.createUser(request);
+            UserRecord userRecord = Main.fauth.createUser(request);
 
             Map<String, Object> data = new HashMap<>();
             data.put("email", email);
-            data.put("password", password);
+            data.put("password", password); // demo only
 
-            FirestoreContext.fstore.collection("Users")
-                    .document(userRecord.getUid())
-                    .set(data);
+            Main.fstore.collection("Users").document(userRecord.getUid()).set(data);
 
-            FirestoreContext.currentUserUid = userRecord.getUid();
-            FirestoreContext.currentUserEmail = email;
-
-            setError("Registration successful! Please sign in.");
-            System.out.println("INFO: User registered successfully: example - " + email);
+            // Do NOT navigate. Require explicit sign-in afterwards.
+            setError("Registered! Please sign in.");
+            log.info("User registered successfully: " + email);
+            return true;
 
         } catch (FirebaseAuthException e) {
             setError("Registration error: " + e.getMessage());
+            log.info("Registration failed (auth): " + email + " -> " + e.getMessage());
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             setError("Registration failed. See console.");
+            log.info("Registration failed (exception): " + email);
+            return false;
         }
     }
 
-    private static String safeTrim(String s) {
-        return (s == null) ? "" : s.trim();
-    }
-
-    private void setError(String msg) {
-        if (errorLabel != null) {
-            errorLabel.setText(msg);
-        }
-    }
-
-    private void clearError() {
-        setError("");
-    }
+    private static String safeTrim(String s) { return (s == null) ? "" : s.trim(); }
+    private void setError(String msg) { if (errorLabel != null) errorLabel.setText(msg); }
+    private void clearError() { setError(""); }
 }

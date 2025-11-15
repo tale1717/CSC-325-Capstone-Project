@@ -1,6 +1,7 @@
 module com.example.firebaseadminjavafx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
 
     requires firebase.admin;          // firebase-admin JAR
     requires com.google.auth;

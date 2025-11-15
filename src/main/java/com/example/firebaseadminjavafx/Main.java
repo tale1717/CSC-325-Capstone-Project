@@ -29,28 +29,29 @@ public class Main extends Application {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(Main.class.getResource("/com/example/firebaseadminjavafx/welcome-view.fxml"));
         Parent root = fxmlLoader.load();
+
         Scene scene = new Scene(root, 400, 400);
         stage.setTitle("GymApp");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void setRoot(String viewName, Control anyControlInScene) {
+
+    public static void setRoot(String fxmlName, Control anyControlInScene) {
         try {
-            String resourcePath;
-            if (viewName.endsWith(".fxml")) {
-                resourcePath = "/com/example/firebaseadminjavafx/" + viewName;
-            } else {
-                resourcePath = "/com/example/firebaseadminjavafx/"
-                        + viewName.replaceAll("([a-z])([A-Z])", "$1-$2").toLowerCase()
-                        + ".fxml";
+            if (!fxmlName.endsWith(".fxml")) {
+                fxmlName = fxmlName + ".fxml";
             }
+
+            String resourcePath = "/com/example/firebaseadminjavafx/" + fxmlName;
+            System.out.println("Loading FXML from: " + resourcePath);
 
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(resourcePath));
             Parent newRoot = loader.load();
             anyControlInScene.getScene().setRoot(newRoot);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to switch to view: " + viewName, e);
+            e.printStackTrace();
+            throw new RuntimeException("Failed to switch to view: " + fxmlName, e);
         }
     }
 

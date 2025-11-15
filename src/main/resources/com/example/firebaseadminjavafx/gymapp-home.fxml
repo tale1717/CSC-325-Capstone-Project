@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -10,29 +11,30 @@
       alignment="CENTER"
       spacing="20"
       prefWidth="400"
-      prefHeight="400">
+      prefHeight="250">
     <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
+        <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
     <children>
-        <Label fx:id="headerLabel"
-               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Label text="Gym Home"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
         <HBox spacing="20" alignment="CENTER">
             <Button fx:id="gymLayoutButton"
                     text="Gym Layout"
                     onAction="#handleGymLayout"
-                    prefWidth="140"/>
+                    prefWidth="130"/>
+
             <Button fx:id="workoutPlanningButton"
                     text="Workout Planning"
                     onAction="#handleWorkoutPlanning"
-                    prefWidth="140"/>
+                    prefWidth="130"/>
         </HBox>
 
         <Button fx:id="backButton"
                 text="Back"
                 onAction="#handleBack"
-                prefWidth="120"/>
+                prefWidth="100"/>
     </children>
 </VBox>

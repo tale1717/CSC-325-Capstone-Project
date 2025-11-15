@@ -1,56 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.EnterInfoController"
-      alignment="CENTER"
-      spacing="15"
-      prefWidth="400"
-      prefHeight="400">
-    <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
-    </padding>
-
+      spacing="12" alignment="CENTER" prefWidth="400" prefHeight="400">
     <children>
-        <Label fx:id="headerLabel"
-               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-
-        <TextField fx:id="nameField"
-                   promptText="Name"
-                   prefWidth="250"
-                   maxWidth="250"/>
-
-        <TextField fx:id="ageField"
-                   promptText="Age"
-                   prefWidth="250"
-                   maxWidth="250"/>
-
-        <TextField fx:id="phoneField"
-                   promptText="Phone Number"
-                   prefWidth="250"
-                   maxWidth="250"/>
-
-        <Label fx:id="statusLabel"
-               wrapText="true"
-               textFill="#c62828"
-               style="-fx-font-size: 12px; -fx-font-weight: bold;"
-               maxWidth="280"
-               alignment="CENTER"/>
-
-        <!-- Centered Save + Back -->
-        <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="saveButton"
-                    text="Save"
-                    onAction="#handleSave"
-                    prefWidth="120"/>
-            <Button fx:id="backButton"
-                    text="Back"
-                    onAction="#handleBack"
-                    prefWidth="120"/>
+        <Label text="Enter Info" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        <TextField fx:id="nameField"  promptText="Name"  maxWidth="260" />
+        <TextField fx:id="ageField"   promptText="Age"   maxWidth="260" />
+        <TextField fx:id="phoneField" promptText="Phone" maxWidth="260" />
+        <Label fx:id="statusLabel" textFill="#2e7d32" />
+        <HBox spacing="16" alignment="CENTER">
+            <children>
+                <Button fx:id="saveButton" text="Save" onAction="#handleSave" prefWidth="100"/>
+                <Button fx:id="backButton" text="Back" onAction="#handleBack" prefWidth="100"/>
+            </children>
         </HBox>
     </children>
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
 </VBox>
