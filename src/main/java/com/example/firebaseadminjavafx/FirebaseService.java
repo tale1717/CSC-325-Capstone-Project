@@ -13,7 +13,7 @@ public final class FirebaseService {
     public static synchronized void initialize() {
         if (initialized) return;
         try {
-            // Use your service-account key. You said it is named key.json in project root.
+
             FileInputStream serviceAccount = new FileInputStream("key.json");
 
             FirebaseOptions options = FirebaseOptions.builder()

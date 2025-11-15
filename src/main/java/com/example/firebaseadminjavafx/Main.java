@@ -18,38 +18,36 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Initialize Firebase + singletons
         FirebaseService.initialize();
         FirestoreContext.init();
 
-        // Link context
         fstore = FirestoreContext.fstore;
-        fauth  = FirestoreContext.fauth;
-        currentUserUid   = FirestoreContext.currentUserUid;
+        fauth = FirestoreContext.fauth;
+        currentUserUid = FirestoreContext.currentUserUid;
         currentUserEmail = FirestoreContext.currentUserEmail;
 
         FXMLLoader fxmlLoader =
                 new FXMLLoader(Main.class.getResource("/com/example/firebaseadminjavafx/welcome-view.fxml"));
         Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, 400, 400);   // match old demo size
+        Scene scene = new Scene(root, 400, 400);
         stage.setTitle("GymApp");
         stage.setScene(scene);
         stage.show();
     }
 
-    /** Swap the existing scene's root (no protected API). */
     public static void setRoot(String viewName, Control anyControlInScene) {
         try {
-            String resourcePath = viewName.endsWith(".fxml")
-                    ? "/com/example/firebaseadminjavafx/" + viewName
-                    : "/com/example/firebaseadminjavafx/"
-                    + viewName.replaceAll("([a-z])([A-Z])", "$1-$2").toLowerCase()
-                    + ".fxml";
+            String resourcePath;
+            if (viewName.endsWith(".fxml")) {
+                resourcePath = "/com/example/firebaseadminjavafx/" + viewName;
+            } else {
+                resourcePath = "/com/example/firebaseadminjavafx/"
+                        + viewName.replaceAll("([a-z])([A-Z])", "$1-$2").toLowerCase()
+                        + ".fxml";
+            }
 
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(resourcePath));
             Parent newRoot = loader.load();
-
-            // Just replace the root on the **current Scene**
             anyControlInScene.getScene().setRoot(newRoot);
         } catch (Exception e) {
             throw new RuntimeException("Failed to switch to view: " + viewName, e);

@@ -6,26 +6,31 @@ import javafx.scene.control.Label;
 
 public class GymAppHomeController {
 
-    @FXML private Label welcomeLabel;
-    @FXML private Button goAdminButton;
-    @FXML private Button signOutButton;
+    @FXML private Label headerLabel;
+    @FXML private Button gymLayoutButton;
+    @FXML private Button workoutPlanningButton;
+    @FXML private Button backButton;
 
     @FXML
     private void initialize() {
         String email = (Main.currentUserEmail != null) ? Main.currentUserEmail : "(unknown)";
-        welcomeLabel.setText("Welcome, " + email);
+        headerLabel.setText("Gym Home — " + email);
     }
 
     @FXML
-    private void handleGoAdmin() {
-        Main.setRoot("Admin", goAdminButton);
+    private void handleGymLayout() {
+        System.out.println("Gym Layout clicked for: " + Main.currentUserEmail);
+
     }
 
     @FXML
-    private void handleSignOut() {
-        System.out.println("INFO: User signed out successfully: example - " + Main.currentUserEmail);
-        Main.currentUserEmail = null;
-        Main.currentUserUid = null;
-        Main.setRoot("Welcome", signOutButton);
+    private void handleWorkoutPlanning() {
+        System.out.println("Workout Planning clicked for: " + Main.currentUserEmail);
+
+    }
+
+    @FXML
+    private void handleBack() {
+        Main.setRoot("NextStep", backButton);
     }
 }

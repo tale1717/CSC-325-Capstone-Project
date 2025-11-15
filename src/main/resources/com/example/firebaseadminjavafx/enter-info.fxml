@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.firebaseadminjavafx.EnterInfoController"
+      alignment="CENTER"
+      spacing="15"
+      prefWidth="400"
+      prefHeight="400">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <children>
+        <Label fx:id="headerLabel"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <TextField fx:id="nameField"
+                   promptText="Name"
+                   prefWidth="250"
+                   maxWidth="250"/>
+
+        <TextField fx:id="ageField"
+                   promptText="Age"
+                   prefWidth="250"
+                   maxWidth="250"/>
+
+        <TextField fx:id="phoneField"
+                   promptText="Phone Number"
+                   prefWidth="250"
+                   maxWidth="250"/>
+
+        <Label fx:id="statusLabel"
+               wrapText="true"
+               textFill="#c62828"
+               style="-fx-font-size: 12px; -fx-font-weight: bold;"
+               maxWidth="280"
+               alignment="CENTER"/>
+
+        <!-- Centered Save + Back -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="saveButton"
+                    text="Save"
+                    onAction="#handleSave"
+                    prefWidth="120"/>
+            <Button fx:id="backButton"
+                    text="Back"
+                    onAction="#handleBack"
+                    prefWidth="120"/>
+        </HBox>
+    </children>
+</VBox>

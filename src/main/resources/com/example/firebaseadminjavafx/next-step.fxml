@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -17,21 +17,27 @@
     </padding>
 
     <children>
-        <Label text="Signed In!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Label text="Next Step"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
         <HBox spacing="6" alignment="CENTER">
             <Label text="Email:"/>
             <Label fx:id="emailValue" text="(loading)"/>
         </HBox>
 
-        <HBox spacing="6" alignment="CENTER">
-            <Label text="UID:"/>
-            <Label fx:id="uidValue" text="(loading)"/>
-        </HBox>
+        <Button fx:id="goGymHomeButton"
+                text="Go to GymHome"
+                onAction="#handleGoGymHome"
+                prefWidth="180"/>
 
-        <Button fx:id="signOutButton"
-                text="Sign Out"
-                onAction="#handleSignOut"
-                prefWidth="120"/>
+        <Button fx:id="enterInfoButton"
+                text="Enter Info"
+                onAction="#handleEnterInfo"
+                prefWidth="180"/>
+
+        <Button fx:id="returnToWelcomeButton"
+                text="Return to Welcome"
+                onAction="#handleReturnToWelcome"
+                prefWidth="180"/>
     </children>
 </VBox>

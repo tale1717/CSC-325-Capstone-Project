@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.firebaseadminjavafx.GymAppHomeController"
       alignment="CENTER"
-      spacing="15"
+      spacing="20"
       prefWidth="400"
       prefHeight="400">
-    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
 
-    <Label fx:id="welcomeLabel" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-    <Label text="Gym layout goes here"/>
-    <HBox spacing="10">
-        <Button fx:id="goAdminButton" text="Admin" onAction="#handleGoAdmin" prefWidth="120"/>
-        <Button fx:id="signOutButton" text="Sign Out" onAction="#handleSignOut" prefWidth="120"/>
-    </HBox>
+    <children>
+        <Label fx:id="headerLabel"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="gymLayoutButton"
+                    text="Gym Layout"
+                    onAction="#handleGymLayout"
+                    prefWidth="140"/>
+            <Button fx:id="workoutPlanningButton"
+                    text="Workout Planning"
+                    onAction="#handleWorkoutPlanning"
+                    prefWidth="140"/>
+        </HBox>
+
+        <Button fx:id="backButton"
+                text="Back"
+                onAction="#handleBack"
+                prefWidth="120"/>
+    </children>
 </VBox>

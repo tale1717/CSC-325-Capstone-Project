@@ -16,7 +16,7 @@
     </padding>
 
     <children>
-        <Label text="Welcome Screen" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <Label text="Welcome Screen" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
         <TextField fx:id="emailID"
                    promptText="Email"
@@ -28,7 +28,6 @@
                        prefWidth="250"
                        maxWidth="250"/>
 
-        <!-- Used for both success & error messages -->
         <Label fx:id="errorLabel"
                wrapText="true"
                textFill="#c62828"
