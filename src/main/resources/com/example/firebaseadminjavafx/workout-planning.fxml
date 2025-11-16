@@ -19,10 +19,10 @@
                 <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
                 <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="220"/>
 
-                <Label text="Height (cm):" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <Label text="Height (inches):" GridPane.rowIndex="1" GridPane.columnIndex="0" />
                 <TextField fx:id="heightField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
 
-                <Label text="Weight (kg):" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <Label text="Weight (pounds):" GridPane.rowIndex="2" GridPane.columnIndex="0" />
                 <TextField fx:id="weightField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
 
                 <Label text="Age:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
