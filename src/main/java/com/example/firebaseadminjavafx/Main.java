@@ -16,6 +16,10 @@ public class Main extends Application {
     public static String currentUserUid;
     public static String currentUserEmail;
 
+    // Equipment status shared across screens
+    public static boolean treadmillT1Functional = true;
+    public static boolean benchB1Functional = true;
+
     @Override
     public void start(Stage stage) throws Exception {
         FirebaseService.initialize();
@@ -33,9 +37,9 @@ public class Main extends Application {
         Scene scene = new Scene(root, 400, 400);
         stage.setTitle("GymApp");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
-
 
     public static void setRoot(String fxmlName, Control anyControlInScene) {
         try {

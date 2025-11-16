@@ -5,26 +5,27 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.firebaseadminjavafx.GymAppHomeController"
+      fx:controller="com.example.firebaseadminjavafx.GymLayoutHomeController"
       alignment="CENTER" spacing="15.0"
       prefWidth="400.0" prefHeight="400.0">
 
     <children>
-        <Label text="Gym Home" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+        <Label text="Gym Layout Home"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
-        <Button fx:id="gymLayoutButton"
-                text="Gym Layout"
-                onAction="#handleGymLayout"
+        <Button fx:id="openMapButton"
+                text="Open Map"
+                onAction="#handleOpenMap"
                 prefWidth="180" />
 
-        <Button fx:id="workoutPlanningButton"
-                text="Workout Planning"
-                onAction="#handleWorkoutPlanning"
+        <Button fx:id="adminButton"
+                text="Admin"
+                onAction="#handleOpenAdmin"
                 prefWidth="180" />
 
         <Button fx:id="backButton"
                 text="Back"
-                onAction="#handleBack"
+                onAction="#handleBackToMain"
                 prefWidth="120" />
     </children>
 </VBox>

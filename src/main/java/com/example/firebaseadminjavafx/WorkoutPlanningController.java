@@ -32,7 +32,7 @@ public class WorkoutPlanningController {
             goalBox.getSelectionModel().selectFirst();
         }
 
-        // Prefill from Firestore if we already have a saved plan
+
         try {
             if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
                 log.info("No signed-in user; skipping workout plan prefill.");
@@ -106,16 +106,16 @@ public class WorkoutPlanningController {
             return;
         }
 
-        // Convert to metric for calculations
+
         double heightCm = heightIn * 2.54;
         double weightKg = weightLb * 0.45359237;
 
         double bmi = weightKg / Math.pow(heightCm / 100.0, 2);
 
-        // Simple BMR (Mifflin-St Jeor for male baseline, just for demo)
+
         double bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
 
-        // Baseline calories with light activity
+
         double calories = bmr * 1.2;
 
         String plan;
@@ -125,7 +125,7 @@ public class WorkoutPlanningController {
         } else if (goal.toLowerCase().contains("gain")) {
             calories += 500;
             plan = "Focus on progressive overload, compound lifts, and a calorie surplus.";
-        } else { // Maintain
+        } else {
             plan = "Maintain balanced nutrition and a mix of strength + cardio 3–4x/week.";
         }
 

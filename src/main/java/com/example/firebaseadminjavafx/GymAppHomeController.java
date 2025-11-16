@@ -16,13 +16,11 @@ public class GymAppHomeController {
 
     @FXML
     private void handleGymLayout() {
-
-        System.out.println("Gym Layout button clicked.");
+        Main.setRoot("gym-layout-home.fxml", gymLayoutButton);
     }
 
     @FXML
     private void handleWorkoutPlanning() {
-        System.out.println("Workout Planning button clicked.");
         Main.setRoot("workout-planning.fxml", workoutPlanningButton);
     }
 

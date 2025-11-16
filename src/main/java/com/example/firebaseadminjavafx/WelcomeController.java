@@ -96,11 +96,11 @@ public class WelcomeController {
 
             Map<String, Object> data = new HashMap<>();
             data.put("email", email);
-            data.put("password", password); // demo only
+            data.put("password", password);
 
             Main.fstore.collection("Users").document(userRecord.getUid()).set(data);
 
-            // Do NOT navigate. Require explicit sign-in afterwards.
+
             setError("Registered! Please sign in.");
             log.info("User registered successfully: " + email);
             return true;
