@@ -90,7 +90,7 @@ public class EnterInfoController {
 
         try {
             DocumentReference userDoc = Main.fstore.collection("Users").document(Main.currentUserUid);
-            // merge so we don't overwrite other fields like password
+
             ApiFuture<WriteResult> write = userDoc.set(data, SetOptions.merge());
             write.get();
 
