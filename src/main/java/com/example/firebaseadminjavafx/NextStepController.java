@@ -23,7 +23,7 @@ public class NextStepController {
 
     @FXML
     private void handleEnterInfo() {
-        Main.setRoot("EnterInfo", enterInfoButton);
+        Main.setRoot("enter-info.fxml", enterInfoButton);
     }
 
     @FXML

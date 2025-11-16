@@ -1,152 +1,163 @@
 package com.example.firebaseadminjavafx;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.SetOptions;
+import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 public class WorkoutPlanningController {
 
-    @FXML private VBox root;
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
+    private static final Logger log = Logger.getLogger(WorkoutPlanningController.class.getName());
+
+    @FXML private TextField nameField;
+    @FXML private TextField heightField;
+    @FXML private TextField weightField;
     @FXML private TextField ageField;
-    @FXML private TextField heightField;   // cm
-    @FXML private TextField weightField;   // lbs
     @FXML private ComboBox<String> goalBox;
     @FXML private TextArea resultArea;
-    @FXML private Label statusLabel;
-    @FXML private Button seePlanButton;
-    @FXML private Button calorieButton;
+    @FXML private Button generateButton;
     @FXML private Button backButton;
-
-    private final CalorieCalculator calorieCalculator = new CalorieCalculator();
-    private final GoalPlanner goalPlanner = new GoalPlanner();
 
     @FXML
     private void initialize() {
-        System.out.println("WorkoutPlanningController initialized");
         goalBox.getItems().setAll("Lose Weight", "Gain Muscle", "Maintain");
-        goalBox.getSelectionModel().selectFirst();
-        statusLabel.setText("");
-        resultArea.setText("");
-    }
 
-    @FXML
-    private void handleSeeMyPlan() {
-        statusLabel.setText("");
+        if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
+            resultArea.setText("Not signed in. Please go back and sign in first.");
+            disableInputs(true);
+            return;
+        }
 
         try {
-            String firstName = firstNameField.getText().trim();
-            String lastName  = lastNameField.getText().trim();
-            int age          = Integer.parseInt(ageField.getText().trim());
-            double heightCm  = Double.parseDouble(heightField.getText().trim());
-            double weightLbs = Double.parseDouble(weightField.getText().trim());
-            String goal      = goalBox.getSelectionModel().getSelectedItem();
+            DocumentReference userDoc =
+                    Main.fstore.collection("Users").document(Main.currentUserUid);
+            ApiFuture<DocumentSnapshot> fut = userDoc.get();
+            DocumentSnapshot snap = fut.get();
 
-            if (firstName.isEmpty() || lastName.isEmpty()) {
-                statusLabel.setText("Please enter your first and last name.");
-                return;
+            if (snap.exists()) {
+                String existingName   = snap.getString("name");
+                Long   wpAge          = snap.getLong("wpAge");
+                Double wpHeightCm     = snap.getDouble("wpHeightCm");
+                Double wpWeightKg     = snap.getDouble("wpWeightKg");
+                String wpGoal         = snap.getString("wpGoal");
+                String wpResult       = snap.getString("wpResultText");
+
+                if (existingName != null)  nameField.setText(existingName);
+                if (wpAge != null)         ageField.setText(String.valueOf(wpAge));
+                if (wpHeightCm != null)    heightField.setText(String.valueOf(wpHeightCm));
+                if (wpWeightKg != null)    weightField.setText(String.valueOf(wpWeightKg));
+                if (wpGoal != null)        goalBox.setValue(wpGoal);
+                if (wpResult != null)      resultArea.setText(wpResult);
             }
-
-            double weightKg = weightLbs * 0.453592;
-            User user = new User(age, heightCm, weightKg, goal);
-
-            String planText = buildPlanText(user, firstName, lastName, weightLbs);
-            resultArea.setText(planText);
-
-        } catch (NumberFormatException ex) {
-            statusLabel.setText("Please enter valid numbers for age, height, and weight.");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            statusLabel.setText("Something went wrong. See console.");
+        } catch (Exception e) {
+            log.info("Workout prefill failed: " + e.getMessage());
+            resultArea.setText("Could not load saved workout plan.");
         }
     }
 
     @FXML
-    private void handleCalorieIntake() {
-        statusLabel.setText("");
+    private void handleGenerateAndSave() {
+        if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
+            resultArea.setText("Not signed in.");
+            log.info("Workout save aborted: no signed-in user.");
+            return;
+        }
+
+        String name  = safeTrim(nameField.getText());
+        String heightS = safeTrim(heightField.getText());
+        String weightS = safeTrim(weightField.getText());
+        String ageS    = safeTrim(ageField.getText());
+        String goal    = goalBox.getValue();
+
+        if (name.isEmpty() || heightS.isEmpty() || weightS.isEmpty()
+                || ageS.isEmpty() || goal == null || goal.isEmpty()) {
+            resultArea.setText("Please fill in all fields and select a goal.");
+            return;
+        }
+
+        double heightCm;
+        double weightKg;
+        int age;
 
         try {
-            int age          = Integer.parseInt(ageField.getText().trim());
-            double heightCm  = Double.parseDouble(heightField.getText().trim());
-            double weightLbs = Double.parseDouble(weightField.getText().trim());
-            String goal      = goalBox.getSelectionModel().getSelectedItem();
-
-            double weightKg  = weightLbs * 0.453592;
-            User user = new User(age, heightCm, weightKg, goal);
-
-            double calories = calorieCalculator.calculateCalories(user);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Calorie Intake");
-            alert.setHeaderText("Estimated Daily Calorie Intake");
-            alert.setContentText(String.format("Approximately %.0f kcal per day.", calories));
-            alert.showAndWait();
-
+            heightCm = Double.parseDouble(heightS);
+            weightKg = Double.parseDouble(weightS);
+            age = Integer.parseInt(ageS);
         } catch (NumberFormatException ex) {
-            statusLabel.setText("Please enter valid numbers before calculating calories.");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            statusLabel.setText("Failed to calculate calories. See console.");
+            resultArea.setText("Height, weight, and age must be valid numbers.");
+            return;
+        }
+
+        if (age <= 0 || age > 120 || heightCm <= 0 || weightKg <= 0) {
+            resultArea.setText("Please enter realistic values.");
+            return;
+        }
+
+        User user = new User(age, heightCm, weightKg, goal);
+        CalorieCalculator calculator = new CalorieCalculator();
+        GoalPlanner planner = new GoalPlanner();
+
+        double calories = calculator.calculateCalories(user);
+        double bmi = weightKg / Math.pow(heightCm / 100.0, 2);
+        String workoutPlan = planner.getWorkoutPlan(goal);
+
+        String resultText =
+                "Name: " + name + "\n\n" +
+                        "Height: " + String.format("%.1f", heightCm) + " cm\n" +
+                        "Weight: " + String.format("%.1f", weightKg) + " kg\n" +
+                        "Age: " + age + "\n" +
+                        "Goal: " + goal + "\n\n" +
+                        String.format("Estimated BMI: %.1f\n", bmi) +
+                        String.format("Estimated Daily Calories: %.0f kcal\n\n", calories) +
+                        "Workout plan:\n" + workoutPlan;
+
+        resultArea.setText(resultText);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", name);
+        data.put("wpAge", age);
+        data.put("wpHeightCm", heightCm);
+        data.put("wpWeightKg", weightKg);
+        data.put("wpGoal", goal);
+        data.put("wpResultText", resultText);
+        data.put("wpUpdatedAt", Instant.now().toString());
+
+        try {
+            DocumentReference userDoc =
+                    Main.fstore.collection("Users").document(Main.currentUserUid);
+            ApiFuture<WriteResult> write = userDoc.set(data, SetOptions.merge());
+            write.get();
+
+            log.info("Workout plan saved for user: " + Main.currentUserEmail);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultArea.setText("Failed to save workout plan. See console.");
+            log.info("Workout save failed for user: " + Main.currentUserEmail);
         }
     }
 
     @FXML
     private void handleBack() {
-        Main.setRoot("gymapp-home.fxml", backButton);
+        Main.setRoot("next-step.fxml", backButton);
     }
 
-    private String buildPlanText(User user,
-                                 String firstName,
-                                 String lastName,
-                                 double weightLbs) {
+    private void disableInputs(boolean disable) {
+        nameField.setDisable(disable);
+        heightField.setDisable(disable);
+        weightField.setDisable(disable);
+        ageField.setDisable(disable);
+        goalBox.setDisable(disable);
+        generateButton.setDisable(disable);
+    }
 
-        int age          = user.getAge();
-        double heightCm  = user.getHeight();
-        double weightKg  = user.getWeight();
-        String goal      = user.getGoal();
-
-        double heightInFeet = heightCm / 30.48;
-        int feetPart = (int) heightInFeet;
-        double inchesPart = (heightInFeet - feetPart) * 12;
-
-        double bmi = weightKg / Math.pow(heightCm / 100.0, 2);
-
-        String plan;
-        String tip;
-        String workouts;
-
-        String goalLower = goal.toLowerCase();
-        if (goalLower.contains("lose")) {
-            plan = "Focus on calorie deficit and cardio 4–5x/week.";
-            tip = "Try eating more whole foods and tracking your steps.";
-            workouts = "Cardio (30 mins)\nStretching\nCycling";
-        } else if (goalLower.contains("gain")) {
-            plan = "Eat in a calorie surplus and lift weights 3–4x/week.";
-            tip = "Increase protein intake and focus on compound lifts.";
-            workouts = "Weight Training\nHigh Protein Meals\nProper Rest";
-        } else {
-            plan = "Maintain a balanced diet and exercise 3x/week.";
-            tip = "Stay consistent and get enough sleep.";
-            workouts = "Walking\nYoga\nLight Strength Training";
-        }
-
-        String workoutPlan = goalPlanner.getWorkoutPlan(goal);
-
-        return "--- Personalized Workout Plan for "
-                + firstName + " " + lastName + " ---\n\n"
-                + "Age: " + age + "\n"
-                + "Height: " + String.format("%.1f", heightCm) + " cm ("
-                + feetPart + " ft " + String.format("%.1f", inchesPart) + " in)\n"
-                + "Weight: " + String.format("%.1f", weightLbs) + " lbs ("
-                + String.format("%.1f", weightKg) + " kg)\n"
-                + "Goal: " + goal + "\n\n"
-                + String.format("Your BMI: %.1f\n\n", bmi)
-                + "Calories intake per day (approx): "
-                + String.format("%.0f kcal\n\n", calorieCalculator.calculateCalories(user))
-                + "Workout plan summary:\n" + workoutPlan
-                + "\n\nRecommended Plan:\n" + plan
-                + "\n\nHealth Tip:\n" + tip
-                + "\n\nWorkout Suggestions:\n" + workouts;
+    private static String safeTrim(String s) {
+        return (s == null) ? "" : s.trim();
     }
 }

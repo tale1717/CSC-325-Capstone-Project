@@ -1,75 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.WorkoutPlanningController"
-      fx:id="root"
-      alignment="CENTER"
-      spacing="10"
-      prefWidth="500"
-      prefHeight="550">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-
+      spacing="10" alignment="CENTER" prefWidth="450" prefHeight="500">
     <children>
-        <Label text="Workout Planning"
-               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Label text="Workout Planning" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
-        <TextField fx:id="firstNameField"
-                   promptText="First Name"
-                   prefWidth="260"/>
+        <GridPane hgap="10" vgap="8">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" />
+                <ColumnConstraints halignment="LEFT" />
+            </columnConstraints>
+            <children>
+                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="220"/>
 
-        <TextField fx:id="lastNameField"
-                   promptText="Last Name"
-                   prefWidth="260"/>
+                <Label text="Height (cm):" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <TextField fx:id="heightField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
 
-        <TextField fx:id="ageField"
-                   promptText="Age"
-                   prefWidth="260"/>
+                <Label text="Weight (kg):" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <TextField fx:id="weightField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
 
-        <TextField fx:id="heightField"
-                   promptText="Height (cm)"
-                   prefWidth="260"/>
+                <Label text="Age:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                <TextField fx:id="ageField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
 
-        <TextField fx:id="weightField"
-                   promptText="Weight (lbs)"
-                   prefWidth="260"/>
+                <Label text="Goal:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                <ComboBox fx:id="goalBox" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="220" />
+            </children>
+        </GridPane>
 
-        <ComboBox fx:id="goalBox"
-                  prefWidth="260"/>
-
-        <Label fx:id="statusLabel"
-               textFill="#c62828"
-               wrapText="true"
-               maxWidth="360"/>
-
-        <HBox spacing="10" alignment="CENTER">
-            <Button fx:id="seePlanButton"
-                    text="See My Plan"
-                    onAction="#handleSeeMyPlan"
-                    prefWidth="130"/>
-            <Button fx:id="calorieButton"
-                    text="Calorie Intake"
-                    onAction="#handleCalorieIntake"
-                    prefWidth="130"/>
-        </HBox>
-
-        <Label text="Results:"
-               style="-fx-font-weight: bold;"/>
+        <Button fx:id="generateButton"
+                text="Generate &amp; Save Plan"
+                onAction="#handleGenerateAndSave"
+                prefWidth="200" />
 
         <TextArea fx:id="resultArea"
-                  prefWidth="420"
-                  prefHeight="220"
-                  wrapText="true"/>
+                  prefWidth="360" prefHeight="200"
+                  wrapText="true" />
 
         <Button fx:id="backButton"
                 text="Back"
                 onAction="#handleBack"
-                prefWidth="120"/>
+                prefWidth="120" />
     </children>
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
 </VBox>
