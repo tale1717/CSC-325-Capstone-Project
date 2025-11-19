@@ -16,10 +16,6 @@ public class Main extends Application {
     public static String currentUserUid;
     public static String currentUserEmail;
 
-    // Equipment status shared across screens
-    public static boolean treadmillT1Functional = true;
-    public static boolean benchB1Functional = true;
-
     @Override
     public void start(Stage stage) throws Exception {
         FirebaseService.initialize();
@@ -34,10 +30,13 @@ public class Main extends Application {
                 new FXMLLoader(Main.class.getResource("/com/example/firebaseadminjavafx/welcome-view.fxml"));
         Parent root = fxmlLoader.load();
 
-        Scene scene = new Scene(root, 400, 400);
+        Scene scene = new Scene(root);
         stage.setTitle("GymApp");
         stage.setScene(scene);
+
+        stage.sizeToScene();
         stage.centerOnScreen();
+
         stage.show();
     }
 
@@ -52,7 +51,14 @@ public class Main extends Application {
 
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(resourcePath));
             Parent newRoot = loader.load();
-            anyControlInScene.getScene().setRoot(newRoot);
+
+            Scene scene = anyControlInScene.getScene();
+            scene.setRoot(newRoot);
+
+            Stage stage = (Stage) scene.getWindow();
+            stage.sizeToScene();
+            stage.centerOnScreen();
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to switch to view: " + fxmlName, e);
