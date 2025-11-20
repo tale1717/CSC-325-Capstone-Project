@@ -72,6 +72,7 @@ public class AdminController {
         applyB1State(b1);
     }
 
+    //Add more machines
     @FXML
     private void handleT1Yes() {
         EquipmentState.t1Working = true;
