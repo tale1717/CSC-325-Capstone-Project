@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="91f27026-328b-46e0-bfeb-43a1d755f193" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GymLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/GymLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/CalorieCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/CalorieCalculator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GUI$InputPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GUI$InputPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GUI$ResultPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GUI$ResultPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GoalPlanner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GoalPlanner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GymLayout.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/GymLayout.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/WorkoutPlanning.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CSC-325-Capstone-Project/WorkoutPlanning.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Avneet-22&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tale1717/CSC-325-Capstone-Project.git&quot;,
+    &quot;accountId&quot;: &quot;fe6f4a96-6afd-458d-a67f-39c4c4aafaae&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="3579yZDwLPjLvXXJT5tcBrqoWQ5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GUI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WorkoutPlanning.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#16 on workoutplanning&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="91f27026-328b-46e0-bfeb-43a1d755f193" name="Changes" comment="" />
+      <created>1762450497931</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762450497931</updated>
+      <workItem from="1762450499218" duration="3781000" />
+      <workItem from="1762644723936" duration="2272000" />
+      <workItem from="1762867530079" duration="1170000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
