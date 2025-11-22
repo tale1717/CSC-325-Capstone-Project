@@ -16,7 +16,7 @@ public class GymAppHomeController {
 
     @FXML
     private void handleGymLayout() {
-        Main.setRoot("gym-layout-home.fxml", gymLayoutButton);
+        Main.setRoot("gym-layout-home", gymLayoutButton);
     }
 
     @FXML
