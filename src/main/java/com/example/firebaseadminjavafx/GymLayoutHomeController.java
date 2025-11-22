@@ -15,17 +15,28 @@ public class GymLayoutHomeController {
     private Button backButton;
 
     @FXML
+    private void initialize() {
+        System.out.println("[GymLayoutHomeController] initialize()");
+    }
+
+    @FXML
     private void handleOpenMap() {
-        Main.setRoot("gym-layout.fxml", openMapButton);
+        System.out.println("[GymLayoutHomeController] Open Map clicked");
+        Main.setRoot("gym-layout", openMapButton); // loads gym-layout.fxml
     }
 
     @FXML
-    private void handleOpenAdmin() {
-        Main.setRoot("admin-view.fxml", adminButton);
+    private void handleAdmin() {
+        System.out.println("[GymLayoutHomeController] Admin clicked");
+
+        Main.setRoot("admin-login" +
+                "", adminButton);
     }
 
     @FXML
-    private void handleBackToMain() {
-        Main.setRoot("gymapp-home.fxml", backButton);
+    private void handleBack() {
+        System.out.println("[GymLayoutHomeController] Back clicked");
+
+        Main.setRoot("gym-app-home", backButton);
     }
 }
