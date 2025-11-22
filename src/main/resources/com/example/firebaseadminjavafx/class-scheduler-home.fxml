@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/24.0.1"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.firebaseadminjavafx.ClassSchedulerController">
+
+    <children>
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Schedule A Class!" />
+
+        <Button fx:id="openClassSchdbtn" onAction="#handleOpenClass" prefWidth="180" text="Classes" />
+
+        <Button fx:id="adminButton" onAction="#handleAdminButton" prefWidth="180" text="Admin" />
+
+        <Button fx:id="backButton" onAction="#handleBackToMain" prefWidth="120" text="Back" />
+    </children>
+</VBox>

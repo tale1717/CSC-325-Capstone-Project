@@ -22,6 +22,11 @@
                 onAction="#handleWorkoutPlanning"
                 prefWidth="180" />
 
+        <Button fx:id="classSchedulerButton"
+                text="Classes"
+                onAction="#handleClassScheduling"
+                prefWidth="180" />
+
         <Button fx:id="backButton"
                 text="Back"
                 onAction="#handleBack"

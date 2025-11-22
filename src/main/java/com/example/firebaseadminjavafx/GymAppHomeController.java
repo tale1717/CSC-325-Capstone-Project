@@ -12,6 +12,9 @@ public class GymAppHomeController {
     private Button workoutPlanningButton;
 
     @FXML
+    private Button classSchedulerButton;
+
+    @FXML
     private Button backButton;
 
     @FXML
@@ -22,6 +25,11 @@ public class GymAppHomeController {
     @FXML
     private void handleWorkoutPlanning() {
         Main.setRoot("workout-planning.fxml", workoutPlanningButton);
+    }
+
+    @FXML
+    private void handleClassScheduling() {
+        Main.setRoot("class-scheduler-home.fxml", classSchedulerButton);
     }
 
     @FXML
