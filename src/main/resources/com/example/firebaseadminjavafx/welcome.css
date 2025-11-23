@@ -1,0 +1,117 @@
+/* Farmingdale State College Green Color Theme */
+.root {
+    -fx-fsc-green: #005035; /* Farmingdale State College Green */
+    -fx-fsc-purple: #4A0D67; /* Purple for buttons */
+    -fx-fsc-green-light: #006747;
+    -fx-fsc-green-dark: #003823;
+    -fx-fsc-purple-light: #6A1B9A;
+    -fx-fsc-purple-dark: #38006B;
+}
+
+/* Main Background - Farmingdale Green */
+#mainContainer {
+    -fx-background-color: -fx-fsc-green;
+}
+
+/* Title - Purple */
+#titleLabel {
+    -fx-text-fill: -fx-fsc-purple;
+    -fx-font-weight: bold;
+}
+
+/* Subtitle - White for contrast */
+#subtitleLabel {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Instruction Label - Light Gray
+   (base style for all labels; special ones are overridden below) */
+.label {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Register Button - Purple Box with White Text */
+#registerButton {
+    -fx-background-color: -fx-fsc-purple;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+}
+
+#registerButton:hover {
+    -fx-background-color: -fx-fsc-purple-light;
+    -fx-cursor: hand;
+}
+
+#registerButton:pressed {
+    -fx-background-color: -fx-fsc-purple-dark;
+}
+
+/* Sign In Button - Purple Box with White Text */
+#signInButton {
+    -fx-background-color: -fx-fsc-purple;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: -fx-fsc-purple;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+#signInButton:hover {
+    -fx-background-color: -fx-fsc-purple-light;
+    -fx-cursor: hand;
+}
+
+#signInButton:pressed {
+    -fx-background-color: -fx-fsc-purple-dark;
+}
+
+/* Google Button - White for contrast */
+#googleButton {
+    -fx-background-color: white;
+    -fx-text-fill: #4285f4;
+    -fx-font-weight: bold;
+    -fx-border-color: white;
+    -fx-background-radius: 5px;
+}
+
+#googleButton:hover {
+    -fx-background-color: #f8f9fa;
+    -fx-cursor: hand;
+}
+
+/* Text Fields */
+.text-field, .password-field {
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: -fx-fsc-purple;
+    -fx-border-width: 2px;
+}
+
+/* OR Separator */
+#orLabel {
+    -fx-text-fill: #cccccc;
+}
+
+/* Terms Label */
+#termsLabel {
+    -fx-text-fill: #cccccc;
+}
+
+/* Additional styling for better contrast on green background */
+VBox {
+    -fx-background-color: -fx-fsc-green;
+}
+
+/* Ensure button text is white */
+#registerButton .text, #signInButton .text {
+    -fx-fill: white;
+}

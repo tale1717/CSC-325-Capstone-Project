@@ -31,6 +31,9 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(
+                Main.class.getResource("/com/example/firebaseadminjavafx/welcome.css").toExternalForm()
+        );
         stage.setTitle("GymApp");
         stage.setScene(scene);
 
