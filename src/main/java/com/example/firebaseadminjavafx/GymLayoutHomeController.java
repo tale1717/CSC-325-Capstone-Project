@@ -37,6 +37,6 @@ public class GymLayoutHomeController {
     private void handleBack() {
         System.out.println("[GymLayoutHomeController] Back clicked");
 
-        Main.setRoot("gym-app-home", backButton);
+        Main.setRoot("gymapp-home", backButton);
     }
 }
