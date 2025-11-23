@@ -13,6 +13,7 @@ module com.example.firebaseadminjavafx {
 
     requires java.logging; // adds updates to intellij logs
 
-    opens com.example.firebaseadminjavafx to javafx.fxml;
+    opens com.example.firebaseadminjavafx to javafx.fxml, google.cloud.firestore;
+
     exports com.example.firebaseadminjavafx;
 }

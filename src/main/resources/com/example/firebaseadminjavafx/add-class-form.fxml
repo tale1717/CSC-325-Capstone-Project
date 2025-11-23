@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.firebaseadminjavafx.AddClassController"
+      spacing="10" alignment="CENTER"
+      prefWidth="300.0" prefHeight="250.0"
+      style="-fx-padding: 20;">
+
+    <TextField fx:id="nameField" promptText="Class Name"/>
+    <TextField fx:id="instructorField" promptText="Instructor"/>
+    <TextField fx:id="timeField" promptText="Time"/>
+    <TextField fx:id="capacityField" promptText="Capacity"/>
+
+    <Button text="Save" onAction="#handleAddClass"/>
+    <Button text="Cancel" onAction="#handleCancel"/>
+</VBox>
