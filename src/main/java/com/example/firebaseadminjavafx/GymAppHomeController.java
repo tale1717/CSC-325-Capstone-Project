@@ -18,22 +18,30 @@ public class GymAppHomeController {
     private Button backButton;
 
     @FXML
+    private Button progressTrackerButton;
+
+    @FXML
     private void handleGymLayout() {
         Main.setRoot("gym-layout-home", gymLayoutButton);
     }
 
     @FXML
     private void handleWorkoutPlanning() {
-        Main.setRoot("workout-planning.fxml", workoutPlanningButton);
+        Main.setRoot("workout-planning", workoutPlanningButton);
     }
 
     @FXML
     private void handleClassScheduling() {
-        Main.setRoot("class-scheduler-home.fxml", classSchedulerButton);
+        Main.setRoot("class-scheduler-home", classSchedulerButton);
     }
 
     @FXML
     private void handleBack() {
-        Main.setRoot("next-step.fxml", backButton);
+        Main.setRoot("next-step", backButton);
+    }
+
+    @FXML
+    private void handleProgressTracker() {
+        Main.setRoot("progress-tracker", progressTrackerButton);
     }
 }

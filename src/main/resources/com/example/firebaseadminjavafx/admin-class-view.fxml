@@ -28,8 +28,10 @@
 
       <Button fx:id="addButton" layoutX="30.0" layoutY="320.0"
               text="Add Class" onAction="#handleAddClass"/>
-      <Button fx:id="deleteButton" layoutX="140.0" layoutY="320.0"
-              text="Remove Selected" onAction="#handleDeleteClass"/>
+      <Button fx:id="editButton" layoutX="140.0" layoutY="320.0"
+              text="Edit Class" onAction="#handleEditClass"/>
+      <Button fx:id="deleteButton" layoutX="265.0" layoutY="320.0"
+              text="Delete Class" onAction="#handleDeleteClass"/>
       <Button fx:id="backButton" layoutX="30.0" layoutY="360.0"
               text="Back" onAction="#handleBackToMain"/>
    </children>
