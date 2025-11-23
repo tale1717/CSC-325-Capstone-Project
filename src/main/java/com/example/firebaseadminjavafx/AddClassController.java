@@ -14,9 +14,20 @@ public class AddClassController {
     @FXML private TextField capacityField;
 
     private Consumer<GymClass> onSave;
+    private GymClass editingClass = null;
 
     public void setOnSave(Consumer<GymClass> onSave) {
         this.onSave = onSave;
+    }
+
+    //Called when editing existing Gym Class
+    public void setEditingClass(GymClass gymClass) {
+        this.editingClass = gymClass;
+
+        nameField.setText(gymClass.getTitle());
+        instructorField.setText(gymClass.getInstructor());
+        timeField.setText(gymClass.getTime());
+        capacityField.setText(gymClass.getCapacity());
     }
 
     @FXML
@@ -31,7 +42,18 @@ public class AddClassController {
             return;
         }
 
-        GymClass gymClass = new GymClass(null, name, instructor, time, capacity);
+        GymClass gymClass;
+
+        if (editingClass == null) {
+            gymClass = new GymClass(null, name, instructor, time, capacity);
+        }
+        else {
+            editingClass.setTitle(name);
+            editingClass.setInstructor(instructor);
+            editingClass.setTime(time);
+            editingClass.setCapacity(capacity);
+            gymClass = editingClass;
+        }
 
         if (onSave != null) {
             onSave.accept(gymClass);
