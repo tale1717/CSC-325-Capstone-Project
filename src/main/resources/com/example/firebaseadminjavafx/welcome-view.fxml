@@ -6,6 +6,8 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.firebaseadminjavafx.WelcomeController"
+      fx:id="mainContainer"
+      id="mainContainer"
       alignment="CENTER"
       spacing="15"
       prefWidth="400"
@@ -16,7 +18,10 @@
     </padding>
 
     <children>
-        <Label text="Welcome Screen" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Label fx:id="titleLabel"
+               id="titleLabel"
+               text="Welcome Screen"
+               style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
         <TextField fx:id="emailID"
                    promptText="Email"
@@ -36,11 +41,13 @@
                alignment="CENTER"/>
 
         <Button fx:id="registerButton"
+                id="registerButton"
                 text="Register"
                 onAction="#registerButtonClicked"
                 prefWidth="120"/>
 
         <Button fx:id="signInButton"
+                id="signInButton"
                 text="Sign In"
                 onAction="#signInButtonClicked"
                 defaultButton="true"

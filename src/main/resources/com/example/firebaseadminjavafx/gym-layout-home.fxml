@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
@@ -6,26 +7,32 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.GymLayoutHomeController"
-      alignment="CENTER" spacing="15.0"
-      prefWidth="400.0" prefHeight="400.0">
+      alignment="CENTER"
+      spacing="15.0"
+      prefWidth="400.0"
+      prefHeight="400.0">
 
     <children>
         <Label text="Gym Layout Home"
                style="-fx-font-size: 18px; -fx-font-weight: bold;" />
 
         <Button fx:id="openMapButton"
-                text="Open Map"
+                text="Open Gym Map"
                 onAction="#handleOpenMap"
-                prefWidth="180" />
+                prefWidth="180.0" />
 
         <Button fx:id="adminButton"
                 text="Admin"
-                onAction="#handleOpenAdmin"
-                prefWidth="180" />
+                onAction="#handleAdmin"
+                prefWidth="180.0" />
 
         <Button fx:id="backButton"
                 text="Back"
-                onAction="#handleBackToMain"
-                prefWidth="120" />
+                onAction="#handleBack"
+                prefWidth="120.0" />
     </children>
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
 </VBox>
