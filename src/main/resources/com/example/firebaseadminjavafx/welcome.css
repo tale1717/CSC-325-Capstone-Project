@@ -1,37 +1,47 @@
-/* Farmingdale State College Green Color Theme */
+/* ---------- Global theme + background ---------- */
+
 .root {
-    -fx-fsc-green: #005035; /* Farmingdale State College Green */
-    -fx-fsc-purple: #4A0D67; /* Purple for buttons */
+    -fx-fsc-green: #005035;
+    -fx-fsc-purple: #4A0D67;
     -fx-fsc-green-light: #006747;
     -fx-fsc-green-dark: #003823;
     -fx-fsc-purple-light: #6A1B9A;
     -fx-fsc-purple-dark: #38006B;
+
+    -fx-background-color: -fx-fsc-green;
 }
 
-/* Main Background - Farmingdale Green */
+/* Default label text: white */
+.label {
+    -fx-text-fill: white;
+}
+
+/* Titles (any label with id=titleLabel or styleClass=title-label) */
+#titleLabel,
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* ---------- LOGIN SCREEN (Welcome) ONLY ---------- */
+
+/* Root VBox for login */
 #mainContainer {
     -fx-background-color: -fx-fsc-green;
 }
 
-/* Title - Purple */
-#titleLabel {
-    -fx-text-fill: -fx-fsc-purple;
-    -fx-font-weight: bold;
+/* Instruction label on login screen */
+.login-instruction {
+    -fx-text-fill: #e0e0e0;
 }
 
-/* Subtitle - White for contrast */
+/* Subtitle (login) */
 #subtitleLabel {
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
 
-/* Instruction Label - Light Gray
-   (base style for all labels; special ones are overridden below) */
-.label {
-    -fx-text-fill: #e0e0e0;
-}
-
-/* Register Button - Purple Box with White Text */
+/* Register button */
 #registerButton {
     -fx-background-color: -fx-fsc-purple;
     -fx-text-fill: white;
@@ -48,7 +58,7 @@
     -fx-background-color: -fx-fsc-purple-dark;
 }
 
-/* Sign In Button - Purple Box with White Text */
+/* Sign In button */
 #signInButton {
     -fx-background-color: -fx-fsc-purple;
     -fx-text-fill: white;
@@ -68,7 +78,7 @@
     -fx-background-color: -fx-fsc-purple-dark;
 }
 
-/* Google Button - White for contrast */
+/* Google button */
 #googleButton {
     -fx-background-color: white;
     -fx-text-fill: #4285f4;
@@ -82,8 +92,9 @@
     -fx-cursor: hand;
 }
 
-/* Text Fields */
-.text-field, .password-field {
+/* Text fields inside login only */
+#mainContainer .text-field,
+#mainContainer .password-field {
     -fx-border-color: #cccccc;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
@@ -91,27 +102,35 @@
     -fx-padding: 10px;
 }
 
-.text-field:focused, .password-field:focused {
+#mainContainer .text-field:focused,
+#mainContainer .password-field:focused {
     -fx-border-color: -fx-fsc-purple;
     -fx-border-width: 2px;
 }
 
-/* OR Separator */
+/* OR separator + terms text */
 #orLabel {
     -fx-text-fill: #cccccc;
 }
 
-/* Terms Label */
 #termsLabel {
     -fx-text-fill: #cccccc;
 }
 
-/* Additional styling for better contrast on green background */
-VBox {
-    -fx-background-color: -fx-fsc-green;
+/* Ensure button text is white */
+#registerButton .text,
+#signInButton .text {
+    -fx-fill: white;
 }
 
-/* Ensure button text is white */
-#registerButton .text, #signInButton .text {
-    -fx-fill: white;
+/* ---------- OVERRIDES FOR SPECIFIC SCREENS ---------- */
+
+/* GymLayout: labels should be black, not white */
+#gymLayoutRoot .label {
+    -fx-text-fill: black;
+}
+
+/* ClassScheduling: same idea once that screen exists */
+#classSchedulingRoot .label {
+    -fx-text-fill: black;
 }
