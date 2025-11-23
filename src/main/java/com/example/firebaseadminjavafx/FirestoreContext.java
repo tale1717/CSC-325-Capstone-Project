@@ -15,10 +15,18 @@ public final class FirestoreContext {
 
     public static void init() {
         if (fstore != null && fauth != null) return;
+
         if (FirebaseApp.getApps().isEmpty()) {
             throw new IllegalStateException("Firebase not initialized. Call FirebaseService.initialize() first.");
         }
         fstore = FirestoreClient.getFirestore();
         fauth = FirebaseAuth.getInstance();
+    }
+
+    // Call this after a user successfully logs in
+    public static void setCurrentUser(String uid, String email) {
+        currentUserUid = uid;
+        currentUserEmail = email;
+        System.out.println("FirestoreContext: Logged in as " + email + " (" + uid + ")");
     }
 }

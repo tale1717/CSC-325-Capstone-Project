@@ -63,6 +63,16 @@ public class AdminLoginController {
 
             // Login success
             log.info("Admin login success for username: " + username);
+
+            // Tell FirestoreContext who is the current user
+            // Using username as both uid and email identifier here.
+            FirestoreContext.setCurrentUser(username, username);
+
+            // Keep Main in sync if other code reads these
+            Main.currentUserUid = FirestoreContext.currentUserUid;
+            Main.currentUserEmail = FirestoreContext.currentUserEmail;
+
+            // Go to admin view
             Main.setRoot("admin-view.fxml", loginButton);
 
         } catch (Exception e) {
