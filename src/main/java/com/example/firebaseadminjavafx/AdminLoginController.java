@@ -5,11 +5,15 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+
+import java.util.logging.Logger;
 
 public class AdminLoginController {
+
+    private static final Logger log = Logger.getLogger(AdminLoginController.class.getName());
 
     @FXML
     private TextField usernameField;
@@ -24,56 +28,63 @@ public class AdminLoginController {
     private Button cancelButton;
 
     @FXML
-    private Label statusLabel;
-
-    @FXML
     private void handleLogin() {
         String username = safeTrim(usernameField.getText());
         String password = safeTrim(passwordField.getText());
 
         if (username.isEmpty() || password.isEmpty()) {
-            setStatus("Enter username and password.");
+            showError("Please enter both username and password.");
+            return;
+        }
+
+        if (Main.fstore == null) {
+            log.info("Firestore is null in AdminLoginController.");
+            showError("Server not ready. Please try again in a moment.");
             return;
         }
 
         try {
-            DocumentReference docRef =
+            DocumentReference doc =
                     Main.fstore.collection("Admins").document(username);
 
-            ApiFuture<DocumentSnapshot> future = docRef.get();
-            DocumentSnapshot snapshot = future.get();
+            ApiFuture<DocumentSnapshot> fut = doc.get();
+            DocumentSnapshot snap = fut.get();
 
-            if (!snapshot.exists()) {
-                setStatus("Admin not found.");
+            if (!snap.exists()) {
+                showError("Invalid username or password.");
                 return;
             }
 
-            String storedPassword = snapshot.getString("password");
-            if (storedPassword != null && storedPassword.equals(password)) {
-                setStatus("");
-                // Go to the existing Admin screen
-                Main.setRoot("admin-view", loginButton);
-            } else {
-                setStatus("Incorrect password.");
+            String storedPassword = snap.getString("password");
+            if (storedPassword == null || !storedPassword.equals(password)) {
+                showError("Invalid username or password.");
+                return;
             }
+
+            // Login success
+            log.info("Admin login success for username: " + username);
+            Main.setRoot("admin-view.fxml", loginButton);
+
         } catch (Exception e) {
-            e.printStackTrace();
-            setStatus("Login failed. See console.");
+            log.info("Admin login failed: " + e.getMessage());
+            showError("Login failed due to an error. Please try again.");
         }
     }
 
     @FXML
     private void handleCancel() {
-        Main.setRoot("gym-layout-home", cancelButton);
+        Main.setRoot("gym-layout-home.fxml", cancelButton);
     }
 
-    private static String safeTrim(String s) {
+    private String safeTrim(String s) {
         return s == null ? "" : s.trim();
     }
 
-    private void setStatus(String msg) {
-        if (statusLabel != null) {
-            statusLabel.setText(msg);
-        }
+    private void showError(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Admin Login");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 }

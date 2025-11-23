@@ -1,58 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
+<AnchorPane prefHeight="400.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.AdminController"
-            prefWidth="400.0" prefHeight="400.0">
+            fx:controller="com.example.firebaseadminjavafx.AdminController">
 
-    <children>
-        <Label layoutX="145.0" layoutY="20.0"
-               text="Admin View"
-               style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <Label layoutX="145.0" layoutY="20.0"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"
+           text="Admin View"/>
 
-        <!-- Treadmill T1 -->
-        <Label layoutX="40.0" layoutY="80.0" text="Treadmill T1" />
-        <Label layoutX="40.0" layoutY="105.0" text="Fully Functional?" />
-        <Button fx:id="t1YesButton"
-                layoutX="160.0" layoutY="100.0"
-                text="YES"
-                onAction="#handleT1Yes" />
-        <Button fx:id="t1NoButton"
-                layoutX="215.0" layoutY="100.0"
-                text="NO"
-                onAction="#handleT1No" />
-        <Label fx:id="t1StatusLabel"
-               layoutX="280.0" layoutY="102.0"
-               prefWidth="60.0" prefHeight="22.0"
-               text="YES"
-               style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-        />
+    <!-- Treadmill T1 -->
+    <Label layoutX="40.0" layoutY="80.0" text="Treadmill T1"/>
+    <Label layoutX="40.0" layoutY="105.0" text="Fully Functional?"/>
+    <Button fx:id="t1YesButton"
+            layoutX="160.0" layoutY="100.0"
+            onAction="#handleT1Yes"
+            text="YES"/>
+    <Button fx:id="t1NoButton"
+            layoutX="215.0" layoutY="100.0"
+            onAction="#handleT1No"
+            text="NO"/>
+    <Label fx:id="t1StatusLabel"
+           layoutX="280.0" layoutY="102.0"
+           prefHeight="22.0" prefWidth="60.0"
+           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
+           text="YES"/>
 
-        <!-- Bench B1 -->
-        <Label layoutX="40.0" layoutY="170.0" text="Bench B1" />
-        <Label layoutX="40.0" layoutY="195.0" text="Fully Functional?" />
-        <Button fx:id="b1YesButton"
-                layoutX="160.0" layoutY="190.0"
-                text="YES"
-                onAction="#handleB1Yes" />
-        <Button fx:id="b1NoButton"
-                layoutX="215.0" layoutY="190.0"
-                text="NO"
-                onAction="#handleB1No" />
-        <Label fx:id="b1StatusLabel"
-               layoutX="280.0" layoutY="192.0"
-               prefWidth="60.0" prefHeight="22.0"
-               text="YES"
-               style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-        />
+    <!-- Treadmill T2 -->
+    <Label layoutX="40.0" layoutY="141.0" text="Treadmill T2"/>
+    <Label layoutX="40.0" layoutY="166.0" text="Fully Functional?"/>
+    <Button fx:id="t2YesButton"
+            layoutX="160.0" layoutY="161.0"
+            onAction="#handleT2Yes"
+            text="YES"/>
+    <Button fx:id="t2NoButton"
+            layoutX="215.0" layoutY="161.0"
+            onAction="#handleT2No"
+            text="NO"/>
+    <Label fx:id="t2StatusLabel"
+           layoutX="280.0" layoutY="163.0"
+           prefHeight="22.0" prefWidth="60.0"
+           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
+           text="YES"/>
 
-        <Button fx:id="backButton"
-                layoutX="140.0" layoutY="300.0"
-                text="Back"
-                prefWidth="120"
-                onAction="#handleBackToHome" />
-    </children>
+    <!-- Bench B1 -->
+    <Label layoutX="40.0" layoutY="209.0" text="Bench B1"/>
+    <Label layoutX="40.0" layoutY="234.0" text="Fully Functional?"/>
+    <Button fx:id="b1YesButton"
+            layoutX="160.0" layoutY="229.0"
+            onAction="#handleB1Yes"
+            text="YES"/>
+    <Button fx:id="b1NoButton"
+            layoutX="215.0" layoutY="229.0"
+            onAction="#handleB1No"
+            text="NO"/>
+    <Label fx:id="b1StatusLabel"
+           layoutX="280.0" layoutY="231.0"
+           prefHeight="22.0" prefWidth="60.0"
+           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
+           text="YES"/>
+
+    <!-- Bench B2 -->
+    <Label layoutX="40.0" layoutY="266.0" text="Bench B2"/>
+    <Label layoutX="40.0" layoutY="291.0" text="Fully Functional?"/>
+    <Button fx:id="b2YesButton"
+            layoutX="160.0" layoutY="286.0"
+            onAction="#handleB2Yes"
+            text="YES"/>
+    <Button fx:id="b2NoButton"
+            layoutX="215.0" layoutY="286.0"
+            onAction="#handleB2No"
+            text="NO"/>
+    <Label fx:id="b2StatusLabel"
+           layoutX="280.0" layoutY="288.0"
+           prefHeight="22.0" prefWidth="60.0"
+           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
+           text="YES"/>
+
+    <Button fx:id="backButton"
+            layoutX="140.0" layoutY="339.0"
+            onAction="#handleBackToHome"
+            prefWidth="120"
+            text="Back"/>
+
 </AnchorPane>
