@@ -14,18 +14,23 @@ public class GymLayoutController {
     private static final Logger log = Logger.getLogger(GymLayoutController.class.getName());
 
     @FXML
-    private Label treadmill1StatusLabel;
+    private Label treadmill1StatusLabel; // T1
+
     @FXML
-    private Label treadmill2StatusLabel;
+    private Label treadmill2StatusLabel; // T2
+
     @FXML
-    private Label bench1StatusLabel;
+    private Label bench1StatusLabel;     // B1
+
     @FXML
-    private Label bench2StatusLabel;
+    private Label bench2StatusLabel;     // B2
+
     @FXML
     private Button backButton;
 
     @FXML
     private void initialize() {
+
         boolean t1 = EquipmentState.t1Working;
         boolean t2 = EquipmentState.t2Working;
         boolean b1 = EquipmentState.b1Working;

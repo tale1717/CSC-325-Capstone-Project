@@ -18,45 +18,69 @@
             </image>
         </ImageView>
 
-        <!-- Treadmill T1 -->
+        <!-- Treadmill T1 label and status -->
         <Label layoutX="155.0" layoutY="121.0"
-               style="-fx-font-weight: bold; -fx-border-color: black;"
-               text="T1" />
+               text="T1"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
         <Label fx:id="treadmill1StatusLabel"
                layoutX="196.0" layoutY="121.0"
                prefHeight="20.0" prefWidth="40.0"
-               style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-               text="YES" />
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
-        <!-- Bench B1 -->
-        <Label layoutX="365.0" layoutY="85.0"
-               style="-fx-font-weight: bold; -fx-border-color: black;"
-               text="B1" />
-        <Label fx:id="bench1StatusLabel"
-               layoutX="354.0" layoutY="104.0"
-               prefHeight="20.0" prefWidth="40.0"
-               style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-               text="YES" />
-
-        <!-- Treadmill T2 -->
+        <!-- Treadmill T2 label and status -->
         <Label layoutX="154.0" layoutY="68.0"
-               style="-fx-font-weight: bold; -fx-border-color: black;"
-               text="T2" />
+               text="T2"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
         <Label fx:id="treadmill2StatusLabel"
                layoutX="196.0" layoutY="67.0"
                prefHeight="20.0" prefWidth="40.0"
-               style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-               text="YES" />
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
-        <!-- Bench B2 -->
+        <!-- Bench B1 label and status -->
+        <Label layoutX="365.0" layoutY="85.0"
+               text="B1"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
+        <Label fx:id="bench1StatusLabel"
+               layoutX="354.0" layoutY="104.0"
+               prefHeight="20.0" prefWidth="40.0"
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
+
+        <!-- Bench B2 label and status -->
         <Label layoutX="428.0" layoutY="85.0"
-               style="-fx-font-weight: bold; -fx-border-color: black;"
-               text="B2" />
+               text="B2"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
         <Label fx:id="bench2StatusLabel"
                layoutX="415.0" layoutY="104.0"
                prefHeight="20.0" prefWidth="40.0"
-               style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-               text="YES" />
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
         <Button fx:id="backButton"
                 layoutX="265.0" layoutY="380.0"
