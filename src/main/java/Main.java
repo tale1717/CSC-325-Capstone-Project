@@ -16,6 +16,9 @@ public class Main extends Application {
         // Create the scene
         Scene scene = new Scene(root, 400, 600);
 
+        // Load the CSS file
+        scene.getStylesheets().add(getClass().getResource("gym-styles.css").toExternalForm());
+
         // Set up the stage
         primaryStage.setTitle("Gym Prototype - Sign Up");
         primaryStage.setScene(scene);

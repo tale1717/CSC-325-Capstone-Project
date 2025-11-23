@@ -8,7 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainContainer" alignment="TOP_CENTER" spacing="20" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gymloginpage.GymLoginController">
+<VBox fx:id="mainContainer" alignment="TOP_CENTER" spacing="20"
+      stylesheets="@gym-styles.css"
+      xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.gymloginpage.GymLoginController">
+
     <padding>
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
@@ -28,7 +33,7 @@
     </Label>
 
     <!-- Instruction -->
-    <Label text="Enter your email and password to sign up for this Gym Prototype" wrapText="true" />
+    <Label text="Enter your email to sign up for this Gym Prototype" wrapText="true" />
 
     <!-- Email Field -->
     <TextField fx:id="emailField" promptText="email@domain.com" prefWidth="300.0" prefHeight="40.0">
@@ -45,13 +50,13 @@
     </PasswordField>
 
     <!-- Register and Sign In Buttons -->
-    <Button fx:id="registerButton" text="Register" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-font-weight: bold;">
+    <Button fx:id="registerButton" text="Register" prefWidth="300.0" prefHeight="40.0">
         <font>
             <Font size="14.0" />
         </font>
     </Button>
 
-    <Button fx:id="signInButton" text="Sign In" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #f0f0f0; -fx-text-fill: #000000; -fx-border-color: #cccccc; -fx-font-weight: bold;">
+    <Button fx:id="signInButton" text="Sign In" prefWidth="300.0" prefHeight="40.0">
         <font>
             <Font size="14.0" />
         </font>
@@ -61,7 +66,7 @@
     <Label fx:id="orLabel" text="or continue with" />
 
     <!-- Google Button -->
-    <Button fx:id="googleButton" text="Google" prefWidth="300.0" prefHeight="40.0" style="-fx-background-color: #4285f4; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #4285f4;">
+    <Button fx:id="googleButton" text="Google" prefWidth="300.0" prefHeight="40.0">
         <font>
             <Font size="14.0" />
         </font>
