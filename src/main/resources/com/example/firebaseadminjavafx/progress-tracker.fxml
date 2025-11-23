@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.firebaseadminjavafx.ProgressController">
+
+    <top>
+        <Label text="Weekly Workout Progress Tracker"
+               textFill="#cd3333"
+               BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+        </Label>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+
+            <!-- Back Button -->
+            <HBox spacing="10">
+                <Button fx:id="backButton"
+                        text="Back"
+                        onAction="#handleBack" />
+            </HBox>
+
+            <!-- Form -->
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="30" />
+                    <ColumnConstraints percentWidth="70" />
+                </columnConstraints>
+
+                <Label text="Week (pick any day):"
+                       GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <DatePicker fx:id="datePickerWeek"
+                            GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Weight:"
+                       GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="txtWeight" promptText="e.g., 150.5"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Gym visits this week:"
+                       GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="txtGymVisits" promptText="e.g., 3"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Total minutes at gym:"
+                       GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="txtMinutesAtGym" promptText="e.g., 120"
+                           GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label text="Machine sessions:"
+                       GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="txtMachineSessions" promptText="e.g., 5"
+                           GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label text="Calories burned:"
+                       GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="txtCalories" promptText="e.g., 1800"
+                           GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+
+            <!-- Buttons -->
+            <HBox spacing="10">
+                <Button text="Save / Update Week" onAction="#onSaveClicked" />
+                <Button text="Delete Selected" onAction="#onDeleteClicked" />
+                <Button text="Clear Form" onAction="#onClearFormClicked" />
+            </HBox>
+
+            <!-- Summary -->
+            <Label fx:id="lblSummary"
+                   text="Weeks tracked: 0 | Total gym visits: 0 | Total minutes: 0 | Total calories: 0" />
+
+            <!-- Table -->
+            <TableView fx:id="tableProgress" prefHeight="250">
+                <columns>
+                    <TableColumn fx:id="colWeek" text="Week Start" />
+                    <TableColumn fx:id="colWeight" text="Weight" />
+                    <TableColumn fx:id="colGymVisits" text="Gym Visits" />
+                    <TableColumn fx:id="colMinutes" text="Minutes at Gym" />
+                    <TableColumn fx:id="colMachines" text="Machine Sessions" />
+                    <TableColumn fx:id="colCalories" text="Calories Burned" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
