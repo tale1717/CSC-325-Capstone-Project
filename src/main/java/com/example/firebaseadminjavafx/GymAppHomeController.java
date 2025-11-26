@@ -2,8 +2,12 @@ package com.example.firebaseadminjavafx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class GymAppHomeController {
+
+    @FXML
+    private Label emailValue;
 
     @FXML
     private Button gymLayoutButton;
@@ -15,10 +19,18 @@ public class GymAppHomeController {
     private Button classSchedulerButton;
 
     @FXML
-    private Button backButton;
+    private Button progressTrackerButton;
 
     @FXML
-    private Button progressTrackerButton;
+    private Button myProfileButton;
+
+    @FXML
+    private Button returnToWelcomeButton;
+
+    @FXML
+    private void initialize() {
+        emailValue.setText(Main.currentUserEmail != null ? Main.currentUserEmail : "(unknown)");
+    }
 
     @FXML
     private void handleGymLayout() {
@@ -36,12 +48,19 @@ public class GymAppHomeController {
     }
 
     @FXML
-    private void handleBack() {
-        Main.setRoot("next-step", backButton);
-    }
-
-    @FXML
     private void handleProgressTracker() {
         Main.setRoot("progress-tracker", progressTrackerButton);
     }
+
+    @FXML
+    private void handleMyProfile() { Main.setRoot("enter-info.fxml", myProfileButton); }
+
+    @FXML
+    private void handleReturnToWelcome() {
+        Main.currentUserEmail = null;
+        Main.currentUserUid = null;
+        Main.setRoot("welcome-view.fxml", returnToWelcomeButton);
+    }
+
+
 }
