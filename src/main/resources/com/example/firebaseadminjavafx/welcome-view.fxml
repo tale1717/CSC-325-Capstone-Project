@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <VBox fx:id="mainContainer" alignment="TOP_CENTER" spacing="20"
-      stylesheets="@gym-styles.css"
+      stylesheets="@welcome.css"
       xmlns="http://javafx.com/javafx/11.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.WelcomeController">
