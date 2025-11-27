@@ -26,6 +26,6 @@ public class ClassSchedulerController {
 
     @FXML
     private void handleBackToMain() {
-        Main.setRoot("Clas.fxml", backButton);
+        Main.setRoot("gymapp-home.fxml", backButton);
     }
 }
