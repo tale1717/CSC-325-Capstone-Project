@@ -89,7 +89,7 @@ public class ClassScheduler {
 
     @FXML
     private void handleBackToMain() {
-        Main.setRoot("gymapp-home.fxml", backButton);
+        Main.setRoot("class-scheduler-home.fxml", backButton);
     }
 
     private void showClassDetails(GymClass gymClass) {
