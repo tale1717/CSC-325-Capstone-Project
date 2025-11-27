@@ -2,65 +2,56 @@ package com.example.firebaseadminjavafx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 public class GymAppHomeController {
 
     @FXML
-    private Label emailValue;
+    private Button profileButton;
 
     @FXML
-    private Button gymLayoutButton;
+    private Button viewClassesButton;
 
     @FXML
-    private Button workoutPlanningButton;
+    private Button workoutButton;
 
     @FXML
-    private Button classSchedulerButton;
+    private Button gymMapButton;
 
     @FXML
     private Button progressTrackerButton;
 
     @FXML
-    private Button myProfileButton;
+    private Button backButton;
 
     @FXML
-    private Button returnToWelcomeButton;
-
-    @FXML
-    private void initialize() {
-        emailValue.setText(Main.currentUserEmail != null ? Main.currentUserEmail : "(unknown)");
+    private void handleProfile() {
+        Main.setRoot("enter-info.fxml", profileButton);
     }
 
     @FXML
-    private void handleGymLayout() {
-        Main.setRoot("gym-layout-home", gymLayoutButton);
+    private void handleViewClasses() {
+        Main.setRoot("class-scheduler-home.fxml", viewClassesButton);
     }
 
     @FXML
-    private void handleWorkoutPlanning() {
-        Main.setRoot("workout-planning", workoutPlanningButton);
+    private void handleWorkout() {
+        Main.setRoot("workout-planning.fxml", workoutButton);
     }
 
     @FXML
-    private void handleClassScheduling() {
-        Main.setRoot("class-scheduler-home", classSchedulerButton);
+    private void handleGymMap() {
+        Main.setRoot("gym-layout-home.fxml", gymMapButton);
     }
 
     @FXML
     private void handleProgressTracker() {
-        Main.setRoot("progress-tracker", progressTrackerButton);
+        Main.setRoot("progress-tracker.fxml", progressTrackerButton);
     }
 
     @FXML
-    private void handleMyProfile() { Main.setRoot("enter-info.fxml", myProfileButton); }
-
-    @FXML
-    private void handleReturnToWelcome() {
-        Main.currentUserEmail = null;
+    private void handleBack() {
         Main.currentUserUid = null;
-        Main.setRoot("welcome-view.fxml", returnToWelcomeButton);
+        Main.currentUserEmail = null;
+        Main.setRoot("welcome-view.fxml", backButton);
     }
-
-
 }
