@@ -64,7 +64,7 @@ public class WelcomeController {
                 Main.currentUserEmail = email;
 
                 log.info("User signed in successfully: " + Main.currentUserEmail);
-                Main.setRoot("gymapp-home.fxml", signInButton);
+                Main.setRoot("next-step.fxml", signInButton);
             } else {
                 setError("Incorrect password.");
                 log.info("Sign in failed (bad password): " + email);
