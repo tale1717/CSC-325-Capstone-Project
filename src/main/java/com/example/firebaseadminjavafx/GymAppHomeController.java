@@ -18,6 +18,9 @@ public class GymAppHomeController {
     private Button gymMapButton;
 
     @FXML
+    private Button progressTrackerButton;
+
+    @FXML
     private Button backButton;
 
     @FXML
@@ -30,7 +33,7 @@ public class GymAppHomeController {
     @FXML
     private void handleViewClasses() {
         System.out.println("View Classes button clicked");
-        // Navigate to classes screen - using existing class scheduler
+        // Navigate to classes screen
         Main.setRoot("class-scheduler-home", viewClassesButton);
     }
 
@@ -46,6 +49,13 @@ public class GymAppHomeController {
         System.out.println("Gym Map button clicked");
         // Navigate to gym layout screen
         Main.setRoot("gym-layout-home", gymMapButton);
+    }
+
+    @FXML
+    private void handleProgressTracker() {
+        System.out.println("Workout Progress Tracker button clicked");
+        // Navigate to progress tracker screen
+        Main.setRoot("progress-tracker", progressTrackerButton);
     }
 
     @FXML

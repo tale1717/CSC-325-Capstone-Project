@@ -11,12 +11,13 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.GymAppHomeController"
       alignment="TOP_CENTER" spacing="30.0"
-      prefWidth="600.0" prefHeight="700.0"
-      style="-fx-background-color: white; -fx-padding: 40;">
+      prefWidth="600.0" prefHeight="800.0"
+      style="-fx-background-color: #1B5E20; -fx-padding: 40;"
+      stylesheets="@welcome.css">
 
     <children>
         <!-- Title -->
-        <Label text="Gym Prototype" style="-fx-font-weight: bold;">
+        <Label text="Gym Prototype" style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
             <font>
                 <Font size="32.0" />
             </font>
@@ -30,13 +31,13 @@
                         text="Profile"
                         onAction="#handleProfile"
                         prefWidth="200" prefHeight="80"
-                        style="-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #673C70 0%, #C473D6 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10;"/>
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"/>
 
                 <Button fx:id="viewClassesButton"
                         text="View Classes"
                         onAction="#handleViewClasses"
                         prefWidth="200" prefHeight="80"
-                        style="-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #673C70 0%, #C473D6 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10;"/>
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"/>
             </HBox>
 
             <!-- Second Row of Buttons -->
@@ -45,19 +46,28 @@
                         text="Workout"
                         onAction="#handleWorkout"
                         prefWidth="200" prefHeight="80"
-                        style="-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #673C70 0%, #C473D6 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10;"/>
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"/>
 
                 <Button fx:id="gymMapButton"
                         text="Gym Map"
                         onAction="#handleGymMap"
                         prefWidth="200" prefHeight="80"
-                        style="-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #673C70 0%, #C473D6 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10;"/>
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"/>
+            </HBox>
+
+            <!-- Third Row - Workout Progress Tracker -->
+            <HBox alignment="CENTER" spacing="30">
+                <Button fx:id="progressTrackerButton"
+                        text="Workout Progress Tracker"
+                        onAction="#handleProgressTracker"
+                        prefWidth="430" prefHeight="80"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"/>
             </HBox>
         </VBox>
 
         <!-- Motivational Text -->
         <Label text="Ready to get stronger, healthier, and more confident? Let's grind!!!"
-               style="-fx-text-fill: #00772A; -fx-font-weight: bold; -fx-font-size: 18px;"
+               style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-font-size: 18px;"
                wrapText="true" textAlignment="CENTER"
                prefWidth="500.0"/>
 
@@ -66,6 +76,6 @@
                 text="Back"
                 onAction="#handleBack"
                 prefWidth="120" prefHeight="40"
-                style="-fx-background-color: #00772A; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);"/>
     </children>
 </VBox>
