@@ -1,5 +1,4 @@
 /* ---------- Global theme + background ---------- */
-
 .root {
     -fx-fsc-green: #005035;
     -fx-fsc-purple: #4A0D67;
@@ -21,6 +20,19 @@
 .title-label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+
+/* ---------- TableView Headers & Cells ---------- */
+
+/* Column headers in classTable */
+#classTable .column-header .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/* Table cells in classTable */
+#classTable .cell {
+    -fx-text-fill: black;
 }
 
 /* ---------- LOGIN SCREEN (Welcome) ONLY ---------- */
@@ -132,5 +144,9 @@
 
 /* ClassScheduling: same idea once that screen exists */
 #classSchedulingRoot .label {
+    -fx-text-fill: black;
+}
+
+#classScheduler .label {
     -fx-text-fill: black;
 }
