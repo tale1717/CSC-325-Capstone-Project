@@ -43,7 +43,7 @@
 /* Root VBox for login */
 #mainContainer {
     -fx-background-color: -fx-christmas-green;
-    -fx-background-image: url('snow-pattern.png'); /* Optional: add snow pattern */
+    //-fx-background-image: url('snow-pattern.png'); /* Optional: add snow pattern */
 }
 
 /* Instruction label on login screen */
