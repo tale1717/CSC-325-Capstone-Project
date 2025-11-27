@@ -25,43 +25,33 @@ public class GymAppHomeController {
 
     @FXML
     private void handleProfile() {
-        System.out.println("Profile button clicked");
-        // Navigate to profile screen
-        // Main.setRoot("profile-screen", profileButton);
+        Main.setRoot("enter-info.fxml", profileButton);
     }
 
     @FXML
     private void handleViewClasses() {
-        System.out.println("View Classes button clicked");
-        // Navigate to classes screen
-        Main.setRoot("class-scheduler-home", viewClassesButton);
+        Main.setRoot("class-scheduler-home.fxml", viewClassesButton);
     }
 
     @FXML
     private void handleWorkout() {
-        System.out.println("Workout button clicked");
-        // Navigate to workout planning screen
-        Main.setRoot("workout-planning", workoutButton);
+        Main.setRoot("workout-planning.fxml", workoutButton);
     }
 
     @FXML
     private void handleGymMap() {
-        System.out.println("Gym Map button clicked");
-        // Navigate to gym layout screen
-        Main.setRoot("gym-layout-home", gymMapButton);
+        Main.setRoot("gym-layout-home.fxml", gymMapButton);
     }
 
     @FXML
     private void handleProgressTracker() {
-        System.out.println("Workout Progress Tracker button clicked");
-        // Navigate to progress tracker screen
-        Main.setRoot("progress-tracker", progressTrackerButton);
+        Main.setRoot("progress-tracker.fxml", progressTrackerButton);
     }
 
     @FXML
     private void handleBack() {
-        System.out.println("Back button clicked");
-        // Navigate back to login screen
-        Main.setRoot("welcome", backButton);
+        Main.currentUserUid = null;
+        Main.currentUserEmail = null;
+        Main.setRoot("welcome-view.fxml", backButton);
     }
 }
