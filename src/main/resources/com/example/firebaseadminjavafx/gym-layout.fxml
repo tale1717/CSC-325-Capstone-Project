@@ -6,53 +6,86 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="565.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.firebaseadminjavafx.GymLayoutController">
+<AnchorPane prefHeight="450.0" prefWidth="650.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.firebaseadminjavafx.GymLayoutController">
 
     <children>
-        <ImageView fitHeight="556.0" fitWidth="849.0" layoutX="0.0" layoutY="0.0">
+        <ImageView fitHeight="350.0" fitWidth="650.0" layoutX="0.0" layoutY="0.0">
             <image>
-                <Image url="@gym-layout.jpg" />
+                <Image url="@gym-design-floor-plan.png" />
             </image>
         </ImageView>
 
         <!-- Treadmill T1 label and status -->
-        <Label layoutX="210.0" layoutY="354.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="T1" />
-        <Label fx:id="treadmill1StatusLabel" layoutX="252.0" layoutY="401.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
+        <Label layoutX="155.0" layoutY="121.0"
+               text="T1"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
+        <Label fx:id="treadmill1StatusLabel"
+               layoutX="196.0" layoutY="121.0"
+               prefHeight="20.0" prefWidth="40.0"
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
         <!-- Treadmill T2 label and status -->
-        <Label layoutX="210.0" layoutY="401.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="T2" />
-        <Label fx:id="treadmill2StatusLabel" layoutX="253.0" layoutY="354.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
+        <Label layoutX="154.0" layoutY="68.0"
+               text="T2"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
+        <Label fx:id="treadmill2StatusLabel"
+               layoutX="196.0" layoutY="67.0"
+               prefHeight="20.0" prefWidth="40.0"
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
         <!-- Bench B1 label and status -->
-        <Label layoutX="221.0" layoutY="118.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="B1" />
-        <Label fx:id="bench1StatusLabel" layoutX="210.0" layoutY="146.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
+        <Label layoutX="365.0" layoutY="85.0"
+               text="B1"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
+        <Label fx:id="bench1StatusLabel"
+               layoutX="354.0" layoutY="104.0"
+               prefHeight="20.0" prefWidth="40.0"
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
         <!-- Bench B2 label and status -->
-        <Label layoutX="317.0" layoutY="119.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="B2" />
-        <Label fx:id="bench2StatusLabel" layoutX="306.0" layoutY="146.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
+        <Label layoutX="428.0" layoutY="85.0"
+               text="B2"
+               style="-fx-font-weight: bold;
+                      -fx-border-color: black;
+                      -fx-background-color: #424242;
+                      -fx-text-fill: white;
+                      -fx-background-radius: 4;" />
+        <Label fx:id="bench2StatusLabel"
+               layoutX="415.0" layoutY="104.0"
+               prefHeight="20.0" prefWidth="40.0"
+               text="YES"
+               style="-fx-border-color: green;
+                      -fx-background-color: lightgreen;
+                      -fx-font-weight: bold;" />
 
-        <Button fx:id="backButton" layoutX="360.0" layoutY="514.0" onAction="#returnBackToHome" prefWidth="120.0" text="Back" />
-      <Label fx:id="bench1StatusLabel1" layoutX="499.0" layoutY="146.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel11" layoutX="610.0" layoutY="145.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel111" layoutX="520.0" layoutY="362.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel112" layoutX="520.0" layoutY="299.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel113" layoutX="673.0" layoutY="278.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel1131" layoutX="714.0" layoutY="196.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel1121" layoutX="302.0" layoutY="298.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel1132" layoutX="253.0" layoutY="302.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel1133" layoutX="254.0" layoutY="256.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel1134" layoutX="254.0" layoutY="205.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label fx:id="bench1StatusLabel12" layoutX="422.0" layoutY="145.0" prefHeight="20.0" prefWidth="40.0" style="-fx-border-color: green;                       -fx-background-color: lightgreen;                       -fx-font-weight: bold;" text="YES" />
-      <Label layoutX="209.0" layoutY="206.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="E1" />
-      <Label layoutX="208.0" layoutY="301.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="E3" />
-      <Label layoutX="208.0" layoutY="256.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="E2" />
-      <Label layoutX="433.0" layoutY="98.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="P1" />
-      <Label layoutX="512.0" layoutY="97.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="S1" />
-      <Label layoutX="622.0" layoutY="98.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="O1" />
-      <Label layoutX="309.0" layoutY="266.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="C1" />
-      <Label layoutX="472.0" layoutY="301.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="A1" />
-      <Label layoutX="471.0" layoutY="364.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="A2" />
-      <Label layoutX="684.0" layoutY="222.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="C1" />
-      <Label layoutX="723.0" layoutY="166.0" style="-fx-font-weight: bold;                       -fx-border-color: black;                       -fx-background-color: #424242;                       -fx-text-fill: white;                       -fx-background-radius: 4;" text="W1" />
+        <Button fx:id="backButton"
+                layoutX="265.0" layoutY="380.0"
+                prefWidth="120.0"
+                text="Back"
+                onAction="#returnBackToHome" />
     </children>
 </AnchorPane>

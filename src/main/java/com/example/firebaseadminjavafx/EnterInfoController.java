@@ -105,7 +105,7 @@ public class EnterInfoController {
 
     @FXML
     private void handleBack() {
-        Main.setRoot("gymapp-home.fxml", backButton);
+        Main.setRoot("next-step.fxml", backButton);
     }
 
     // --- helpers ---
