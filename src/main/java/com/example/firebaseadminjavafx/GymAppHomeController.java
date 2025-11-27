@@ -6,42 +6,62 @@ import javafx.scene.control.Button;
 public class GymAppHomeController {
 
     @FXML
-    private Button gymLayoutButton;
+    private Button profileButton;
 
     @FXML
-    private Button workoutPlanningButton;
+    private Button viewClassesButton;
 
     @FXML
-    private Button classSchedulerButton;
+    private Button workoutButton;
 
     @FXML
-    private Button backButton;
+    private Button gymMapButton;
 
     @FXML
     private Button progressTrackerButton;
 
     @FXML
-    private void handleGymLayout() {
-        Main.setRoot("gym-layout-home", gymLayoutButton);
+    private Button backButton;
+
+    @FXML
+    private void handleProfile() {
+        System.out.println("Profile button clicked");
+        // Navigate to profile screen
+        // Main.setRoot("profile-screen", profileButton);
     }
 
     @FXML
-    private void handleWorkoutPlanning() {
-        Main.setRoot("workout-planning", workoutPlanningButton);
+    private void handleViewClasses() {
+        System.out.println("View Classes button clicked");
+        // Navigate to classes screen
+        Main.setRoot("class-scheduler-home", viewClassesButton);
     }
 
     @FXML
-    private void handleClassScheduling() {
-        Main.setRoot("class-scheduler-home", classSchedulerButton);
+    private void handleWorkout() {
+        System.out.println("Workout button clicked");
+        // Navigate to workout planning screen
+        Main.setRoot("workout-planning", workoutButton);
     }
 
     @FXML
-    private void handleBack() {
-        Main.setRoot("next-step", backButton);
+    private void handleGymMap() {
+        System.out.println("Gym Map button clicked");
+        // Navigate to gym layout screen
+        Main.setRoot("gym-layout-home", gymMapButton);
     }
 
     @FXML
     private void handleProgressTracker() {
+        System.out.println("Workout Progress Tracker button clicked");
+        // Navigate to progress tracker screen
         Main.setRoot("progress-tracker", progressTrackerButton);
+    }
+
+    @FXML
+    private void handleBack() {
+        System.out.println("Back button clicked");
+        // Navigate back to login screen
+        Main.setRoot("welcome", backButton);
     }
 }
