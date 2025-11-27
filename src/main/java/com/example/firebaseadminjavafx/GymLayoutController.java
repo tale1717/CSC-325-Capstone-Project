@@ -14,16 +14,49 @@ public class GymLayoutController {
     private static final Logger log = Logger.getLogger(GymLayoutController.class.getName());
 
     @FXML
+    private Label bench1StatusLabel;     // B1
+
+    @FXML
+    private Label bench2StatusLabel;     // B2|
+
+    @FXML
+    private Label elliptical1StatusLabel;     // E1
+
+    @FXML
+    private Label elliptical2StatusLabel;     // E2
+
+    @FXML
+    private Label elliptical3StatusLabel;     // E3
+
+    @FXML
     private Label treadmill1StatusLabel; // T1
 
     @FXML
     private Label treadmill2StatusLabel; // T2
 
     @FXML
-    private Label bench1StatusLabel;     // B1
+    private Label chestPress1StatusLabel;     // PC1
 
     @FXML
-    private Label bench2StatusLabel;     // B2
+    private Label cable1StatusLabel;     // C1
+
+    @FXML
+    private Label olympicBench1StatusLabel;     // OB1
+
+    @FXML
+    private Label olympicIncline1StatusLabel;     // OI1
+
+    @FXML
+    private Label adductor1StatusLabel;     // AD1
+
+    @FXML
+    private Label abductor1StatusLabel;     // AB1
+
+    @FXML
+    private Label preacherCurl1StatusLabel;     // P1
+
+    @FXML
+    private Label weight1StatusLabel;     // W1
 
     @FXML
     private Button backButton;
