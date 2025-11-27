@@ -25,12 +25,25 @@
     -fx-font-weight: bold;
 }
 
+/* ---------- TableView Headers & Cells ---------- */
+
+/* Column headers in classTable */
+#classTable .column-header .label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/* Table cells in classTable */
+#classTable .cell {
+    -fx-text-fill: black;
+}
+
 /* ---------- LOGIN SCREEN (Welcome) ONLY ---------- */
 
 /* Root VBox for login */
 #mainContainer {
     -fx-background-color: -fx-christmas-green;
-    -fx-background-image: url('snow-pattern.png'); /* Optional: add snow pattern */
+    //-fx-background-image: url('snow-pattern.png'); /* Optional: add snow pattern */
 }
 
 /* Instruction label on login screen */
@@ -162,6 +175,9 @@
     -fx-text-fill: black;
 }
 
+#classScheduler .label {
+    -fx-text-fill: black;
+}
 /* Additional Christmas styling for other elements */
 .button {
     -fx-font-family: "Arial";
