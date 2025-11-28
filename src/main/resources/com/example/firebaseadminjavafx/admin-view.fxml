@@ -2,89 +2,301 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0"
-            xmlns="http://javafx.com/javafx/25"
+<ScrollPane xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.AdminController">
+            fx:controller="com.example.firebaseadminjavafx.AdminController"
+            fx:id="gymAdminRoot"
+            style="-fx-background: #1B5E20; -fx-background-color: #1B5E20;"
+            fitToWidth="true"
+            prefWidth="400.0" prefHeight="400.0">
 
-    <Label layoutX="145.0" layoutY="20.0"
-           style="-fx-font-size: 18px; -fx-font-weight: bold;"
-           text="Admin View"/>
 
-    <!-- Treadmill T1 -->
-    <Label layoutX="40.0" layoutY="80.0" text="Treadmill T1"/>
-    <Label layoutX="40.0" layoutY="105.0" text="Fully Functional?"/>
-    <Button fx:id="t1YesButton"
-            layoutX="160.0" layoutY="100.0"
-            onAction="#handleT1Yes"
-            text="YES"/>
-    <Button fx:id="t1NoButton"
-            layoutX="215.0" layoutY="100.0"
-            onAction="#handleT1No"
-            text="NO"/>
-    <Label fx:id="t1StatusLabel"
-           layoutX="280.0" layoutY="102.0"
-           prefHeight="22.0" prefWidth="60.0"
-           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-           text="YES"/>
+    <VBox spacing="15.0" style="-fx-padding: 20;">
+        <!-- Title -->
+        <Label text="Admin View"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;
+               -fx-background-color: #1B5E20;"
+        />
 
-    <!-- Treadmill T2 -->
-    <Label layoutX="40.0" layoutY="141.0" text="Treadmill T2"/>
-    <Label layoutX="40.0" layoutY="166.0" text="Fully Functional?"/>
-    <Button fx:id="t2YesButton"
-            layoutX="160.0" layoutY="161.0"
-            onAction="#handleT2Yes"
-            text="YES"/>
-    <Button fx:id="t2NoButton"
-            layoutX="215.0" layoutY="161.0"
-            onAction="#handleT2No"
-            text="NO"/>
-    <Label fx:id="t2StatusLabel"
-           layoutX="280.0" layoutY="163.0"
-           prefHeight="22.0" prefWidth="60.0"
-           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-           text="YES"/>
+        <!-- Treadmill T1 -->
+        <VBox spacing="5.0">
+            <Label text="Treadmill T1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="t1YesButton"
+                        text="YES"
+                        onAction="#handleT1Yes"/>
+                <Button fx:id="t1NoButton"
+                        text="NO"
+                        onAction="#handleT1No"/>
+                <Label fx:id="t1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
 
-    <!-- Bench B1 -->
-    <Label layoutX="40.0" layoutY="209.0" text="Bench B1"/>
-    <Label layoutX="40.0" layoutY="234.0" text="Fully Functional?"/>
-    <Button fx:id="b1YesButton"
-            layoutX="160.0" layoutY="229.0"
-            onAction="#handleB1Yes"
-            text="YES"/>
-    <Button fx:id="b1NoButton"
-            layoutX="215.0" layoutY="229.0"
-            onAction="#handleB1No"
-            text="NO"/>
-    <Label fx:id="b1StatusLabel"
-           layoutX="280.0" layoutY="231.0"
-           prefHeight="22.0" prefWidth="60.0"
-           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-           text="YES"/>
+        <!-- Treadmill T2 -->
+        <VBox spacing="5.0">
+            <Label text="Treadmill T2"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="t2YesButton"
+                        text="YES"
+                        onAction="#handleT2Yes"/>
+                <Button fx:id="t2NoButton"
+                        text="NO"
+                        onAction="#handleT2No"/>
+                <Label fx:id="t2StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
 
-    <!-- Bench B2 -->
-    <Label layoutX="40.0" layoutY="266.0" text="Bench B2"/>
-    <Label layoutX="40.0" layoutY="291.0" text="Fully Functional?"/>
-    <Button fx:id="b2YesButton"
-            layoutX="160.0" layoutY="286.0"
-            onAction="#handleB2Yes"
-            text="YES"/>
-    <Button fx:id="b2NoButton"
-            layoutX="215.0" layoutY="286.0"
-            onAction="#handleB2No"
-            text="NO"/>
-    <Label fx:id="b2StatusLabel"
-           layoutX="280.0" layoutY="288.0"
-           prefHeight="22.0" prefWidth="60.0"
-           style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
-           text="YES"/>
+        <!-- Bench B1 -->
+        <VBox spacing="5.0">
+            <Label text="Bench B1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="b1YesButton"
+                        text="YES"
+                        onAction="#handleB1Yes"/>
+                <Button fx:id="b1NoButton"
+                        text="NO"
+                        onAction="#handleB1No"/>
+                <Label fx:id="b1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
 
-    <Button fx:id="backButton"
-            layoutX="140.0" layoutY="339.0"
-            onAction="#handleBackToHome"
-            prefWidth="120"
-            text="Back"/>
+        <!-- Bench B2 -->
+        <VBox spacing="5.0">
+            <Label text="Bench B2"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="b2YesButton"
+                        text="YES"
+                        onAction="#handleB2Yes"/>
+                <Button fx:id="b2NoButton"
+                        text="NO"
+                        onAction="#handleB2No"/>
+                <Label fx:id="b2StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
 
-</AnchorPane>
+        <!-- Elliptical E1 -->
+        <VBox spacing="5.0">
+            <Label text="Elliptical E1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="e1YesButton"
+                        text="YES"
+                        onAction="#handleE1Yes"/>
+                <Button fx:id="e1NoButton"
+                        text="NO"
+                        onAction="#handleE1No"/>
+                <Label fx:id="e1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Elliptical E2 -->
+        <VBox spacing="5.0">
+            <Label text="Elliptical E2"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="e2YesButton"
+                        text="YES"
+                        onAction="#handleE2Yes"/>
+                <Button fx:id="e2NoButton"
+                        text="NO"
+                        onAction="#handleE2No"/>
+                <Label fx:id="e2StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Elliptical E3 -->
+        <VBox spacing="5.0">
+            <Label text="Elliptical E3"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="e3YesButton"
+                        text="YES"
+                        onAction="#handleE3Yes"/>
+                <Button fx:id="e3NoButton"
+                        text="NO"
+                        onAction="#handleE3No"/>
+                <Label fx:id="e3StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Preacher Curl P1 -->
+        <VBox spacing="5.0">
+            <Label text="Preacher Curl P1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="pc1YesButton"
+                        text="YES"
+                        onAction="#handlePC1Yes"/>
+                <Button fx:id="pc1NoButton"
+                        text="NO"
+                        onAction="#handlePC1No"/>
+                <Label fx:id="pc1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Shoulder Press S1 -->
+        <VBox spacing="5.0">
+            <Label text="Shoulder Press S1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="s1YesButton"
+                        text="YES"
+                        onAction="#handleS1Yes"/>
+                <Button fx:id="s1NoButton"
+                        text="NO"
+                        onAction="#handleS1No"/>
+                <Label fx:id="s1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Olympic Bench OB1 -->
+        <VBox spacing="5.0">
+            <Label text="Olympic Bench OB1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="ob1YesButton"
+                        text="YES"
+                        onAction="#handleOB1Yes"/>
+                <Button fx:id="ob1NoButton"
+                        text="NO"
+                        onAction="#handleOB1No"/>
+                <Label fx:id="ob1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Olympic Incline OI1 -->
+        <VBox spacing="5.0">
+            <Label text="Olympic Incline OI1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="oi1YesButton"
+                        text="YES"
+                        onAction="#handleOI1Yes"/>
+                <Button fx:id="oi1NoButton"
+                        text="NO"
+                        onAction="#handleOI1No"/>
+                <Label fx:id="oi1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Cable Machine C1 -->
+        <VBox spacing="5.0">
+            <Label text="Cable Machine C1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="c1YesButton"
+                        text="YES"
+                        onAction="#handleC1Yes"/>
+                <Button fx:id="c1NoButton"
+                        text="NO"
+                        onAction="#handleC1No"/>
+                <Label fx:id="c1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Adductor AD1 -->
+        <VBox spacing="5.0">
+            <Label text="Adductor AD1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="ad1YesButton"
+                        text="YES"
+                        onAction="#handleAD1Yes"/>
+                <Button fx:id="ad1NoButton"
+                        text="NO"
+                        onAction="#handleAD1No"/>
+                <Label fx:id="ad1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Abductor AB1 -->
+        <VBox spacing="5.0">
+            <Label text="Abductor AB1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="ab1YesButton"
+                        text="YES"
+                        onAction="#handleAB1Yes"/>
+                <Button fx:id="ab1NoButton"
+                        text="NO"
+                        onAction="#handleAB1No"/>
+                <Label fx:id="ab1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Weight Assist Dip/Chin W1 -->
+        <VBox spacing="5.0">
+            <Label text="Weight Assist Dip/Chin W1"/>
+            <Label text="Fully Functional?"/>
+            <HBox spacing="5.0">
+                <Button fx:id="w1YesButton"
+                        text="YES"
+                        onAction="#handleW1Yes"/>
+                <Button fx:id="w1NoButton"
+                        text="NO"
+                        onAction="#handleW1No"/>
+                <Label fx:id="w1StatusLabel"
+                       prefWidth="60.0" prefHeight="22.0"
+                       text="YES"
+                       style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+
+        <!-- Back Button -->
+        <Button fx:id="backButton"
+                text="Back"
+                prefWidth="120"
+                onAction="#handleBackToHome"
+        />
+    </VBox>
+</ScrollPane>
