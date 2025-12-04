@@ -30,7 +30,7 @@
 /* Root VBox for login */
 #mainContainer {
     -fx-background-color: -fx-christmas-green;
-    -fx-background-image: url('snow-pattern.png'); /* Optional: add snow pattern */
+  /*  //-fx-background-image: url('snow-pattern.png');  Optional: add snow pattern */
 }
 
 /* Instruction label on login screen */
@@ -157,10 +157,11 @@
     -fx-text-fill: black;
 }
 
-/* ClassScheduling: same idea once that screen exists */
-#classSchedulingRoot .label {
+/* GymAdmin: labels should be black not white
+#gymAdminRoot .label {
     -fx-text-fill: black;
 }
+*/
 
 /* Additional Christmas styling for other elements */
 .button {

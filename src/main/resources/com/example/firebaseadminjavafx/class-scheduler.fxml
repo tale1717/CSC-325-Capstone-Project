@@ -2,9 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextAlignment?>
 
 <AnchorPane prefHeight="400.0" prefWidth="400.0"
             style="-fx-background-color: #1B5E20;"
@@ -13,69 +14,52 @@
             fx:controller="com.example.firebaseadminjavafx.ClassScheduler">
 
     <children>
-        <!-- Main Title - Christmas Gold -->
-        <Label alignment="CENTER" layoutX="50.0" layoutY="30.0" prefHeight="30.0" prefWidth="300.0"
+
+        <!-- Title -->
+        <Label alignment="CENTER" layoutX="50.0" layoutY="30.0"
+               prefHeight="30.0" prefWidth="300.0"
                text="View All Classes Below"
                style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 1);">
             <font>
-                <Font name="System Bold" size="16.0" />
+                <Font name="System Bold" size="16.0"/>
             </font>
         </Label>
 
-        <!-- Suggested Classes Button - Christmas Red (LARGER) -->
-        <Button layoutX="15.0" layoutY="90.0" mnemonicParsing="false"
+        <!-- NEW RED Suggested Classes Button -->
+        <Button layoutX="15.0" layoutY="90.0"
                 prefWidth="140" prefHeight="35"
                 text="Suggested Classes"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"/>
+                onAction="#handleSuggestClass"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
 
-        <!-- Available Classes Label - Christmas Gold - Centered properly -->
-        <Label alignment="CENTER" layoutX="125.0" layoutY="130.0" prefHeight="30.0" prefWidth="150.0"
-               text="Available Classes"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
+        <!-- Search Field (from OLD version) -->
+        <TextField fx:id="searchField"
+                   layoutX="180.0" layoutY="90.0"
+                   prefHeight="35" prefWidth="160"
+                   promptText="Enter Class Name..."
+                   style="-fx-background-radius: 5;" />
 
-        <!-- Search For Class Button - Christmas Red -->
-        <Button layoutX="245.0" layoutY="90.0" mnemonicParsing="false"
-                prefWidth="140" prefHeight="35"
-                text="Search For Class"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"/>
+        <!-- NEW RED Search Button -->
+        <Button fx:id="searchClassButton"
+                layoutX="345.0" layoutY="90.0"
+                prefWidth="40" prefHeight="35"
+                text="Go"
+                onAction="#handleSearchClass"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-background-radius: 5;"/>
 
-        <!-- Class List - Christmas Gold - ALIGNED with "Available Classes" -->
-        <!-- "Yoga" - Aligned with "A" in "Available" -->
-        <Label alignment="CENTER" layoutX="125.0" layoutY="180.0" prefHeight="30.0" prefWidth="150.0"
-               text="Yoga"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
+        <!-- Available Classes List (from OLD version) -->
+        <ListView fx:id="classListView"
+                  layoutX="125.0" layoutY="140.0"
+                  prefHeight="160.0" prefWidth="150.0">
+        </ListView>
 
-        <!-- "Crossfit" - Aligned with "A" in "Available" -->
-        <Label alignment="CENTER" layoutX="125.0" layoutY="220.0" prefHeight="30.0" prefWidth="150.0"
-               text="Crossfit"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
-
-        <!-- "Boxing" - Aligned with "A" in "Available" -->
-        <Label alignment="CENTER" layoutX="125.0" layoutY="260.0" prefHeight="30.0" prefWidth="150.0"
-               text="Boxing"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
-
-        <!-- Back Button - Christmas Red -->
-        <Button fx:id="backButton" layoutX="140.0" layoutY="320.0" mnemonicParsing="false"
-                onAction="#handleBackToMain"
+        <!-- NEW RED Back Button -->
+        <Button fx:id="backButton"
+                layoutX="140.0" layoutY="320.0"
                 prefWidth="120" prefHeight="35"
                 text="Back"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"/>
+                onAction="#handleBackToMain"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
     </children>
+
 </AnchorPane>

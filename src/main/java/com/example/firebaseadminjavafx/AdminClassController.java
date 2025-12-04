@@ -31,6 +31,7 @@ public class AdminClassController {
 
     @FXML
     public void initialize() {
+
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         instructorColumn.setCellValueFactory(new PropertyValueFactory<>("instructor"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
