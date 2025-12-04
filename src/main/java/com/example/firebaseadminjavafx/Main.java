@@ -67,7 +67,9 @@ public class Main extends Application {
             throw new RuntimeException("Failed to switch to view: " + fxmlName, e);
         }
     }
-
+    // test #2
+    //test
+// watch my tutorial and LISTEN
     public static void main(String[] args) {
         launch();
     }
