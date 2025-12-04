@@ -2,23 +2,45 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.EnterInfoController"
-      spacing="12" alignment="CENTER" prefWidth="400" prefHeight="400">
+      spacing="12" alignment="CENTER" prefWidth="400" prefHeight="400"
+      style="-fx-background-color: #1B5E20;"> <!-- Christmas green background -->
+
     <children>
-        <Label text="Enter Info" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
-        <TextField fx:id="nameField"  promptText="Name"  maxWidth="260" />
-        <TextField fx:id="ageField"   promptText="Age"   maxWidth="260" />
-        <TextField fx:id="phoneField" promptText="Phone" maxWidth="260" />
-        <Label fx:id="statusLabel" textFill="#2e7d32" />
+        <!-- Title with Christmas gold -->
+        <Label text="Enter Info" style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 1);">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+
+        <!-- Text Fields -->
+        <TextField fx:id="nameField"  promptText="Name"  maxWidth="260" prefHeight="35"
+                   style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 5;"/>
+
+        <TextField fx:id="ageField"   promptText="Age"   maxWidth="260" prefHeight="35"
+                   style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 5;"/>
+
+        <TextField fx:id="phoneField" promptText="Phone" maxWidth="260" prefHeight="35"
+                   style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 5;"/>
+
+        <!-- Status Label -->
+        <Label fx:id="statusLabel" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;" />
+
+        <!-- Buttons with Christmas red -->
         <HBox spacing="16" alignment="CENTER">
             <children>
-                <Button fx:id="saveButton" text="Save" onAction="#handleSave" prefWidth="100"/>
-                <Button fx:id="backButton" text="Back" onAction="#handleBack" prefWidth="100"/>
+                <Button fx:id="saveButton" text="Save" onAction="#handleSave" prefWidth="100" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"/>
+
+                <Button fx:id="backButton" text="Back" onAction="#handleBack" prefWidth="100" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"/>
             </children>
         </HBox>
     </children>
-    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <padding><Insets top="30" right="20" bottom="30" left="20"/></padding>
 </VBox>
