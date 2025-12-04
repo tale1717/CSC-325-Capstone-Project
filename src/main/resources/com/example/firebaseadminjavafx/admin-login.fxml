@@ -4,45 +4,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.AdminLoginController"
       alignment="CENTER"
-      spacing="10.0"
+      spacing="15.0"
       prefWidth="400.0"
-      prefHeight="400.0">
+      prefHeight="400.0"
+      style="-fx-background-color: #1B5E20;">
 
     <children>
+        <!-- Title - Christmas Gold -->
         <Label text="Admin Login"
-               style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 1);">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
 
+        <!-- Username Field -->
         <TextField fx:id="usernameField"
                    promptText="Username"
-                   prefWidth="200.0" />
+                   prefWidth="220.0" prefHeight="35"
+                   style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
 
+        <!-- Password Field -->
         <PasswordField fx:id="passwordField"
                        promptText="Password"
-                       prefWidth="200.0" />
+                       prefWidth="220.0" prefHeight="35"
+                       style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
 
+        <!-- Message Label - Keeping original red text for error messages -->
         <Label fx:id="messageLabel"
                textFill="red" />
 
-        <HBox spacing="10" alignment="CENTER">
+        <!-- Button Container -->
+        <HBox spacing="15" alignment="CENTER">
             <children>
+                <!-- Login Button - Christmas Red -->
                 <Button fx:id="loginButton"
                         text="Login"
                         onAction="#handleLogin"
-                        prefWidth="100.0" />
+                        prefWidth="100.0" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+
+                <!-- Cancel Button - Christmas Red -->
                 <Button fx:id="cancelButton"
                         text="Cancel"
                         onAction="#handleCancel"
-                        prefWidth="100.0" />
+                        prefWidth="100.0" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
             </children>
         </HBox>
     </children>
 
     <padding>
-        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+        <Insets top="30.0" right="20.0" bottom="30.0" left="20.0" />
     </padding>
 </VBox>
