@@ -11,10 +11,10 @@
             style="-fx-background-color: #1B5E20;">
 
     <top>
-        <!-- Title - Christmas Gold -->
+        <!-- Title - Christmas White -->
         <Label text="Weekly Workout Progress Tracker"
                BorderPane.alignment="CENTER"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-font-size: 18px;">
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 18px;">
             <padding>
                 <Insets top="15" right="10" bottom="15" left="10" />
             </padding>

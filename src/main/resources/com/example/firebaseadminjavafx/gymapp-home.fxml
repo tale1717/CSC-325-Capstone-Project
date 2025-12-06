@@ -32,7 +32,7 @@
         <HBox alignment="TOP_LEFT" spacing="0" style="-fx-padding: 0 0 40 0;">
             <!-- Title on left -->
             <VBox alignment="TOP_LEFT" prefWidth="700">
-                <Label text="Gym Prototype" style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 2);">
+                <Label text="Gym Prototype" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 2);">
                     <font>
                         <Font size="48.0" />
                     </font>
@@ -90,15 +90,15 @@
 
         <!-- Motivational Text -->
         <Label text="Ready to get stronger, healthier, and more confident? Let's grind!!!"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-font-size: 24px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 1);"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 24px; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 3, 0, 0, 1);"
                wrapText="true" textAlignment="CENTER"
                maxWidth="800.0" prefWidth="800.0"/>
 
-        <!-- Back Button -->
+        <!-- Back Button - Now same size as Profile button -->
         <Button fx:id="backButton"
                 text="Back"
                 onAction="#handleBack"
-                prefWidth="120" prefHeight="40"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 2);"/>
+                prefWidth="200" prefHeight="80"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 40; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 8, 0, 0, 3);"/>
     </VBox>
 </StackPane>
