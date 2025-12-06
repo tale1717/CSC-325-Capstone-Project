@@ -19,7 +19,7 @@
         <Label alignment="CENTER" layoutX="50.0" layoutY="30.0"
                prefHeight="30.0" prefWidth="300.0"
                text="View All Classes Below"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 1);">
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);">
             <font>
                 <Font name="System Bold" size="16.0"/>
             </font>

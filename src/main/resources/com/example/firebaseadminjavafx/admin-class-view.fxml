@@ -10,10 +10,10 @@
             style="-fx-background-color: #1B5E20;">
 
     <children>
-        <!-- Title - Christmas Gold -->
+        <!-- Title - Christmas White -->
         <Label layoutX="30.0" layoutY="20.0"
                text="Admin: Manage Gym Classes"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;">
             <font>
                 <Font name="System Bold" size="18.0"/>
             </font>

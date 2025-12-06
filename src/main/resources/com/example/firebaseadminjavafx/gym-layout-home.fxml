@@ -15,9 +15,9 @@
       style="-fx-background-color: #1B5E20;">
 
     <children>
-        <!-- Title - Christmas Gold -->
+        <!-- Title - Christmas White -->
         <Label text="Gym Layout Home"
-               style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 1);">
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);">
             <font>
                 <Font size="20.0" />
             </font>
