@@ -1,5 +1,7 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.logic;
 
+import com.example.firebaseadminjavafx.firebase.FirebaseService;
+import com.example.firebaseadminjavafx.firebase.FirestoreContext;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.auth.FirebaseAuth;
 import javafx.application.Application;

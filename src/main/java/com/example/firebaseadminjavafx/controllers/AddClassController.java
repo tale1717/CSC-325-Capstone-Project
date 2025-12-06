@@ -1,5 +1,6 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.controllers;
 
+import com.example.firebaseadminjavafx.logic.GymClass;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;

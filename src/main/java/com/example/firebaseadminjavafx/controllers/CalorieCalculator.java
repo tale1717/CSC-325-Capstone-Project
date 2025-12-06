@@ -1,4 +1,6 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.controllers;
+
+import com.example.firebaseadminjavafx.models.User;
 
 public class CalorieCalculator {
 

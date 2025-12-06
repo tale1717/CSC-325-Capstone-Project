@@ -1,5 +1,7 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.controllers;
 
+import com.example.firebaseadminjavafx.logic.GymClass;
+import com.example.firebaseadminjavafx.logic.Main;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import javafx.collections.FXCollections;
@@ -8,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.concurrent.ExecutionException;
 

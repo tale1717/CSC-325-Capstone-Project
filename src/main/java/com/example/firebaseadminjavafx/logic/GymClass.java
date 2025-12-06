@@ -1,4 +1,4 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.logic;
 
 public class GymClass {
     private String id; // Firestore document ID

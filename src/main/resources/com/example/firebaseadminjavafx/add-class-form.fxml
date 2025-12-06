@@ -4,7 +4,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.firebaseadminjavafx.AddClassController"
+      fx:controller="com.example.firebaseadminjavafx.controllers.AddClassController"
       spacing="10" alignment="CENTER"
       prefWidth="300.0" prefHeight="250.0"
       style="-fx-padding: 20;">

@@ -10,7 +10,7 @@
             prefHeight="565.0" prefWidth="861.0"
             xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.GymLayoutController">
+            fx:controller="com.example.firebaseadminjavafx.controllers.GymLayoutController">
 
     <children>
         <ImageView fitHeight="556.0" fitWidth="849.0" layoutX="0.0" layoutY="0.0">

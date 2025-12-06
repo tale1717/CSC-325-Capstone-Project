@@ -1,5 +1,7 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.controllers;
 
+import com.example.firebaseadminjavafx.EquipmentState;
+import com.example.firebaseadminjavafx.logic.Main;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;

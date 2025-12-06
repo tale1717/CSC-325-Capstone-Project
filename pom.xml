@@ -63,7 +63,7 @@
                 <version>0.0.8</version>
                 <configuration>
                     <!-- Update  -->
-                    <mainClass>com.example.firebaseadminjavafx.Main</mainClass>
+                    <mainClass>com.example.firebaseadminjavafx.logic.Main</mainClass>
                 </configuration>
             </plugin>
 

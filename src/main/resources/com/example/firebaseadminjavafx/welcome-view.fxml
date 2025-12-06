@@ -12,7 +12,7 @@
       stylesheets="@welcome.css"
       xmlns="http://javafx.com/javafx/11.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.firebaseadminjavafx.WelcomeController">
+      fx:controller="com.example.firebaseadminjavafx.controllers.WelcomeController">
 
     <padding>
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />

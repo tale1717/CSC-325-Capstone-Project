@@ -1,5 +1,7 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.controllers;
 
+import com.example.firebaseadminjavafx.logic.GymClass;
+import com.example.firebaseadminjavafx.logic.Main;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import javafx.collections.FXCollections;

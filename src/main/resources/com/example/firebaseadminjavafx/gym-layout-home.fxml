@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.firebaseadminjavafx.GymLayoutHomeController"
+      fx:controller="com.example.firebaseadminjavafx.controllers.GymLayoutHomeController"
       alignment="CENTER"
       spacing="20.0"
       prefWidth="400.0"

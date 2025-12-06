@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.firebaseadminjavafx.EnterInfoController"
+      fx:controller="com.example.firebaseadminjavafx.controllers.EnterInfoController"
       spacing="12" alignment="CENTER" prefWidth="400" prefHeight="400"
       style="-fx-background-color: #1B5E20;"> <!-- Christmas green background -->
 
