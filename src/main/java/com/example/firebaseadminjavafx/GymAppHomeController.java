@@ -6,42 +6,52 @@ import javafx.scene.control.Button;
 public class GymAppHomeController {
 
     @FXML
-    private Button gymLayoutButton;
+    private Button profileButton;
 
     @FXML
-    private Button workoutPlanningButton;
+    private Button viewClassesButton;
 
     @FXML
-    private Button classSchedulerButton;
+    private Button workoutButton;
 
     @FXML
-    private Button backButton;
+    private Button gymMapButton;
 
     @FXML
     private Button progressTrackerButton;
 
     @FXML
-    private void handleGymLayout() {
-        Main.setRoot("gym-layout-home", gymLayoutButton);
+    private Button backButton;
+
+    @FXML
+    private void handleProfile() {
+        Main.setRoot("enter-info.fxml", profileButton);
     }
 
     @FXML
-    private void handleWorkoutPlanning() {
-        Main.setRoot("workout-planning", workoutPlanningButton);
+    private void handleViewClasses() {
+        Main.setRoot("class-scheduler-home.fxml", viewClassesButton);
     }
 
     @FXML
-    private void handleClassScheduling() {
-        Main.setRoot("class-scheduler-home", classSchedulerButton);
+    private void handleWorkout() {
+        Main.setRoot("workout-planning.fxml", workoutButton);
     }
 
     @FXML
-    private void handleBack() {
-        Main.setRoot("next-step", backButton);
+    private void handleGymMap() {
+        Main.setRoot("gym-layout-home.fxml", gymMapButton);
     }
 
     @FXML
     private void handleProgressTracker() {
-        Main.setRoot("progress-tracker", progressTrackerButton);
+        Main.setRoot("progress-tracker.fxml", progressTrackerButton);
+    }
+
+    @FXML
+    private void handleBack() {
+        Main.currentUserUid = null;
+        Main.currentUserEmail = null;
+        Main.setRoot("welcome-view.fxml", backButton);
     }
 }

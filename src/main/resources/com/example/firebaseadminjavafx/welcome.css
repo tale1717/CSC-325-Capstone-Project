@@ -1,25 +1,27 @@
-/* ---------- Global theme + background ---------- */
+/* ---------- Christmas Theme Colors ---------- */
 
 .root {
-    -fx-fsc-green: #005035;
-    -fx-fsc-purple: #4A0D67;
-    -fx-fsc-green-light: #006747;
-    -fx-fsc-green-dark: #003823;
-    -fx-fsc-purple-light: #6A1B9A;
-    -fx-fsc-purple-dark: #38006B;
+    -fx-christmas-green: #1B5E20; /* Dark Christmas green */
+    -fx-christmas-red: #B71C1C; /* Dark Christmas red */
+    -fx-christmas-green-light: #2E7D32; /* Light Christmas green */
+    -fx-christmas-green-dark: #0D3C10; /* Darker Christmas green */
+    -fx-christmas-red-light: #D32F2F; /* Light Christmas red */
+    -fx-christmas-red-dark: #8B0000; /* Darker Christmas red */
+    -fx-gold: #FFD700; /* Christmas gold accent */
+    -fx-snow-white: #FFFAFA; /* Snow white */
 
-    -fx-background-color: -fx-fsc-green;
+    -fx-background-color: -fx-christmas-green;
 }
 
-/* Default label text: white */
+/* Default label text: snow white */
 .label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-snow-white;
 }
 
 /* Titles (any label with id=titleLabel or styleClass=title-label) */
 #titleLabel,
 .title-label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-gold;
     -fx-font-weight: bold;
 }
 
@@ -27,7 +29,8 @@
 
 /* Root VBox for login */
 #mainContainer {
-    -fx-background-color: -fx-fsc-green;
+    -fx-background-color: -fx-christmas-green;
+  /*  //-fx-background-image: url('snow-pattern.png');  Optional: add snow pattern */
 }
 
 /* Instruction label on login screen */
@@ -37,90 +40,114 @@
 
 /* Subtitle (login) */
 #subtitleLabel {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-snow-white;
     -fx-font-weight: bold;
 }
 
-/* Register button */
+/* Register button - Christmas Red */
 #registerButton {
-    -fx-background-color: -fx-fsc-purple;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-christmas-red;
+    -fx-text-fill: -fx-snow-white;
     -fx-font-weight: bold;
     -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);
 }
 
 #registerButton:hover {
-    -fx-background-color: -fx-fsc-purple-light;
+    -fx-background-color: -fx-christmas-red-light;
     -fx-cursor: hand;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 #registerButton:pressed {
-    -fx-background-color: -fx-fsc-purple-dark;
+    -fx-background-color: -fx-christmas-red-dark;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }
 
-/* Sign In button */
+/* Sign In button - Christmas Red */
 #signInButton {
-    -fx-background-color: -fx-fsc-purple;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-christmas-red;
+    -fx-text-fill: -fx-snow-white;
     -fx-font-weight: bold;
-    -fx-border-color: -fx-fsc-purple;
+    -fx-border-color: -fx-christmas-red;
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);
 }
 
 #signInButton:hover {
-    -fx-background-color: -fx-fsc-purple-light;
+    -fx-background-color: -fx-christmas-red-light;
     -fx-cursor: hand;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 #signInButton:pressed {
-    -fx-background-color: -fx-fsc-purple-dark;
+    -fx-background-color: -fx-christmas-red-dark;
+    -fx-scale-x: 0.95;
+    -fx-scale-y: 0.95;
 }
 
-/* Google button */
+/* Google button - Christmas themed */
 #googleButton {
-    -fx-background-color: white;
-    -fx-text-fill: #4285f4;
+    -fx-background-color: -fx-snow-white;
+    -fx-text-fill: -fx-christmas-green;
     -fx-font-weight: bold;
-    -fx-border-color: white;
+    -fx-border-color: -fx-gold;
+    -fx-border-width: 2px;
     -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);
 }
 
 #googleButton:hover {
-    -fx-background-color: #f8f9fa;
+    -fx-background-color: -fx-gold;
+    -fx-text-fill: -fx-christmas-green;
     -fx-cursor: hand;
 }
 
 /* Text fields inside login only */
 #mainContainer .text-field,
 #mainContainer .password-field {
-    -fx-border-color: #cccccc;
+    -fx-border-color: -fx-gold;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
-    -fx-background-color: white;
+    -fx-background-color: -fx-snow-white;
     -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
 }
 
 #mainContainer .text-field:focused,
 #mainContainer .password-field:focused {
-    -fx-border-color: -fx-fsc-purple;
+    -fx-border-color: -fx-christmas-red;
     -fx-border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(183, 28, 28, 0.3), 3, 0, 0, 1);
 }
 
 /* OR separator + terms text */
 #orLabel {
-    -fx-text-fill: #cccccc;
+    -fx-text-fill: -fx-gold;
+    -fx-font-style: italic;
 }
 
 #termsLabel {
-    -fx-text-fill: #cccccc;
+    -fx-text-fill: #e0e0e0;
 }
 
 /* Ensure button text is white */
 #registerButton .text,
 #signInButton .text {
-    -fx-fill: white;
+    -fx-fill: -fx-snow-white;
+}
+
+/* Christmas decorative elements (optional) */
+#mainContainer {
+    -fx-border-color: -fx-gold;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 }
 
 /* ---------- OVERRIDES FOR SPECIFIC SCREENS ---------- */
@@ -130,7 +157,19 @@
     -fx-text-fill: black;
 }
 
-/* ClassScheduling: same idea once that screen exists */
-#classSchedulingRoot .label {
+/* GymAdmin: labels should be black not white
+#gymAdminRoot .label {
     -fx-text-fill: black;
+}
+*/
+
+/* Additional Christmas styling for other elements */
+.button {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+/* Christmas tree ornament effect for titles */
+#titleLabel {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.5), 10, 0, 0, 2);
 }

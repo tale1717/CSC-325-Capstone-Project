@@ -11,7 +11,8 @@ module com.example.firebaseadminjavafx {
     requires com.google.api.apicommon; // com.google.api.core.ApiFuture
     requires google.cloud.core;
 
-    requires java.logging; // adds updates to intellij logs
+    requires java.logging;
+    requires org.checkerframework.checker.qual; // adds updates to intellij logs
 
     opens com.example.firebaseadminjavafx to javafx.fxml, google.cloud.firestore;
 

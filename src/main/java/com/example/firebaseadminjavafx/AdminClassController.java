@@ -31,6 +31,7 @@ public class AdminClassController {
 
     @FXML
     public void initialize() {
+
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         instructorColumn.setCellValueFactory(new PropertyValueFactory<>("instructor"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
@@ -125,7 +126,7 @@ public class AdminClassController {
 
     @FXML
     private void handleBackToMain() {
-        Main.setRoot("gymapp-home.fxml", backButton);
+        Main.setRoot("class-scheduler-home.fxml", backButton);
     }
 
     //Handling and maintaining the Firestore Database if we perform one of the above actions
