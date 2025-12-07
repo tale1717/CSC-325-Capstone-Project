@@ -7,78 +7,82 @@
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.WorkoutPlanningController"
-      spacing="15" alignment="CENTER" prefWidth="450" prefHeight="500"
+      spacing="20" alignment="CENTER"
+      prefWidth="1400.0" prefHeight="900.0"
       style="-fx-background-color: #1B5E20;">
 
     <children>
         <!-- Title - Christmas White -->
         <Label text="Workout Planning" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;">
             <font>
-                <Font size="20.0" />
+                <Font size="28.0" />
             </font>
         </Label>
 
-        <GridPane hgap="10" vgap="10">
-            <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" />
-                <ColumnConstraints halignment="LEFT" />
-            </columnConstraints>
-            <children>
-                <!-- All Labels - Christmas White -->
-                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
-                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
-                           prefWidth="220" prefHeight="30"
-                           style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+        <!-- Wrapper for All Labels with Gray Border and Gray Background -->
+        <VBox style="-fx-border-color: #808080; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-background-color: #E0E0E0; -fx-background-radius: 5px; -fx-padding: 20;">
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" />
+                    <ColumnConstraints halignment="LEFT" />
+                </columnConstraints>
+                <children>
+                    <!-- All Labels - Now Black Text -->
+                    <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                               prefWidth="300" prefHeight="35"
+                               style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
-                <Label text="Height (inches):" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
-                <TextField fx:id="heightField" GridPane.rowIndex="1" GridPane.columnIndex="1"
-                           prefHeight="30"
-                           style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+                    <Label text="Height (inches):" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TextField fx:id="heightField" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                               prefWidth="300" prefHeight="35"
+                               style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
-                <Label text="Weight (pounds):" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
-                <TextField fx:id="weightField" GridPane.rowIndex="2" GridPane.columnIndex="1"
-                           prefHeight="30"
-                           style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+                    <Label text="Weight (pounds):" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TextField fx:id="weightField" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                               prefWidth="300" prefHeight="35"
+                               style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
-                <Label text="Age:" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
-                <TextField fx:id="ageField" GridPane.rowIndex="3" GridPane.columnIndex="1"
-                           prefHeight="30"
-                           style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+                    <Label text="Age:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TextField fx:id="ageField" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                               prefWidth="300" prefHeight="35"
+                               style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
-                <Label text="Goal:" GridPane.rowIndex="4" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
-                <ComboBox fx:id="goalBox" GridPane.rowIndex="4" GridPane.columnIndex="1"
-                          prefWidth="220" prefHeight="30"
-                          style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
-            </children>
-        </GridPane>
+                    <Label text="Goal:" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <ComboBox fx:id="goalBox" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                              prefWidth="300" prefHeight="35"
+                              style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+                </children>
+            </GridPane>
+        </VBox>
 
         <!-- Generate & Save Plan Button - Christmas Red -->
         <Button fx:id="generateButton"
                 text="Generate &amp; Save Plan"
                 onAction="#handleGenerateAndSave"
-                prefWidth="220" prefHeight="40"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+                prefWidth="300" prefHeight="50"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 5;"/>
 
         <!-- Result TextArea -->
         <TextArea fx:id="resultArea"
-                  prefWidth="380" prefHeight="200"
+                  prefWidth="600" prefHeight="300"
                   wrapText="true"
-                  style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 13px;"/>
+                  style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
         <!-- Back Button - Christmas Red -->
         <Button fx:id="backButton"
                 text="Back"
                 onAction="#handleBack"
-                prefWidth="120" prefHeight="35"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+                prefWidth="150" prefHeight="45"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 5;"/>
     </children>
 
     <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
+        <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
 </VBox>
