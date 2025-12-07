@@ -11,8 +11,8 @@
       style="-fx-background-color: #1B5E20;">
 
     <children>
-        <!-- Title - Christmas Gold -->
-        <Label text="Workout Planning" style="-fx-text-fill: #FFD700; -fx-font-weight: bold;">
+        <!-- Title - Christmas White -->
+        <Label text="Workout Planning" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;">
             <font>
                 <Font size="20.0" />
             </font>
@@ -24,33 +24,33 @@
                 <ColumnConstraints halignment="LEFT" />
             </columnConstraints>
             <children>
-                <!-- All Labels - Christmas Gold -->
+                <!-- All Labels - Christmas White -->
                 <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFD700; -fx-font-weight: bold;"/>
+                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
                 <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
                            prefWidth="220" prefHeight="30"
                            style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
 
                 <Label text="Height (inches):" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFD700; -fx-font-weight: bold;"/>
+                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
                 <TextField fx:id="heightField" GridPane.rowIndex="1" GridPane.columnIndex="1"
                            prefHeight="30"
                            style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
 
                 <Label text="Weight (pounds):" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFD700; -fx-font-weight: bold;"/>
+                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
                 <TextField fx:id="weightField" GridPane.rowIndex="2" GridPane.columnIndex="1"
                            prefHeight="30"
                            style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
 
                 <Label text="Age:" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFD700; -fx-font-weight: bold;"/>
+                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
                 <TextField fx:id="ageField" GridPane.rowIndex="3" GridPane.columnIndex="1"
                            prefHeight="30"
                            style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
 
                 <Label text="Goal:" GridPane.rowIndex="4" GridPane.columnIndex="0"
-                       style="-fx-text-fill: #FFD700; -fx-font-weight: bold;"/>
+                       style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"/>
                 <ComboBox fx:id="goalBox" GridPane.rowIndex="4" GridPane.columnIndex="1"
                           prefWidth="220" prefHeight="30"
                           style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
