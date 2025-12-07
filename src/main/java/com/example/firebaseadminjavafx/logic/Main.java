@@ -1,9 +1,11 @@
 package com.example.firebaseadminjavafx.logic;
 
-import com.example.firebaseadminjavafx.firebase.FirebaseService;
-import com.example.firebaseadminjavafx.firebase.FirestoreContext;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.cloud.FirestoreClient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,68 +13,128 @@ import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main extends Application {
 
     public static Firestore fstore;
     public static FirebaseAuth fauth;
+
     public static String currentUserUid;
     public static String currentUserEmail;
 
+    private static Stage mainStage;
+
+    private static final Logger log = Logger.getLogger(Main.class.getName());
+
     @Override
-    public void start(Stage stage) throws Exception {
-        FirebaseService.initialize();
-        FirestoreContext.init();
+    public void start(Stage stage) {
+        mainStage = stage;
 
-        fstore = FirestoreContext.fstore;
-        fauth = FirestoreContext.fauth;
-        currentUserUid = FirestoreContext.currentUserUid;
-        currentUserEmail = FirestoreContext.currentUserEmail;
+        initFirebase();
 
-        FXMLLoader fxmlLoader =
-                new FXMLLoader(Main.class.getResource("/com/example/firebaseadminjavafx/welcome-view.fxml"));
-        Parent root = fxmlLoader.load();
+        try {
+            Parent root = loadRoot("welcome-view.fxml");
+            Scene scene = new Scene(root);
+            mainStage.setScene(scene);
+            mainStage.setTitle("GymApp");
+            mainStage.sizeToScene();
+            mainStage.centerOnScreen();   // center first window
+            mainStage.show();
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Failed to load initial view.", e);
+        }
+    }
 
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(
-                Main.class.getResource("/com/example/firebaseadminjavafx/welcome.css").toExternalForm()
+    private void initFirebase() {
+        if (fstore != null) return;
+
+        try {
+            InputStream serviceAccount =
+                    Main.class.getResourceAsStream("/key.json");
+
+            if (serviceAccount == null) {
+                log.severe("key.json not found on classpath.");
+                return;
+            }
+
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
+
+            FirebaseApp app = FirebaseApp.getApps().isEmpty()
+                    ? FirebaseApp.initializeApp(options)
+                    : FirebaseApp.getInstance();
+
+            fstore = FirestoreClient.getFirestore(app);
+            fauth = FirebaseAuth.getInstance(app);
+
+            log.info("Firebase initialized successfully.");
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Failed to initialize Firebase.", e);
+        }
+    }
+
+    private static Parent loadRoot(String fxmlName) throws IOException {
+        if (!fxmlName.endsWith(".fxml")) {
+            fxmlName = fxmlName + ".fxml";
+        }
+
+        FXMLLoader loader = new FXMLLoader(
+                Main.class.getResource("/com/example/firebaseadminjavafx/" + fxmlName)
         );
-        stage.setTitle("GymApp");
-        stage.setScene(scene);
+        return loader.load();
+    }
 
-        stage.sizeToScene();
-        stage.centerOnScreen();
+    public static void setRoot(String fxmlName) {
+        try {
+            Parent root = loadRoot(fxmlName);
 
-        stage.show();
+            if (mainStage == null) {
+                log.severe("mainStage is null.");
+                return;
+            }
+
+            if (mainStage.getScene() == null) {
+                mainStage.setScene(new Scene(root));
+            } else {
+                mainStage.getScene().setRoot(root);
+            }
+
+            mainStage.sizeToScene();
+            mainStage.centerOnScreen();   // center after each view change
+
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Failed to switch to view: " + fxmlName, e);
+        }
     }
 
     public static void setRoot(String fxmlName, Control anyControlInScene) {
         try {
-            if (!fxmlName.endsWith(".fxml")) {
-                fxmlName = fxmlName + ".fxml";
+            Parent root = loadRoot(fxmlName);
+
+            if (anyControlInScene != null &&
+                    anyControlInScene.getScene() != null) {
+
+                anyControlInScene.getScene().setRoot(root);
+
+                if (mainStage != null) {
+                    mainStage.sizeToScene();
+                    mainStage.centerOnScreen();   // keep centered in this path too
+                }
+            } else {
+                setRoot(fxmlName);
             }
 
-            String resourcePath = "/com/example/firebaseadminjavafx/" + fxmlName;
-            System.out.println("Loading FXML from: " + resourcePath);
-
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(resourcePath));
-            Parent newRoot = loader.load();
-
-            Scene scene = anyControlInScene.getScene();
-            scene.setRoot(newRoot);
-
-            Stage stage = (Stage) scene.getWindow();
-            stage.sizeToScene();
-            stage.centerOnScreen();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to switch to view: " + fxmlName, e);
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Failed to switch to view: " + fxmlName, e);
         }
     }
-    // test #2
-    //test
-// watch my tutorial and LISTEN
+
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

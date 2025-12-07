@@ -1,6 +1,6 @@
 package com.example.firebaseadminjavafx.controllers;
 
-import com.example.firebaseadminjavafx.EquipmentState;
+import com.example.firebaseadminjavafx.models.EquipmentState;
 import com.example.firebaseadminjavafx.logic.Main;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
@@ -78,11 +78,12 @@ public class AdminController {
     @FXML private Button c1NoButton;
     @FXML private Label c1StatusLabel;
 
-    // Adductor / Abductor
+    // Adductor
     @FXML private Button ad1YesButton;
     @FXML private Button ad1NoButton;
     @FXML private Label ad1StatusLabel;
 
+    // Abductor
     @FXML private Button ab1YesButton;
     @FXML private Button ab1NoButton;
     @FXML private Label ab1StatusLabel;

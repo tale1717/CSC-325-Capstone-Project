@@ -1,35 +1,87 @@
 package com.example.firebaseadminjavafx.logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GymClass {
-    private String id; // Firestore document ID
-    private String title;
+
+    private String id;
+    private String name;
     private String instructor;
     private String time;
-    private String capacity;
+    private int capacity;
 
-    public GymClass() {}
+    // Stored in Firestore (but older docs might have it as a String)
+    private List<String> focusAreas = new ArrayList<>();
 
-    public GymClass(String id, String title, String instructor, String time, String capacity) {
+    public GymClass() {
+        // Needed for Firestore
+    }
+
+    public GymClass(String id,
+                    String name,
+                    String instructor,
+                    String time,
+                    int capacity,
+                    List<String> focusAreas) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.instructor = instructor;
         this.time = time;
         this.capacity = capacity;
+        this.focusAreas = (focusAreas != null) ? focusAreas : new ArrayList<>();
     }
 
-    // Getters and setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getInstructor() { return instructor; }
-    public void setInstructor(String instructor) { this.instructor = instructor; }
+    public String getName() {
+        return name;
+    }
 
-    public String getTime() { return time; }
-    public void setTime(String time) { this.time = time; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getCapacity() { return capacity; }
-    public void setCapacity(String capacity) { this.capacity = capacity; }
+    public String getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public List<String> getFocusAreas() {
+        return focusAreas;
+    }
+
+    public void setFocusAreas(List<String> focusAreas) {
+        this.focusAreas = (focusAreas != null) ? focusAreas : new ArrayList<>();
+    }
+
+    // For display in table / list
+    public String getFocusAreasString() {
+        return String.join(", ", focusAreas);
+    }
 }

@@ -1,6 +1,5 @@
 package com.example.firebaseadminjavafx.controllers;
 
-import com.example.firebaseadminjavafx.firebase.FirestoreContext;
 import com.example.firebaseadminjavafx.logic.Main;
 import com.example.firebaseadminjavafx.logic.ProgressTracker;
 import com.example.firebaseadminjavafx.logic.WeeklyProgress;
@@ -11,7 +10,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -45,21 +43,18 @@ public class ProgressController {
     private final DateTimeFormatter weekFormat =
             DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
-    // Firestore + user
     private Firestore db;
     private String userId;
 
     @FXML
     private void initialize() {
-        // get Firestore + current user from FirestoreContext
-        db = FirestoreContext.fstore;
-        userId = FirestoreContext.currentUserUid;
+        db = Main.fstore;
+        userId = Main.currentUserUid;
 
         if (db == null) {
-            System.out.println("Firestore not initialized; skipping Firestore operations.");
+            System.out.println("Firestore not initialized; check Main.initFirebase.");
         }
 
-        //  Fallback: if no user set, use a default so things still work
         if (userId == null || userId.isEmpty()) {
             userId = "defaultUser";
             System.out.println("No current user set; using fallback userId = " + userId);
@@ -69,9 +64,7 @@ public class ProgressController {
 
         setupTable();
         setupSelectionListener();
-
         loadFromFirestore();
-
         updateSummary();
     }
 
@@ -115,40 +108,49 @@ public class ProgressController {
         );
     }
 
-    // BUTTON HANDLERS
+    // ========= BUTTON HANDLERS =========
 
     @FXML
     private void onSaveClicked() {
-        try {
-            LocalDate date = datePickerWeek.getValue();
-            if (date == null) {
-                showError("Please select a date for the week.");
-                return;
-            }
-
-            LocalDate weekStart = getWeekStart(date);
-
-            double weight = Double.parseDouble(txtWeight.getText().trim());
-            int gymVisits = Integer.parseInt(txtGymVisits.getText().trim());
-            int minutes = Integer.parseInt(txtMinutesAtGym.getText().trim());
-            int machines = Integer.parseInt(txtMachineSessions.getText().trim());
-            int calories = Integer.parseInt(txtCalories.getText().trim());
-
-            WeeklyProgress wp = new WeeklyProgress(
-                    weekStart, weight, gymVisits, minutes, machines, calories
-            );
-
-            tracker.addOrUpdate(wp);
-            tableProgress.refresh();
-
-            saveEntryToFirestore(wp);
-
-            clearInputs();
-            updateSummary();
-
-        } catch (NumberFormatException ex) {
-            showError("Please enter valid numeric values.");
+        LocalDate date = datePickerWeek.getValue();
+        if (date == null) {
+            showError("Please select a date for the week.");
+            return;
         }
+
+        LocalDate weekStart = getWeekStart(date);
+
+        Double weight = parseDoubleOrNull(txtWeight.getText().trim(), "Weight");
+        if (weight == null && !txtWeight.getText().trim().isEmpty()) return;
+        if (weight == null) weight = 0.0;
+
+        Integer gymVisits = parseIntOrNull(txtGymVisits.getText().trim(), "Gym visits");
+        if (gymVisits == null && !txtGymVisits.getText().trim().isEmpty()) return;
+        if (gymVisits == null) gymVisits = 0;
+
+        Integer minutes = parseIntOrNull(txtMinutesAtGym.getText().trim(), "Total minutes at gym");
+        if (minutes == null && !txtMinutesAtGym.getText().trim().isEmpty()) return;
+        if (minutes == null) minutes = 0;
+
+        Integer machines = parseIntOrNull(txtMachineSessions.getText().trim(), "Machine sessions");
+        if (machines == null && !txtMachineSessions.getText().trim().isEmpty()) return;
+        if (machines == null) machines = 0;
+
+        Integer calories = parseIntOrNull(txtCalories.getText().trim(), "Calories burned");
+        if (calories == null && !txtCalories.getText().trim().isEmpty()) return;
+        if (calories == null) calories = 0;
+
+        WeeklyProgress wp = new WeeklyProgress(
+                weekStart, weight, gymVisits, minutes, machines, calories
+        );
+
+        tracker.addOrUpdate(wp);
+        tableProgress.refresh();
+
+        saveEntryToFirestore(wp);
+
+        clearInputs();
+        updateSummary();
     }
 
     @FXML
@@ -174,17 +176,16 @@ public class ProgressController {
 
     @FXML
     private void handleBack() {
-        Main.setRoot("gymapp-home", backButton);
+        Main.setRoot("gymapp-home.fxml", backButton);
     }
 
-    // FIRESTORE
+    // ========= FIRESTORE =========
 
     private CollectionReference getUserProgressCollection() {
         if (db == null) {
             System.out.println("Firestore not initialized; skipping Firestore operations.");
             return null;
         }
-        // userId is always non-null now (either real user or "defaultUser")
         return db.collection("users")
                 .document(userId)
                 .collection("weeklyProgress");
@@ -206,20 +207,18 @@ public class ProgressController {
                 Long machines = doc.getLong("machineSessions");
                 Long calories = doc.getLong("caloriesBurned");
 
-                if (weekStartStr == null || weight == null ||
-                        gymVisits == null || minutes == null ||
-                        machines == null || calories == null) {
+                if (weekStartStr == null) {
                     continue;
                 }
 
                 LocalDate weekStart = LocalDate.parse(weekStartStr);
                 WeeklyProgress wp = new WeeklyProgress(
                         weekStart,
-                        weight,
-                        gymVisits.intValue(),
-                        minutes.intValue(),
-                        machines.intValue(),
-                        calories.intValue()
+                        weight == null ? 0.0 : weight,
+                        gymVisits == null ? 0 : gymVisits.intValue(),
+                        minutes == null ? 0 : minutes.intValue(),
+                        machines == null ? 0 : machines.intValue(),
+                        calories == null ? 0 : calories.intValue()
                 );
 
                 tracker.addOrUpdate(wp);
@@ -297,6 +296,26 @@ public class ProgressController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private Double parseDoubleOrNull(String text, String fieldName) {
+        if (text.isEmpty()) return null;
+        try {
+            return Double.parseDouble(text);
+        } catch (NumberFormatException ex) {
+            showError(fieldName + " must be a number.");
+            return null;
+        }
+    }
+
+    private Integer parseIntOrNull(String text, String fieldName) {
+        if (text.isEmpty()) return null;
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException ex) {
+            showError(fieldName + " must be a whole number.");
+            return null;
+        }
     }
 
     private void updateSummary() {

@@ -1,4 +1,4 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.models;
 
 public class EquipmentState {
 

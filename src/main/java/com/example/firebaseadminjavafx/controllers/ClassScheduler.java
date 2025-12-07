@@ -2,122 +2,170 @@ package com.example.firebaseadminjavafx.controllers;
 
 import com.example.firebaseadminjavafx.logic.GymClass;
 import com.example.firebaseadminjavafx.logic.Main;
+import com.example.firebaseadminjavafx.logic.ProfileDataStore;
+import com.example.firebaseadminjavafx.models.UserProfile;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ListView;
 
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ClassScheduler {
 
     @FXML
-    private Button suggestClassButton;
+    private ListView<String> classListView;
 
-    @FXML
-    private Button searchClassButton;
-
-    @FXML
-    private Button backButton;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
-    private ListView<GymClass> classListView;
-
-    private ObservableList<GymClass> allClasses = FXCollections.observableArrayList();
+    private final List<GymClass> allClasses = new ArrayList<>();
 
     @FXML
     public void initialize() {
         loadClassesFromFirestore();
-        classListView.setItems(allClasses);
-
-        classListView.setCellFactory(param -> new ListCell<>() {
-            private final HBox hbox = new HBox();
-            private final Label label = new Label();
-            private final Button viewButton = new Button("View");
-
-            {
-                label.setStyle("-fx-text-fill: black;");
-                hbox.setSpacing(10);
-                hbox.getChildren().addAll(label, viewButton);
-                HBox.setHgrow(label, Priority.ALWAYS);
-
-                viewButton.setOnAction(event -> {
-                    GymClass gymClass = getItem();
-                    if (gymClass != null) showClassDetails(gymClass);
-                });
-            }
-
-            @Override
-            protected void updateItem(GymClass gymClass, boolean empty) {
-                super.updateItem(gymClass, empty);
-                if (empty || gymClass == null) {
-                    setGraphic(null);
-                }
-                else {
-                    label.setText(gymClass.getTitle());
-                    setGraphic(hbox);
-                }
-            }
-        });
     }
 
-    //PLACEHOLDER FXML FILE
-    @FXML
-    private void handleSuggestClass(){
-        Main.setRoot("class-scheduler.fxml", suggestClassButton);
+    private void loadClassesFromFirestore() {
+        try {
+            ApiFuture<QuerySnapshot> future =
+                    Main.fstore.collection("gymClasses").get();
+
+            QuerySnapshot snapshot = future.get();
+            allClasses.clear();
+
+            for (DocumentSnapshot doc : snapshot.getDocuments()) {
+                GymClass gc = doc.toObject(GymClass.class);
+                if (gc != null) {
+                    gc.setId(doc.getId());
+                    allClasses.add(gc);
+                }
+            }
+
+            List<String> lines = allClasses.stream()
+                    .map(this::formatClassLine)
+                    .collect(Collectors.toList());
+
+            classListView.getItems().setAll(lines);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showInfo("Error", "Could not load classes from Firestore.");
+        }
     }
 
-    @FXML
-    private void handleSearchClass() {
-        String searchTerm = searchField.getText().trim().toLowerCase();
-        ObservableList<GymClass> filtered = FXCollections.observableArrayList();
-
-        for (GymClass gymClass : allClasses) {
-            if (gymClass.getTitle().toLowerCase().startsWith(searchTerm)) {
-                filtered.add(gymClass);
-            }
+    private String formatClassLine(GymClass gc) {
+        String focus = gc.getFocusAreasString();
+        if (focus == null || focus.isBlank()) {
+            focus = "General";
         }
 
-        classListView.setItems(filtered);
+        return gc.getName()
+                + " | " + gc.getTime()
+                + " | " + gc.getInstructor()
+                + " | Cap: " + gc.getCapacity()
+                + " | Focus: " + focus;
+    }
+
+    @FXML
+    private void handleOpenClass() {
+        int index = classListView.getSelectionModel().getSelectedIndex();
+        if (index < 0 || index >= allClasses.size()) {
+            showInfo("No Selection", "Please select a class from the list.");
+            return;
+        }
+
+        GymClass gc = allClasses.get(index);
+        showClassDetails(gc);
+    }
+
+    @FXML
+    private void handleAdminButton() {
+        Main.setRoot("admin-class-view.fxml");
     }
 
     @FXML
     private void handleBackToMain() {
-        Main.setRoot("class-scheduler-home.fxml", backButton);
+        Main.setRoot("gymapp-home.fxml");
+    }
+
+    // Renamed to match onAction="#handleSuggestClasses" in FXML
+    @FXML
+    private void handleSuggestClasses() {
+        if (!ProfileDataStore.hasProfile()) {
+            showInfo("No Profile",
+                    "Please create a workout plan first so we know your focus areas.");
+            return;
+        }
+
+        UserProfile profile = ProfileDataStore.getCurrentProfile();
+        if (profile == null || profile.getFocusAreas() == null
+                || profile.getFocusAreas().isEmpty()) {
+            showInfo("No Focus Areas",
+                    "Your profile does not have any focus areas yet.");
+            return;
+        }
+
+        Set<String> userFocus =
+                profile.getFocusAreas().stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toSet());
+
+        List<GymClass> matches = allClasses.stream()
+                .filter(gc -> {
+                    List<String> focusList = gc.getFocusAreas();
+                    if (focusList == null || focusList.isEmpty()) {
+                        return false;
+                    }
+                    for (String f : focusList) {
+                        if (f != null && userFocus.contains(f.toLowerCase())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
+
+        if (matches.isEmpty()) {
+            showInfo("No Matches",
+                    "No classes match your current workout focus areas yet.");
+            return;
+        }
+
+        List<String> lines = matches.stream()
+                .map(this::formatClassLine)
+                .collect(Collectors.toList());
+
+        classListView.getItems().setAll(lines);
     }
 
     private void showClassDetails(GymClass gymClass) {
-        Alert detailsAlert = new Alert(Alert.AlertType.INFORMATION);
-        detailsAlert.setTitle("Class Details");
-        detailsAlert.setHeaderText(gymClass.getTitle());
-        detailsAlert.setContentText(
-                "Instructor: " + gymClass.getInstructor() + "\n" +
-                        "Time: " + gymClass.getTime() + "\n" +
-                        "Capacity: " + gymClass.getCapacity()
-        );
-        detailsAlert.showAndWait();
+        String focus = gymClass.getFocusAreasString();
+        if (focus == null || focus.isBlank()) {
+            focus = "General";
+        }
+
+        String message =
+                "Name: " + gymClass.getName() + "\n"
+                        + "Instructor: " + gymClass.getInstructor() + "\n"
+                        + "Time: " + gymClass.getTime() + "\n"
+                        + "Capacity: " + gymClass.getCapacity() + "\n"
+                        + "Focus Areas: " + focus;
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Class Details");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-    private void loadClassesFromFirestore() {
-        ApiFuture<QuerySnapshot> future = Main.fstore.collection("gymClasses").get();
-        try {
-            QuerySnapshot snapshot = future.get();
-            allClasses.clear();
-
-            for (DocumentSnapshot documentSnapshot: snapshot.getDocuments()) {
-                GymClass gc = documentSnapshot.toObject(GymClass.class);
-                allClasses.add(gc);
-            }
-        }
-        catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+    private void showInfo(String title, String message) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle(title);
+        a.setHeaderText(null);
+        a.setContentText(message);
+        a.showAndWait();
     }
 }
