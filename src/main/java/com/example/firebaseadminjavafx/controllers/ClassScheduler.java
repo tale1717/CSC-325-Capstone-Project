@@ -9,7 +9,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,21 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClassScheduler {
+
+    @FXML
+    private Button suggestClassButton;
+
+    @FXML
+    private Button searchClassButton;
+
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private Button adminButton;
+
+    @FXML
+    private TextField searchField;
 
     @FXML
     private ListView<String> classListView;
@@ -83,15 +100,40 @@ public class ClassScheduler {
 
     @FXML
     private void handleAdminButton() {
-        Main.setRoot("admin-class-view.fxml");
+        Main.setRoot("class-scheduler-home.fxml");
     }
 
     @FXML
     private void handleBackToMain() {
-        Main.setRoot("gymapp-home.fxml");
+        Main.setRoot("class-scheduler-home.fxml");
     }
 
-    // Renamed to match onAction="#handleSuggestClasses" in FXML
+    @FXML
+    private void handleSearchClass() {
+        String term = (searchField == null || searchField.getText() == null)
+                ? ""
+                : searchField.getText().trim().toLowerCase();
+
+        if (term.isEmpty()) {
+            List<String> allLines = allClasses.stream()
+                    .map(this::formatClassLine)
+                    .collect(Collectors.toList());
+            classListView.getItems().setAll(allLines);
+            return;
+        }
+
+        List<GymClass> filtered = allClasses.stream()
+                .filter(gc -> gc.getName() != null &&
+                        gc.getName().toLowerCase().startsWith(term))
+                .collect(Collectors.toList());
+
+        List<String> lines = filtered.stream()
+                .map(this::formatClassLine)
+                .collect(Collectors.toList());
+
+        classListView.getItems().setAll(lines);
+    }
+
     @FXML
     private void handleSuggestClasses() {
         if (!ProfileDataStore.hasProfile()) {

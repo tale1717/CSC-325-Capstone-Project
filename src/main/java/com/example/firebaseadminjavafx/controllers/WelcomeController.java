@@ -1,7 +1,11 @@
 package com.example.firebaseadminjavafx.controllers;
 
 import com.example.firebaseadminjavafx.logic.Main;
+import com.example.firebaseadminjavafx.logic.ProfileDataStore;
+import com.example.firebaseadminjavafx.models.UserProfile;
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.auth.FirebaseAuthException;
@@ -13,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,8 +66,11 @@ public class WelcomeController {
             QueryDocumentSnapshot doc = docs.get(0);
             String storedPassword = doc.getString("password");
             if (storedPassword != null && storedPassword.equals(password)) {
-                Main.currentUserUid = doc.getId();   // uid stored as document id at register
+                Main.currentUserUid = doc.getId();
                 Main.currentUserEmail = email;
+
+                // Load workout plan + focus areas into ProfileDataStore (supports List or CSV)
+                loadWorkoutProfileForUser(Main.currentUserUid);
 
                 log.info("User signed in successfully: " + Main.currentUserEmail);
                 Main.setRoot("gymapp-home.fxml", signInButton);
@@ -74,6 +82,56 @@ public class WelcomeController {
             e.printStackTrace();
             setError("Sign-in failed. See console.");
             log.info("Sign in failed (exception) for: " + email);
+        }
+    }
+
+    private void loadWorkoutProfileForUser(String uid) {
+        try {
+            if (uid == null || uid.isEmpty()) return;
+            if (Main.fstore == null) return;
+
+            DocumentReference planRef =
+                    Main.fstore.collection("WorkoutPlans").document(uid);
+
+            ApiFuture<DocumentSnapshot> fut = planRef.get();
+            DocumentSnapshot snap = fut.get();
+            if (!snap.exists()) {
+                log.info("No WorkoutPlans document for user " + uid);
+                return;
+            }
+
+            Object focusObj = snap.get("focusAreas");
+            List<String> focusList = new ArrayList<>();
+
+            if (focusObj instanceof java.util.List) {
+                @SuppressWarnings("unchecked")
+                List<String> stored = (List<String>) focusObj;
+                for (String f : stored) {
+                    if (f != null && !f.trim().isEmpty()) {
+                        focusList.add(f.trim());
+                    }
+                }
+            } else if (focusObj instanceof String) {
+                String csv = (String) focusObj;
+                String[] parts = csv.split(",");
+                for (String raw : parts) {
+                    String trimmed = raw.trim();
+                    if (!trimmed.isEmpty()) {
+                        focusList.add(trimmed);
+                    }
+                }
+            }
+
+            if (!focusList.isEmpty()) {
+                UserProfile profile = new UserProfile(focusList);
+                ProfileDataStore.setCurrentProfile(profile);
+                log.info("Loaded profile focus areas for user: " + Main.currentUserEmail);
+            } else {
+                log.info("WorkoutPlans document has no focusAreas for user: " + Main.currentUserEmail);
+            }
+
+        } catch (Exception e) {
+            log.info("Failed to load workout profile for user: " + uid + " -> " + e.getMessage());
         }
     }
 
@@ -100,7 +158,6 @@ public class WelcomeController {
             data.put("password", password);
 
             Main.fstore.collection("Users").document(userRecord.getUid()).set(data);
-
 
             setError("Registered! Please sign in.");
             log.info("User registered successfully: " + email);

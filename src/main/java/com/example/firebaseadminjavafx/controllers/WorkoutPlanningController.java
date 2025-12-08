@@ -39,8 +39,15 @@ public class WorkoutPlanningController {
 
     @FXML
     private void initialize() {
+        // Expanded goal options
         if (goalBox != null && goalBox.getItems().isEmpty()) {
-            goalBox.getItems().addAll("Lose Weight", "Gain Muscle", "Maintain");
+            goalBox.getItems().addAll(
+                    "Lose Weight / Fat",
+                    "Gain Muscle / Strength",
+                    "Body Recomposition (Lean & Strong)",
+                    "Improve Endurance / Cardio",
+                    "Maintain / General Fitness"
+            );
             goalBox.getSelectionModel().selectFirst();
         }
 
@@ -80,7 +87,7 @@ public class WorkoutPlanningController {
             );
         }
 
-        // Prefill from Firestore (and set ProfileDataStore if possible)
+        // Prefill from Firestore (support both CSV string and List<String>)
         try {
             if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
                 log.info("No signed-in user; skipping workout plan prefill.");
@@ -101,7 +108,6 @@ public class WorkoutPlanningController {
                 String summary = snap.getString("planSummary");
                 String expLevel = snap.getString("experienceLevel");
                 Long sessionsPerWeek = snap.getLong("sessionsPerWeek");
-                String focusAreasCsv = snap.getString("focusAreas");
 
                 if (name != null)      nameField.setText(name);
                 if (hIn != null)       heightField.setText(String.valueOf(hIn));
@@ -114,28 +120,35 @@ public class WorkoutPlanningController {
                     experienceLevelBox.getSelectionModel().select(expLevel);
                 }
                 if (sessionsPerWeek != null && sessionsPerWeekBox != null) {
-                    sessionsPerWeekBox.getSelectionModel().select(sessionsPerWeek.intValue());
+                    sessionsPerWeekBox.getSelectionModel()
+                            .select(sessionsPerWeek.intValue());
                 }
 
-                // Restore focus areas + set ProfileDataStore
-                if (focusAreasCsv != null && focusAreasList != null) {
+                // focusAreas: support both List<String> (new) and CSV string (old)
+                if (focusAreasList != null) {
                     selectedFocusAreas.clear();
-                    String[] parts = focusAreasCsv.split(",");
-                    for (String raw : parts) {
-                        String trimmed = raw.trim();
-                        if (!trimmed.isEmpty()) {
-                            selectedFocusAreas.add(trimmed);
+
+                    Object focusObj = snap.get("focusAreas");
+                    if (focusObj instanceof java.util.List) {
+                        @SuppressWarnings("unchecked")
+                        List<String> storedList = (List<String>) focusObj;
+                        for (String f : storedList) {
+                            if (f != null && !f.trim().isEmpty()) {
+                                selectedFocusAreas.add(f.trim());
+                            }
+                        }
+                    } else if (focusObj instanceof String) {
+                        String focusAreasCsv = (String) focusObj;
+                        String[] parts = focusAreasCsv.split(",");
+                        for (String raw : parts) {
+                            String trimmed = raw.trim();
+                            if (!trimmed.isEmpty()) {
+                                selectedFocusAreas.add(trimmed);
+                            }
                         }
                     }
-                    focusAreasList.refresh();
 
-                    // NEW: set the in-memory profile from loaded data
-                    if (!selectedFocusAreas.isEmpty()) {
-                        java.util.List<String> focusList =
-                                new java.util.ArrayList<>(selectedFocusAreas);
-                        UserProfile profile = new UserProfile(focusList);
-                        ProfileDataStore.setCurrentProfile(profile);
-                    }
+                    focusAreasList.refresh();
                 }
 
                 if (summary != null && resultArea != null) {
@@ -160,7 +173,7 @@ public class WorkoutPlanningController {
         String weightText = safeTrim(weightField.getText());
         String ageText    = safeTrim(ageField.getText());
         String goal       = (goalBox.getValue() == null)
-                ? "Maintain"
+                ? "Maintain / General Fitness"
                 : goalBox.getValue();
         String experienceLevel = (experienceLevelBox.getValue() == null)
                 ? "Beginner"
@@ -203,16 +216,26 @@ public class WorkoutPlanningController {
         double calories = bmr * 1.2;
 
         String goalLower = goal.toLowerCase(Locale.ROOT);
+
         if (goalLower.contains("lose")) {
             calories -= 500;
         } else if (goalLower.contains("gain")) {
-            calories += 500;
+            calories += 300; // a bit more conservative surplus
+        } else if (goalLower.contains("recomposition")) {
+            // stay around maintenance, let training do most of the work
+            calories = bmr * 1.2;
+        } else if (goalLower.contains("endurance")) {
+            // slight surplus can help with long sessions
+            calories += 150;
         }
 
-        java.util.List<String> focusList = new java.util.ArrayList<>(selectedFocusAreas);
+        List<String> focusList = new ArrayList<>(selectedFocusAreas);
         focusList.sort(String::compareToIgnoreCase);
         String focusAreasCsv = String.join(", ", focusList);
-        String primaryFocus = focusList.get(0);
+
+        // Make profile available to Suggested Classes (in memory)
+        UserProfile profile = new UserProfile(focusList);
+        ProfileDataStore.setCurrentProfile(profile);
 
         StringBuilder planBuilder = new StringBuilder();
 
@@ -225,6 +248,14 @@ public class WorkoutPlanningController {
             planBuilder.append("- Calorie surplus of about 300–500 kcal/day.\n")
                     .append("- Progressive overload with compound lifts 3–4x/week.\n")
                     .append("- 1–2 days of light cardio or active recovery.\n");
+        } else if (goalLower.contains("recomposition")) {
+            planBuilder.append("- Calories around maintenance (small surplus or deficit of 150–200 kcal).\n")
+                    .append("- Strength training 3–4x/week with progressive overload.\n")
+                    .append("- 2–3 moderate cardio sessions to support fat loss.\n");
+        } else if (goalLower.contains("endurance")) {
+            planBuilder.append("- Focus on steady-state and interval cardio 4–5x/week.\n")
+                    .append("- 1–2 strength sessions to maintain muscle.\n")
+                    .append("- Pay attention to carbs and hydration around workouts.\n");
         } else {
             planBuilder.append("- Maintain calories around current maintenance.\n")
                     .append("- Mix of strength and cardio 3–4x/week.\n")
@@ -244,7 +275,7 @@ public class WorkoutPlanningController {
         focusToMachines.put("Cardio/Endurance", Arrays.asList("T1/T2 Treadmills", "E1/E2/E3 Ellipticals"));
         focusToMachines.put("Flexibility/Mobility", Arrays.asList("Stretching area (mats)", "Light cable and bodyweight movements"));
 
-        java.util.List<String> machineSuggestions = new java.util.ArrayList<>();
+        List<String> machineSuggestions = new ArrayList<>();
         for (String focus : focusList) {
             List<String> mapped = focusToMachines.get(focus);
             if (mapped != null) {
@@ -277,10 +308,6 @@ public class WorkoutPlanningController {
 
         resultArea.setText(summary);
 
-        // NEW: update in-memory profile so Suggested Classes can see it
-        UserProfile profile = new UserProfile(focusList);
-        ProfileDataStore.setCurrentProfile(profile);
-
         Map<String, Object> data = new HashMap<>();
         data.put("userEmail", Main.currentUserEmail);
         data.put("name", nameText);
@@ -293,7 +320,8 @@ public class WorkoutPlanningController {
         data.put("planSummary", summary);
         data.put("experienceLevel", experienceLevel);
         data.put("sessionsPerWeek", sessionsPerWeekVal);
-        data.put("focusAreas", focusAreasCsv);
+        // Store focusAreas as a List<String> now
+        data.put("focusAreas", focusList);
         data.put("updatedAt", Instant.now().toString());
 
         try {
