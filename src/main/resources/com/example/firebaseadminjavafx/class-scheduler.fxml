@@ -7,22 +7,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane prefHeight="400.0" prefWidth="400.0"
+            style="-fx-background-color: #1B5E20;"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.firebaseadminjavafx.ClassScheduler">
 
-   <children>
-      <Label alignment="CENTER" layoutX="122.0" layoutY="36.0" prefHeight="20.0" prefWidth="158.0" text="View All Classes Below">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
+    <children>
 
-      <Button layoutX="23.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleSuggestClass" text="Suggested Classes" />
-      
-      <Label alignment="CENTER" layoutX="153.0" layoutY="100.0" prefHeight="17.0" prefWidth="100.0" text="Available Classes" />
-      <Button fx:id="searchClassButton" layoutX="293.0" layoutY="133.0" mnemonicParsing="false" onAction="#handleSearchClass" text="Search" />
-      <Button fx:id="backButton" layoutX="178.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleBackToMain" text="Back" />
-      <TextField fx:id="searchField" layoutX="266.0" layoutY="96.0" prefHeight="26.0" prefWidth="109.0" promptText="Enter Class Name..." />
-      <ListView fx:id="classListView" layoutX="128.0" layoutY="133.0" prefHeight="170.0" prefWidth="148.0" />
-   </children>
+        <!-- Title -->
+        <Label alignment="CENTER" layoutX="50.0" layoutY="30.0"
+               prefHeight="30.0" prefWidth="300.0"
+               text="View All Classes Below"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+
+        <!-- NEW RED Suggested Classes Button -->
+        <Button layoutX="15.0" layoutY="90.0"
+                prefWidth="140" prefHeight="35"
+                text="Suggested Classes"
+                onAction="#handleSuggestClass"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+
+        <!-- Search Field (from OLD version) -->
+        <TextField fx:id="searchField"
+                   layoutX="180.0" layoutY="90.0"
+                   prefHeight="35" prefWidth="160"
+                   promptText="Enter Class Name..."
+                   style="-fx-background-radius: 5;" />
+
+        <!-- NEW RED Search Button -->
+        <Button fx:id="searchClassButton"
+                layoutX="345.0" layoutY="90.0"
+                prefWidth="40" prefHeight="35"
+                text="Go"
+                onAction="#handleSearchClass"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-background-radius: 5;"/>
+
+        <!-- Available Classes List (from OLD version) -->
+        <ListView fx:id="classListView"
+                  layoutX="125.0" layoutY="140.0"
+                  prefHeight="160.0" prefWidth="150.0">
+        </ListView>
+
+        <!-- NEW RED Back Button -->
+        <Button fx:id="backButton"
+                layoutX="140.0" layoutY="320.0"
+                prefWidth="120" prefHeight="35"
+                text="Back"
+                onAction="#handleBackToMain"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+    </children>
+
 </AnchorPane>

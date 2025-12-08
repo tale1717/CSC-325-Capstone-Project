@@ -3,36 +3,49 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.firebaseadminjavafx.GymLayoutHomeController"
       alignment="CENTER"
-      spacing="15.0"
+      spacing="20.0"
       prefWidth="400.0"
-      prefHeight="400.0">
+      prefHeight="400.0"
+      style="-fx-background-color: #1B5E20;">
 
     <children>
+        <!-- Title - Christmas White -->
         <Label text="Gym Layout Home"
-               style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
 
+        <!-- Open Gym Map Button - Christmas Red -->
         <Button fx:id="openMapButton"
                 text="Open Gym Map"
                 onAction="#handleOpenMap"
-                prefWidth="180.0" />
+                prefWidth="200.0" prefHeight="45.0"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
 
+        <!-- Admin Button - Christmas Red -->
         <Button fx:id="adminButton"
                 text="Admin"
                 onAction="#handleAdmin"
-                prefWidth="180.0" />
+                prefWidth="200.0" prefHeight="45.0"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
 
+        <!-- Back Button - Christmas Red -->
         <Button fx:id="backButton"
                 text="Back"
                 onAction="#handleBack"
-                prefWidth="120.0" />
+                prefWidth="120.0" prefHeight="40.0"
+                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
     </children>
 
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20" />
+        <Insets top="40" right="20" bottom="40" left="20" />
     </padding>
 </VBox>
