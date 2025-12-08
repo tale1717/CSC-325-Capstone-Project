@@ -18,9 +18,9 @@
            style="-fx-background-color: transparent;">
 
     <!-- Background Image - Widened for MacBook Pro 14 display -->
-    <ImageView fitWidth="1400" fitHeight="900" preserveRatio="true">
+    <ImageView fitWidth="1400" fitHeight="900" preserveRatio="false">
         <image>
-            <Image url="@GymAppHome.png" />
+            <Image url="@gymbgimageFour.png" />
         </image>
     </ImageView>
 
@@ -90,7 +90,7 @@
 
         <!-- Motivational Text -->
         <Label text="Ready to get stronger, healthier, and more confident? Let's grind!!!"
-               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 24px; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 3, 0, 0, 1);"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 24px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,11), 5, 0, 0, 2);"
                wrapText="true" textAlignment="CENTER"
                maxWidth="800.0" prefWidth="800.0"/>
 
