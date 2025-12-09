@@ -14,7 +14,7 @@ public final class FirebaseService {
         if (initialized) return;
         try {
 
-            FileInputStream serviceAccount = new FileInputStream("key.json");
+            FileInputStream serviceAccount = new FileInputStream("com/example/firebaseadminjavafx/key.json");
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
