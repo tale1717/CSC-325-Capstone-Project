@@ -3,24 +3,22 @@ module com.example.firebaseadminjavafx {
     requires javafx.fxml;
     requires javafx.graphics;
 
-    requires firebase.admin;              // Firebase Admin JAR
+    requires firebase.admin;
     requires com.google.auth;
     requires com.google.auth.oauth2;
-    requires google.cloud.firestore;      // <-- no "com."
+    requires google.cloud.firestore;
     requires com.google.api.apicommon;
-    requires google.cloud.core;           // <-- no "com."
+    requires google.cloud.core;
+
     requires java.logging;
+    requires java.desktop;
+    requires org.checkerframework.checker.qual;
 
-    // --- opens (for reflection access)
-    opens com.example.firebaseadminjavafx.controllers to javafx.fxml, google.cloud.firestore;
-    opens com.example.firebaseadminjavafx.firebase    to javafx.fxml, google.cloud.firestore;
-    opens com.example.firebaseadminjavafx.logic       to javafx.fxml, google.cloud.firestore;
-    opens com.example.firebaseadminjavafx.models      to javafx.fxml, google.cloud.firestore;
+    opens com.example.firebaseadminjavafx.controllers to javafx.fxml;
+    opens com.example.firebaseadminjavafx.logic to com.google.gson, google.cloud.firestore, javafx.fxml;
+    opens com.example.firebaseadminjavafx.models to com.google.gson, google.cloud.firestore;
 
-    // --- exports (for access by other modules)
-    exports com.example.firebaseadminjavafx.controllers;
-    exports com.example.firebaseadminjavafx.firebase;
     exports com.example.firebaseadminjavafx.logic;
+    exports com.example.firebaseadminjavafx.controllers;
     exports com.example.firebaseadminjavafx.models;
-    opens com.example.firebaseadminjavafx to google.cloud.firestore, javafx.fxml;
 }

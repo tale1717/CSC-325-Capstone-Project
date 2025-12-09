@@ -21,7 +21,7 @@
 /* Titles (any label with id=titleLabel or styleClass=title-label) */
 #titleLabel,
 .title-label {
-    -fx-text-fill: -fx-gold;
+    -fx-text-fill: -fx-snow-white; /* Changed from gold to snow white */
     -fx-font-weight: bold;
 }
 
@@ -30,12 +30,16 @@
 /* Root VBox for login */
 #mainContainer {
     -fx-background-color: -fx-christmas-green;
-  /*  //-fx-background-image: url('snow-pattern.png');  Optional: add snow pattern */
+    -fx-border-color: -fx-christmas-red; /* Changed from gold to christmas red */
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    /* //-fx-background-image: url('snow-pattern.png');  Optional: add snow pattern */
 }
 
 /* Instruction label on login screen */
 .login-instruction {
-    -fx-text-fill: #e0e0e0;
+    -fx-text-fill: -fx-snow-white; /* Changed from #e0e0e0 to snow white */
 }
 
 /* Subtitle (login) */
@@ -51,10 +55,14 @@
     -fx-font-weight: bold;
     -fx-background-radius: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 2);
+    -fx-border-color: -fx-christmas-red; /* Added border color */
+    -fx-border-width: 2px; /* Added border width */
+    -fx-border-radius: 5px; /* Added border radius */
 }
 
 #registerButton:hover {
     -fx-background-color: -fx-christmas-red-light;
+    -fx-border-color: -fx-christmas-red-light; /* Added hover border color */
     -fx-cursor: hand;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
@@ -62,6 +70,7 @@
 
 #registerButton:pressed {
     -fx-background-color: -fx-christmas-red-dark;
+    -fx-border-color: -fx-christmas-red-dark; /* Added pressed border color */
     -fx-scale-x: 0.95;
     -fx-scale-y: 0.95;
 }
@@ -80,6 +89,7 @@
 
 #signInButton:hover {
     -fx-background-color: -fx-christmas-red-light;
+    -fx-border-color: -fx-christmas-red-light; /* Added hover border color */
     -fx-cursor: hand;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
@@ -87,6 +97,7 @@
 
 #signInButton:pressed {
     -fx-background-color: -fx-christmas-red-dark;
+    -fx-border-color: -fx-christmas-red-dark; /* Added pressed border color */
     -fx-scale-x: 0.95;
     -fx-scale-y: 0.95;
 }
@@ -96,22 +107,23 @@
     -fx-background-color: -fx-snow-white;
     -fx-text-fill: -fx-christmas-green;
     -fx-font-weight: bold;
-    -fx-border-color: -fx-gold;
+    -fx-border-color: -fx-christmas-red; /* Changed from gold to christmas red */
     -fx-border-width: 2px;
     -fx-background-radius: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);
 }
 
 #googleButton:hover {
-    -fx-background-color: -fx-gold;
-    -fx-text-fill: -fx-christmas-green;
+    -fx-background-color: -fx-christmas-red; /* Changed from gold to christmas red */
+    -fx-text-fill: -fx-snow-white; /* Changed to snow white for better contrast */
+    -fx-border-color: -fx-christmas-red-light; /* Added hover border color */
     -fx-cursor: hand;
 }
 
 /* Text fields inside login only */
 #mainContainer .text-field,
 #mainContainer .password-field {
-    -fx-border-color: -fx-gold;
+    -fx-border-color: -fx-christmas-red; /* Changed from gold to christmas red */
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-background-color: -fx-snow-white;
@@ -121,19 +133,19 @@
 
 #mainContainer .text-field:focused,
 #mainContainer .password-field:focused {
-    -fx-border-color: -fx-christmas-red;
+    -fx-border-color: -fx-christmas-red-dark; /* Changed from christmas-red to dark variant */
     -fx-border-width: 2px;
     -fx-effect: dropshadow(three-pass-box, rgba(183, 28, 28, 0.3), 3, 0, 0, 1);
 }
 
 /* OR separator + terms text */
 #orLabel {
-    -fx-text-fill: -fx-gold;
+    -fx-text-fill: -fx-snow-white; /* Changed from gold to snow white */
     -fx-font-style: italic;
 }
 
 #termsLabel {
-    -fx-text-fill: #e0e0e0;
+    -fx-text-fill: -fx-snow-white; /* Changed from #e0e0e0 to snow white */
 }
 
 /* Ensure button text is white */
@@ -142,12 +154,9 @@
     -fx-fill: -fx-snow-white;
 }
 
-/* Christmas decorative elements (optional) */
-#mainContainer {
-    -fx-border-color: -fx-gold;
-    -fx-border-width: 3px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
+/* Christmas tree ornament effect for titles */
+#titleLabel {
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.5), 10, 0, 0, 2); /* Changed from gold glow to white glow */
 }
 
 /* ---------- OVERRIDES FOR SPECIFIC SCREENS ---------- */
@@ -167,9 +176,4 @@
 .button {
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
-}
-
-/* Christmas tree ornament effect for titles */
-#titleLabel {
-    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.5), 10, 0, 0, 2);
 }

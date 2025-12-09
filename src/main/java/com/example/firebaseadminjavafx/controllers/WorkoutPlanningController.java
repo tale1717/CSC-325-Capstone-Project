@@ -127,6 +127,7 @@ public class WorkoutPlanningController {
                 // focusAreas: support both List<String> (new) and CSV string (old)
                 if (focusAreasList != null) {
                     selectedFocusAreas.clear();
+                    List<String> focusList = new ArrayList<>();
 
                     Object focusObj = snap.get("focusAreas");
                     if (focusObj instanceof java.util.List) {
@@ -134,7 +135,9 @@ public class WorkoutPlanningController {
                         List<String> storedList = (List<String>) focusObj;
                         for (String f : storedList) {
                             if (f != null && !f.trim().isEmpty()) {
-                                selectedFocusAreas.add(f.trim());
+                                String trimmed = f.trim();
+                                selectedFocusAreas.add(trimmed);
+                                focusList.add(trimmed);
                             }
                         }
                     } else if (focusObj instanceof String) {
@@ -144,11 +147,18 @@ public class WorkoutPlanningController {
                             String trimmed = raw.trim();
                             if (!trimmed.isEmpty()) {
                                 selectedFocusAreas.add(trimmed);
+                                focusList.add(trimmed);
                             }
                         }
                     }
 
                     focusAreasList.refresh();
+
+                    // Rebuild in-memory profile so Suggested Classes works on reload
+                    if (!focusList.isEmpty()) {
+                        UserProfile profile = new UserProfile(focusList);
+                        ProfileDataStore.setCurrentProfile(profile);
+                    }
                 }
 
                 if (summary != null && resultArea != null) {

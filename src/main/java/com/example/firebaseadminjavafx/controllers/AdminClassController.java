@@ -185,7 +185,7 @@ public class AdminClassController {
     private void handleBackToMain() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/firebaseadminjavafx/gymapp-home.fxml"));
+                    getClass().getResource("/com/example/firebaseadminjavafx/class-scheduler-home.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) rootPane.getScene().getWindow();
