@@ -20,6 +20,12 @@
             </image>
         </ImageView>
 
+        <ImageView fitHeight="300.0" fitWidth="450.0" layoutX="480.0" layoutY="200.0" preserveRatio="false">
+            <image>
+                <Image url="@christmas-wreath.png" />
+            </image>
+        </ImageView>
+
         <!-- Title - Christmas White -->
         <Label layoutX="570.0" layoutY="169.0" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);" text="Admin Login">
             <font>
