@@ -14,6 +14,9 @@ public class GymClass {
     // Stored in Firestore (but older docs might have it as a String)
     private List<String> focusAreas = new ArrayList<>();
 
+    // New: backing field so Firestore can map legacy "focusAreasString"
+    private String focusAreasString;
+
     public GymClass() {
         // Needed for Firestore
     }
@@ -80,8 +83,19 @@ public class GymClass {
         this.focusAreas = (focusAreas != null) ? focusAreas : new ArrayList<>();
     }
 
+    // New: let Firestore map "focusAreasString" without warnings
+    public void setFocusAreasString(String focusAreasString) {
+        this.focusAreasString = focusAreasString;
+    }
+
     // For display in table / list
     public String getFocusAreasString() {
+        if (focusAreasString != null && !focusAreasString.isBlank()) {
+            return focusAreasString;
+        }
+        if (focusAreas == null || focusAreas.isEmpty()) {
+            return "";
+        }
         return String.join(", ", focusAreas);
     }
 }

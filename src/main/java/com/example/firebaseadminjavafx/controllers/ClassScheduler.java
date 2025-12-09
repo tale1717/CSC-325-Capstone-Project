@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -134,6 +135,19 @@ public class ClassScheduler {
         classListView.getItems().setAll(lines);
     }
 
+    // New: normalize focus names so small label differences still match
+    private String normalizeFocus(String s) {
+        if (s == null) return "";
+        String t = s.trim().toLowerCase();
+        if (t.startsWith("cardio")) {
+            return "cardio"; // "cardio", "cardio/endurance", etc.
+        }
+        if (t.equals("core") || t.equals("abs") || t.equals("core/abs")) {
+            return "core/abs";
+        }
+        return t;
+    }
+
     @FXML
     private void handleSuggestClasses() {
         if (!ProfileDataStore.hasProfile()) {
@@ -152,7 +166,8 @@ public class ClassScheduler {
 
         Set<String> userFocus =
                 profile.getFocusAreas().stream()
-                        .map(String::toLowerCase)
+                        .filter(Objects::nonNull)
+                        .map(this::normalizeFocus)
                         .collect(Collectors.toSet());
 
         List<GymClass> matches = allClasses.stream()
@@ -162,7 +177,7 @@ public class ClassScheduler {
                         return false;
                     }
                     for (String f : focusList) {
-                        if (f != null && userFocus.contains(f.toLowerCase())) {
+                        if (f != null && userFocus.contains(normalizeFocus(f))) {
                             return true;
                         }
                     }
