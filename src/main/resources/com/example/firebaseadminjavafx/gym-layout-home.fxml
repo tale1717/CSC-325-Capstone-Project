@@ -17,15 +17,15 @@
             </image>
         </ImageView>
 
-        <ImageView layoutX="100.0" layoutY="100.0" fitHeight="300.0" fitWidth="400.0" preserveRatio="false">
+        <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="200.0" layoutY="100.0" preserveRatio="false">
             <image>
-                <Image url="@snowflake.png" />
+                <Image url="@snowicon.png" />
             </image>
         </ImageView>
 
-        <ImageView layoutX="900.0" layoutY="100.0" fitHeight="300.0" fitWidth="400.0" preserveRatio="false">
+        <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="900.0" layoutY="100.0" preserveRatio="false">
             <image>
-                <Image url="@snowflake.png" />
+                <Image url="@snowicon.png" />
             </image>
         </ImageView>
 

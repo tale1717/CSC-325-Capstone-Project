@@ -24,6 +24,18 @@
         </image>
     </ImageView>
 
+    <ImageView fitHeight="900.0" fitWidth="1400.0" preserveRatio="false">
+        <image>
+            <Image url="@christmas-lights.png" />
+        </image>
+    </ImageView>
+
+    <ImageView fitHeight="100.0" fitWidth="140.0" StackPane.alignment="TOP_RIGHT" preserveRatio="false">
+        <image>
+            <Image url="@christmas-bell.png" />
+        </image>
+    </ImageView>
+
     <!-- EXACT SAME STRUCTURE AS THE WORKING FIRST FILE, but with layout adjustments -->
     <!-- Content Container -->
     <VBox alignment="TOP_CENTER" spacing="30.0" style="-fx-padding: 40;">
@@ -32,7 +44,7 @@
         <HBox alignment="TOP_LEFT" spacing="0" style="-fx-padding: 0 0 40 0;">
             <!-- Title on left -->
             <VBox alignment="TOP_LEFT" prefWidth="700">
-                <Label text="Gym Prototype" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 2);">
+                <Label text="Jolly Gymnas" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 5, 0, 0, 2);">
                     <font>
                         <Font size="48.0" />
                     </font>
