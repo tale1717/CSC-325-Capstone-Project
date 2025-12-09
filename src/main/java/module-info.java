@@ -12,7 +12,8 @@ module com.example.firebaseadminjavafx {
     requires google.cloud.core;
 
     requires java.logging;
-    requires org.checkerframework.checker.qual; // adds updates to intellij logs
+    requires org.checkerframework.checker.qual;
+    requires java.desktop; // adds updates to intellij logs
 
     opens com.example.firebaseadminjavafx to javafx.fxml, google.cloud.firestore;
 

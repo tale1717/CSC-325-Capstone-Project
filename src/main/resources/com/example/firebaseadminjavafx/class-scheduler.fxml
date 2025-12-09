@@ -19,6 +19,23 @@
             </image>
         </ImageView>
 
+        <ImageView fitHeight="900.0" fitWidth="1400.0" preserveRatio="false">
+            <image>
+                <Image url="@top-christmas-lights.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="900.0" fitWidth="1400.0" preserveRatio="false"
+                   scaleY="-1"
+                   AnchorPane.bottomAnchor="0"
+                   AnchorPane.leftAnchor="0"
+                   AnchorPane.rightAnchor="0"
+                   AnchorPane.topAnchor="0">
+            <image>
+                <Image url="@top-christmas-lights.png" />
+            </image>
+        </ImageView>
+
         <!-- Title -->
         <Label alignment="CENTER" layoutX="495.0" layoutY="75.0" prefHeight="40.0" prefWidth="370.0" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);" text="View All Classes Below">
             <font>
