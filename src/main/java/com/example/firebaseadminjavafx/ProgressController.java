@@ -6,14 +6,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class ProgressController {
@@ -36,6 +38,11 @@ public class ProgressController {
     @FXML private Label lblSummary;
 
     @FXML private Button backButton;
+
+    // Charts
+    @FXML private LineChart<String, Number> lineChartWeight;
+    @FXML private BarChart<String, Number> barChartGymVisits;
+    @FXML private Label lblGymSmiley;
 
     private final ProgressTracker tracker = new ProgressTracker();
     private final DateTimeFormatter weekFormat =
@@ -66,8 +73,7 @@ public class ProgressController {
         setupTable();
         setupSelectionListener();
 
-        loadFromFirestore();
-
+        loadFromFirestore();   // this calls updateAllCharts() at the end
         updateSummary();
     }
 
@@ -141,6 +147,7 @@ public class ProgressController {
 
             clearInputs();
             updateSummary();
+            updateAllCharts();
 
         } catch (NumberFormatException ex) {
             showError("Please enter valid numeric values.");
@@ -155,6 +162,7 @@ public class ProgressController {
             tableProgress.getSelectionModel().clearSelection();
             clearInputs();
             updateSummary();
+            updateAllCharts();
 
             deleteEntryFromFirestore(selected);
         } else {
@@ -223,6 +231,7 @@ public class ProgressController {
 
             tableProgress.refresh();
             updateSummary();
+            updateAllCharts();
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -266,6 +275,75 @@ public class ProgressController {
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
+        }
+    }
+
+    // ========= CHART HELPERS =========
+
+    private void updateAllCharts() {
+        updateWeightChart();
+        updateGymVisitsChartAndSmiley();
+    }
+
+    private void updateWeightChart() {
+        if (lineChartWeight == null) {
+            return; // FXML not loaded or chart not present
+        }
+
+        lineChartWeight.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Weight");
+
+        // Sort entries by week so the graph goes in time order
+        List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
+        sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
+
+        for (WeeklyProgress wp : sorted) {
+            String weekLabel = wp.getWeekStart().format(weekFormat);
+            Number weight = wp.getWeight();
+            series.getData().add(new XYChart.Data<>(weekLabel, weight));
+        }
+
+        lineChartWeight.getData().add(series);
+    }
+
+    private void updateGymVisitsChartAndSmiley() {
+        if (barChartGymVisits == null) {
+            return;
+        }
+
+        barChartGymVisits.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Gym Visits");
+
+        List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
+        sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
+
+        WeeklyProgress latest = null;
+
+        for (WeeklyProgress wp : sorted) {
+            String weekLabel = wp.getWeekStart().format(weekFormat);
+            Number visits = wp.getGymVisits();
+            series.getData().add(new XYChart.Data<>(weekLabel, visits));
+            latest = wp; // last in sorted list will be latest week
+        }
+
+        barChartGymVisits.getData().add(series);
+
+        // Handle smiley: if latest week has 3+ gym visits, show a happy message
+        if (lblGymSmiley != null) {
+            if (latest != null) {
+                int visits = latest.getGymVisits();
+                if (visits >= 3) {
+                    lblGymSmiley.setText("😊 Great job! You went " + visits + " times this week!");
+                } else {
+                    lblGymSmiley.setText("💪 You went " + visits + " times. Aim for 3 next week!");
+                }
+            } else {
+                lblGymSmiley.setText("");
+            }
         }
     }
 
