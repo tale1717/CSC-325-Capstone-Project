@@ -7,7 +7,10 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
 
+
+<?import javafx.scene.image.Image?>
 <VBox fx:id="mainContainer" alignment="TOP_CENTER" spacing="20"
       stylesheets="@welcome.css"
       xmlns="http://javafx.com/javafx/11.0.1"
@@ -18,10 +21,21 @@
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
 
+    <ImageView fitHeight="80" fitWidth="80">
+        <image>
+            <Image url="@christmas-ornaments.png" />
+        </image>
+    </ImageView>
+
     <!-- Title -->
-    <Label fx:id="titleLabel" text="Gym Prototype" style="-fx-font-weight: bold;">
+    <Label fx:id="titleLabel" text="Gym App" style="-fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);" >
         <font>
-            <Font size="24.0" />
+            <Font size="26.0" />
+        </font>
+    </Label>
+    <Label fx:id="subLabel" text="Jolly Gymnas" style="-fx-font-weight: bold; -fx-text-fill: #B71C1C; -fx-effect: dropshadow(three-pass-box, rgba(255,100,0,0.8), 2, 0, 0, 1);">
+        <font>
+            <Font size="18.0" />
         </font>
     </Label>
 
