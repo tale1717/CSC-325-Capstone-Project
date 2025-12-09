@@ -4,18 +4,25 @@ import com.example.firebaseadminjavafx.logic.Main;
 import com.example.firebaseadminjavafx.logic.ProgressTracker;
 import com.example.firebaseadminjavafx.logic.WeeklyProgress;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class ProgressController {
@@ -36,8 +43,11 @@ public class ProgressController {
     @FXML private TableColumn<WeeklyProgress, Number> colCalories;
 
     @FXML private Label lblSummary;
-
     @FXML private Button backButton;
+
+    @FXML private LineChart<String, Number> lineChartWeight;
+    @FXML private BarChart<String, Number> barChartGymVisits;
+    @FXML private Label lblGymSmiley;
 
     private final ProgressTracker tracker = new ProgressTracker();
     private final DateTimeFormatter weekFormat =
@@ -52,7 +62,7 @@ public class ProgressController {
         userId = Main.currentUserUid;
 
         if (db == null) {
-            System.out.println("Firestore not initialized; check Main.initFirebase.");
+            System.out.println("Firestore not initialized; skipping Firestore operations.");
         }
 
         if (userId == null || userId.isEmpty()) {
@@ -64,6 +74,7 @@ public class ProgressController {
 
         setupTable();
         setupSelectionListener();
+
         loadFromFirestore();
         updateSummary();
     }
@@ -108,49 +119,39 @@ public class ProgressController {
         );
     }
 
-    // ========= BUTTON HANDLERS =========
-
     @FXML
     private void onSaveClicked() {
-        LocalDate date = datePickerWeek.getValue();
-        if (date == null) {
-            showError("Please select a date for the week.");
-            return;
+        try {
+            LocalDate date = datePickerWeek.getValue();
+            if (date == null) {
+                showError("Please select a date for the week.");
+                return;
+            }
+
+            LocalDate weekStart = getWeekStart(date);
+
+            double weight = Double.parseDouble(txtWeight.getText().trim());
+            int gymVisits = Integer.parseInt(txtGymVisits.getText().trim());
+            int minutes = Integer.parseInt(txtMinutesAtGym.getText().trim());
+            int machines = Integer.parseInt(txtMachineSessions.getText().trim());
+            int calories = Integer.parseInt(txtCalories.getText().trim());
+
+            WeeklyProgress wp = new WeeklyProgress(
+                    weekStart, weight, gymVisits, minutes, machines, calories
+            );
+
+            tracker.addOrUpdate(wp);
+            tableProgress.refresh();
+
+            saveEntryToFirestore(wp);
+
+            clearInputs();
+            updateSummary();
+            updateAllCharts();
+
+        } catch (NumberFormatException ex) {
+            showError("Please enter valid numeric values.");
         }
-
-        LocalDate weekStart = getWeekStart(date);
-
-        Double weight = parseDoubleOrNull(txtWeight.getText().trim(), "Weight");
-        if (weight == null && !txtWeight.getText().trim().isEmpty()) return;
-        if (weight == null) weight = 0.0;
-
-        Integer gymVisits = parseIntOrNull(txtGymVisits.getText().trim(), "Gym visits");
-        if (gymVisits == null && !txtGymVisits.getText().trim().isEmpty()) return;
-        if (gymVisits == null) gymVisits = 0;
-
-        Integer minutes = parseIntOrNull(txtMinutesAtGym.getText().trim(), "Total minutes at gym");
-        if (minutes == null && !txtMinutesAtGym.getText().trim().isEmpty()) return;
-        if (minutes == null) minutes = 0;
-
-        Integer machines = parseIntOrNull(txtMachineSessions.getText().trim(), "Machine sessions");
-        if (machines == null && !txtMachineSessions.getText().trim().isEmpty()) return;
-        if (machines == null) machines = 0;
-
-        Integer calories = parseIntOrNull(txtCalories.getText().trim(), "Calories burned");
-        if (calories == null && !txtCalories.getText().trim().isEmpty()) return;
-        if (calories == null) calories = 0;
-
-        WeeklyProgress wp = new WeeklyProgress(
-                weekStart, weight, gymVisits, minutes, machines, calories
-        );
-
-        tracker.addOrUpdate(wp);
-        tableProgress.refresh();
-
-        saveEntryToFirestore(wp);
-
-        clearInputs();
-        updateSummary();
     }
 
     @FXML
@@ -161,6 +162,7 @@ public class ProgressController {
             tableProgress.getSelectionModel().clearSelection();
             clearInputs();
             updateSummary();
+            updateAllCharts();
 
             deleteEntryFromFirestore(selected);
         } else {
@@ -178,8 +180,6 @@ public class ProgressController {
     private void handleBack() {
         Main.setRoot("gymapp-home.fxml", backButton);
     }
-
-    // ========= FIRESTORE =========
 
     private CollectionReference getUserProgressCollection() {
         if (db == null) {
@@ -207,18 +207,20 @@ public class ProgressController {
                 Long machines = doc.getLong("machineSessions");
                 Long calories = doc.getLong("caloriesBurned");
 
-                if (weekStartStr == null) {
+                if (weekStartStr == null || weight == null ||
+                        gymVisits == null || minutes == null ||
+                        machines == null || calories == null) {
                     continue;
                 }
 
                 LocalDate weekStart = LocalDate.parse(weekStartStr);
                 WeeklyProgress wp = new WeeklyProgress(
                         weekStart,
-                        weight == null ? 0.0 : weight,
-                        gymVisits == null ? 0 : gymVisits.intValue(),
-                        minutes == null ? 0 : minutes.intValue(),
-                        machines == null ? 0 : machines.intValue(),
-                        calories == null ? 0 : calories.intValue()
+                        weight,
+                        gymVisits.intValue(),
+                        minutes.intValue(),
+                        machines.intValue(),
+                        calories.intValue()
                 );
 
                 tracker.addOrUpdate(wp);
@@ -226,6 +228,7 @@ public class ProgressController {
 
             tableProgress.refresh();
             updateSummary();
+            updateAllCharts();
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -272,7 +275,70 @@ public class ProgressController {
         }
     }
 
-    // ========= HELPERS =========
+    private void updateAllCharts() {
+        updateWeightChart();
+        updateGymVisitsChartAndSmiley();
+    }
+
+    private void updateWeightChart() {
+        if (lineChartWeight == null) {
+            return;
+        }
+
+        lineChartWeight.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Weight");
+
+        List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
+        sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
+
+        for (WeeklyProgress wp : sorted) {
+            String weekLabel = wp.getWeekStart().format(weekFormat);
+            Number weight = wp.getWeight();
+            series.getData().add(new XYChart.Data<>(weekLabel, weight));
+        }
+
+        lineChartWeight.getData().add(series);
+    }
+
+    private void updateGymVisitsChartAndSmiley() {
+        if (barChartGymVisits == null) {
+            return;
+        }
+
+        barChartGymVisits.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Gym Visits");
+
+        List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
+        sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
+
+        WeeklyProgress latest = null;
+
+        for (WeeklyProgress wp : sorted) {
+            String weekLabel = wp.getWeekStart().format(weekFormat);
+            Number visits = wp.getGymVisits();
+            series.getData().add(new XYChart.Data<>(weekLabel, visits));
+            latest = wp;
+        }
+
+        barChartGymVisits.getData().add(series);
+
+        if (lblGymSmiley != null) {
+            if (latest != null) {
+                int visits = latest.getGymVisits();
+                if (visits >= 3) {
+                    lblGymSmiley.setText("😊 Great job! You went " + visits + " times this week!");
+                } else {
+                    lblGymSmiley.setText("💪 You went " + visits + " times. Aim for 3 next week!");
+                }
+            } else {
+                lblGymSmiley.setText("");
+            }
+        }
+    }
 
     private void clearInputs() {
         datePickerWeek.setValue(null);
@@ -296,26 +362,6 @@ public class ProgressController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    private Double parseDoubleOrNull(String text, String fieldName) {
-        if (text.isEmpty()) return null;
-        try {
-            return Double.parseDouble(text);
-        } catch (NumberFormatException ex) {
-            showError(fieldName + " must be a number.");
-            return null;
-        }
-    }
-
-    private Integer parseIntOrNull(String text, String fieldName) {
-        if (text.isEmpty()) return null;
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException ex) {
-            showError(fieldName + " must be a whole number.");
-            return null;
-        }
     }
 
     private void updateSummary() {

@@ -2,39 +2,76 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0" xmlns="http://javafx.com/javafx/24.0.1"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.firebaseadminjavafx.controllers.ClassSchedulerController"
-      style="-fx-background-color: #1B5E20;"> <!-- Christmas green background -->
+<AnchorPane prefHeight="900.0" prefWidth="1400.0"
+            style="-fx-background-color: #1B5E20;"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.firebaseadminjavafx.controllers.ClassSchedulerController">
 
     <children>
-        <!-- Title with Christmas gold -->
-        <Label text="Schedule A Class!" style="-fx-text-fill: #FFD700; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 3, 0, 0, 1);">
+
+        <ImageView fitHeight="900.0" fitWidth="1400.0" preserveRatio="false">
+            <image>
+                <Image url="@gymbgimageTwo.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="200.0" layoutY="100.0" preserveRatio="false">
+            <image>
+                <Image url="@snowicon.png" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="300.0" fitWidth="300.0" layoutX="900.0" layoutY="100.0" preserveRatio="false">
+            <image>
+                <Image url="@snowicon.png" />
+            </image>
+        </ImageView>
+
+        <Label layoutX="537.0" layoutY="95.0"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 3, 0, 0, 1);"
+               text="Schedule A Class!">
             <font>
-                <Font size="22.0" />
+                <Font size="48.0" />
             </font>
         </Label>
 
-        <!-- Classes Button - Christmas red -->
-        <Button fx:id="openClassSchdbtn" onAction="#handleOpenClass" prefWidth="200" prefHeight="50"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"
-                text="Classes" />
+        <Button fx:id="openClassSchdbtn"
+                layoutX="600.0" layoutY="320.0"
+                onAction="#handleOpenClass"
+                prefHeight="60.0" prefWidth="220.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"
+                text="Classes">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
 
-        <!-- Admin Button - Christmas red -->
-        <Button fx:id="adminButton" onAction="#handleAdminButton" prefWidth="200" prefHeight="50"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"
-                text="Admin" />
+        <Button fx:id="adminButton"
+                layoutX="600.0" layoutY="440.0"
+                onAction="#handleAdminButton"
+                prefHeight="60.0" prefWidth="220.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"
+                text="Admin">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
 
-        <!-- Back Button - Christmas red -->
-        <Button fx:id="backButton" onAction="#handleBackToMain" prefWidth="120" prefHeight="40"
-                style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"
-                text="Back" />
+        <Button fx:id="backButton"
+                layoutX="600.0" layoutY="560.0"
+                onAction="#handleBackToMain"
+                prefHeight="60.0" prefWidth="220.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 2);"
+                text="Back">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
     </children>
-
-    <padding>
-        <Insets top="40" right="20" bottom="40" left="20" />
-    </padding>
-</VBox>
+</AnchorPane>

@@ -3,35 +3,38 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.controllers.ProgressController">
+            fx:controller="com.example.firebaseadminjavafx.controllers.ProgressController"
+            style="-fx-background-color: #1B5E20">
 
     <top>
         <Label text="Weekly Workout Progress Tracker"
-               textFill="#cd3333"
-               BorderPane.alignment="CENTER">
+               BorderPane.alignment="CENTER"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 18px;">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
+                <Insets top="15" right="10" bottom="15" left="10" />
             </padding>
         </Label>
     </top>
 
     <center>
-        <VBox spacing="10">
+        <VBox spacing="15">
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
+                <Insets top="10" right="15" bottom="15" left="15" />
             </padding>
 
-            <!-- Back Button -->
             <HBox spacing="10">
                 <Button fx:id="backButton"
                         text="Back"
-                        onAction="#handleBack" />
+                        onAction="#handleBack"
+                        prefWidth="100" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
             </HBox>
 
-            <!-- Form -->
             <GridPane hgap="10" vgap="10">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="30" />
@@ -39,33 +42,45 @@
                 </columnConstraints>
 
                 <Label text="Week (pick any day):"
+                       style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <DatePicker fx:id="datePickerWeek"
+                            style="-fx-background-color: white; -fx-border-color: #FFD700;"
                             GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                 <Label text="Weight:"
+                       style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <TextField fx:id="txtWeight" promptText="e.g., 150.5"
+                           style="-fx-background-color: white; -fx-border-color: #FFD700;"
                            GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                 <Label text="Gym visits this week:"
+                       style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <TextField fx:id="txtGymVisits" promptText="e.g., 3"
+                           style="-fx-background-color: white; -fx-border-color: #FFD700;"
                            GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                 <Label text="Total minutes at gym:"
+                       style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <TextField fx:id="txtMinutesAtGym" promptText="e.g., 120"
+                           style="-fx-background-color: white; -fx-border-color: #FFD700;"
                            GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                 <Label text="Machine sessions:"
+                       style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="4" />
                 <TextField fx:id="txtMachineSessions" promptText="e.g., 5"
+                           style="-fx-background-color: white; -fx-border-color: #FFD700;"
                            GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
                 <Label text="Calories burned:"
+                       style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="5" />
                 <TextField fx:id="txtCalories" promptText="e.g., 1800"
+                           style="-fx-background-color: white; -fx-border-color: #FFD700;"
                            GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                 <rowConstraints>
@@ -78,19 +93,65 @@
                 </rowConstraints>
             </GridPane>
 
-            <!-- Buttons -->
-            <HBox spacing="10">
-                <Button text="Save / Update Week" onAction="#onSaveClicked" />
-                <Button text="Delete Selected" onAction="#onDeleteClicked" />
-                <Button text="Clear Form" onAction="#onClearFormClicked" />
+            <HBox spacing="15">
+                <Button text="Save / Update Week" onAction="#onSaveClicked"
+                        prefWidth="140" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+                <Button text="Delete Selected" onAction="#onDeleteClicked"
+                        prefWidth="120" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+                <Button text="Clear Form" onAction="#onClearFormClicked"
+                        prefWidth="100" prefHeight="35"
+                        style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
             </HBox>
 
-            <!-- Summary -->
             <Label fx:id="lblSummary"
+                   style="-fx-text-fill: white; -fx-font-weight: bold;"
                    text="Weeks tracked: 0 | Total gym visits: 0 | Total minutes: 0 | Total calories: 0" />
 
-            <!-- Table -->
-            <TableView fx:id="tableProgress" prefHeight="250">
+            <HBox spacing="15">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <LineChart fx:id="lineChartWeight"
+                               title="Weight Progress"
+                               prefHeight="260"
+                               prefWidth="400"
+                               animated="false"
+                               createSymbols="true"
+                               legendVisible="false"
+                               style="-fx-background-color: #FFF8E1; -fx-border-color: #FFB74D; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 10;">
+                        <xAxis>
+                            <CategoryAxis label="Week" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Weight (lbs)" />
+                        </yAxis>
+                    </LineChart>
+                </VBox>
+
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <BarChart fx:id="barChartGymVisits"
+                              title="Gym Visits per Week"
+                              prefHeight="260"
+                              prefWidth="400"
+                              animated="false"
+                              legendVisible="false"
+                              style="-fx-background-color: #E3F2FD; -fx-border-color: #64B5F6; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 10;">
+                        <xAxis>
+                            <CategoryAxis label="Week" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Visits" />
+                        </yAxis>
+                    </BarChart>
+
+                    <Label fx:id="lblGymSmiley"
+                           text=""
+                           style="-fx-text-fill: #FFFDE7; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+            </HBox>
+
+            <TableView fx:id="tableProgress" prefHeight="260"
+                       style="-fx-background-color: white; -fx-border-color: #FFD700;">
                 <columns>
                     <TableColumn fx:id="colWeek" text="Week Start" />
                     <TableColumn fx:id="colWeight" text="Weight" />
