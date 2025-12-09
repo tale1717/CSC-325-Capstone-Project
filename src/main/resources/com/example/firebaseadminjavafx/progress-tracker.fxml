@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -114,8 +115,52 @@
                    style="-fx-text-fill: white; -fx-font-weight: bold;"
                    text="Weeks tracked: 0 | Total gym visits: 0 | Total minutes: 0 | Total calories: 0" />
 
+            <!-- Charts row: side-by-side -->
+            <HBox spacing="15">
+                <!-- Weight chart -->
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <LineChart fx:id="lineChartWeight"
+                               title="Weight Progress"
+                               prefHeight="260"
+                               prefWidth="400"
+                               animated="false"
+                               createSymbols="true"
+                               legendVisible="false"
+                               style="-fx-background-color: #FFF8E1; -fx-border-color: #FFB74D; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 10;">
+                        <xAxis>
+                            <CategoryAxis label="Week" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Weight (lbs)" />
+                        </yAxis>
+                    </LineChart>
+                </VBox>
+
+                <!-- Gym visits chart + smiley -->
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <BarChart fx:id="barChartGymVisits"
+                              title="Gym Visits per Week"
+                              prefHeight="260"
+                              prefWidth="400"
+                              animated="false"
+                              legendVisible="false"
+                              style="-fx-background-color: #E3F2FD; -fx-border-color: #64B5F6; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 10;">
+                        <xAxis>
+                            <CategoryAxis label="Week" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Visits" />
+                        </yAxis>
+                    </BarChart>
+
+                    <Label fx:id="lblGymSmiley"
+                           text=""
+                           style="-fx-text-fill: #FFFDE7; -fx-font-size: 16px; -fx-font-weight: bold;" />
+                </VBox>
+            </HBox>
+
             <!-- Table -->
-            <TableView fx:id="tableProgress" prefHeight="250"
+            <TableView fx:id="tableProgress" prefHeight="260"
                        style="-fx-background-color: white; -fx-border-color: #FFD700;">
                 <columns>
                     <TableColumn fx:id="colWeek" text="Week Start" />
