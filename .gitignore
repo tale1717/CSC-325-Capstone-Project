@@ -12,7 +12,7 @@ target/
 *.iws
 *.iml
 *.ipr
-src/main/key.json
+src/main/resources/key.json
 
 ### Eclipse ###
 .apt_generated

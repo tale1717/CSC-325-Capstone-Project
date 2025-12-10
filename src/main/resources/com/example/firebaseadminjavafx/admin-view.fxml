@@ -8,7 +8,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.AdminController"
+            fx:controller="com.example.firebaseadminjavafx.controllers.AdminController"
             fx:id="gymAdminRoot"
             style="-fx-background: #1B5E20; -fx-background-color: #1B5E20;"
             fitToWidth="true"

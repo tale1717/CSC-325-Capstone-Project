@@ -7,7 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #1B5E20;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.firebaseadminjavafx.GymLayoutHomeController">
+<AnchorPane prefHeight="900.0" prefWidth="1400.0"
+            style="-fx-background-color: #1B5E20;"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.firebaseadminjavafx.controllers.GymLayoutHomeController">
 
     <children>
 
@@ -29,29 +33,45 @@
             </image>
         </ImageView>
 
-        <!-- Title - Christmas White -->
-        <Label layoutX="537.0" layoutY="95.0" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);" text="Gym Layout Home">
+        <Label layoutX="537.0" layoutY="95.0"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);"
+               text="Gym Layout Home">
             <font>
                 <Font size="48.0" />
             </font>
         </Label>
 
-        <!-- Open Gym Map Button - Christmas Red -->
-        <Button fx:id="openMapButton" layoutX="600.0" layoutY="320.0" onAction="#handleOpenMap" prefHeight="60.0" prefWidth="220.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Open Gym Map">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
+        <Button fx:id="openMapButton"
+                layoutX="600.0" layoutY="320.0"
+                onAction="#handleOpenMap"
+                prefHeight="60.0" prefWidth="220.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Open Gym Map">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
 
-        <!-- Admin Button - Christmas Red -->
-        <Button fx:id="adminButton" layoutX="600.0" layoutY="440.0" onAction="#handleAdmin" prefHeight="60.0" prefWidth="220.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Admin">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
+        <Button fx:id="adminButton"
+                layoutX="600.0" layoutY="440.0"
+                onAction="#handleAdmin"
+                prefHeight="60.0" prefWidth="220.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Admin">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
 
-        <!-- Back Button - Christmas Red -->
-        <Button fx:id="backButton" layoutX="600.0" layoutY="560.0" onAction="#handleBack" prefHeight="60.0" prefWidth="220.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Back">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
+        <Button fx:id="backButton"
+                layoutX="600.0" layoutY="560.0"
+                onAction="#handleBack"
+                prefHeight="60.0" prefWidth="220.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Back">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>
