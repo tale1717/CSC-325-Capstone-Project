@@ -15,6 +15,13 @@ import javafx.collections.ObservableSet;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+import java.time.LocalDate;
+import com.example.firebaseadminjavafx.logic.SuggestedMachineStore;
+
+
 
 import java.time.Instant;
 import java.util.*;
@@ -300,6 +307,75 @@ public class WorkoutPlanningController {
             planBuilder.append("- ").append(m).append("\n");
         }
 
+        // Feed list into global suggested machine store for Gym Layout highlighting
+        SuggestedMachineStore.clear();
+        for (String m : machineSuggestions) {
+
+            // Convert visible text → machine code used in GymLayout
+            switch (m) {
+                case "T1 Treadmills":
+                case "T1/T2 Treadmills":
+                    SuggestedMachineStore.add("T1");
+                    SuggestedMachineStore.add("T2");
+                    break;
+
+                case "T1":
+                    SuggestedMachineStore.add("T1");
+                    break;
+
+                case "T2":
+                    SuggestedMachineStore.add("T2");
+                    break;
+
+                case "E1/E2/E3 Ellipticals":
+                    SuggestedMachineStore.add("E1");
+                    SuggestedMachineStore.add("E2");
+                    SuggestedMachineStore.add("E3");
+                    break;
+
+                case "Cable machine C1":
+                case "C1 Cable Machine":
+                    SuggestedMachineStore.add("C1");
+                    break;
+
+                case "W1 Weight Assist Dip/Chin":
+                    SuggestedMachineStore.add("W1");
+                    break;
+
+                case "P1 Preacher Curl":
+                    SuggestedMachineStore.add("P1");
+                    break;
+
+                case "OB1 Olympic Bench":
+                    SuggestedMachineStore.add("OB1");
+                    break;
+
+                case "OI1 Olympic Incline":
+                    SuggestedMachineStore.add("OI1");
+                    break;
+
+                case "AD1 Adductor":
+                    SuggestedMachineStore.add("AD1");
+                    break;
+
+                case "AB1 Abductor":
+                    SuggestedMachineStore.add("AB1");
+                    break;
+
+                case "PC1 Chest Press":
+                case "Chest Press (PC1)":
+                    SuggestedMachineStore.add("PC1");
+                    break;
+            }
+        }
+
+
+        String progressSuggestions = buildProgressSuggestions(goalLower, sessionsPerWeekVal, focusList);
+        if (!progressSuggestions.isBlank()) {
+            planBuilder.append("\nProgress-based suggestions:\n");
+            planBuilder.append(progressSuggestions).append("\n");
+        }
+
         String summary = String.format(
                 "Name: %s%n" +
                         "Height: %.1f in%n" +
@@ -348,6 +424,162 @@ public class WorkoutPlanningController {
             log.info("Workout plan save failed for user: " + Main.currentUserEmail);
         }
     }
+
+    private String buildProgressSuggestions(String goalLower, int targetSessions, List<String> focusList) {
+        if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
+            return "";
+        }
+
+        try {
+            CollectionReference col = Main.fstore
+                    .collection("users")
+                    .document(Main.currentUserUid)
+                    .collection("weeklyProgress");
+
+            ApiFuture<QuerySnapshot> future =
+                    col.orderBy("weekStart").limitToLast(4).get();
+
+            QuerySnapshot snapshot = future.get();
+            List<QueryDocumentSnapshot> docs = snapshot.getDocuments();
+
+            if (docs.size() < 2) {
+                return "";
+            }
+
+            double firstWeight = Double.NaN;
+            double lastWeight = Double.NaN;
+            double sumVisits = 0.0;
+            double sumMinutes = 0.0;
+            double sumMachines = 0.0;
+            int count = 0;
+
+            for (QueryDocumentSnapshot doc : docs) {
+                Double w = doc.getDouble("weight");
+                Long visits = doc.getLong("gymVisits");
+                Long minutes = doc.getLong("totalMinutesAtGym");
+                Long machines = doc.getLong("machineSessions");
+
+                if (w == null || visits == null || minutes == null) {
+                    continue;
+                }
+
+                if (Double.isNaN(firstWeight)) {
+                    firstWeight = w;
+                }
+                lastWeight = w;
+
+                sumVisits += visits;
+                sumMinutes += minutes;
+                if (machines != null) {
+                    sumMachines += machines;
+                }
+                count++;
+            }
+
+            if (count < 2 || Double.isNaN(firstWeight) || Double.isNaN(lastWeight)) {
+                return "";
+            }
+
+            double avgVisits = sumVisits / count;
+            double avgMinutes = sumMinutes / count;
+            double avgMachines = sumMachines / Math.max(1, count);
+            double weightDelta = lastWeight - firstWeight;
+
+            boolean wantLoss = goalLower.contains("lose");
+            boolean wantGain = goalLower.contains("gain") || goalLower.contains("strength");
+            boolean wantRecomp = goalLower.contains("recomposition");
+            boolean wantEndurance = goalLower.contains("endurance");
+
+            StringBuilder sb = new StringBuilder();
+
+            // consistency vs target sessions
+            if (avgVisits < Math.max(1, targetSessions - 1)) {
+                sb.append("- You are averaging about ")
+                        .append(String.format("%.1f", avgVisits))
+                        .append(" gym visits per week, but your plan targets ")
+                        .append(targetSessions)
+                        .append(". Consider lowering your sessions per week to 2–3 and focusing on consistency.\n");
+            } else if (avgVisits >= targetSessions + 1) {
+                sb.append("- You are consistently going to the gym more often than your plan expects (about ")
+                        .append(String.format("%.1f", avgVisits))
+                        .append(" visits/week). If workouts feel easy, you could increase intensity or move up an experience level.\n");
+            }
+
+            // weight trend vs goal – loss / recomp
+            if (wantLoss || wantRecomp) {
+                if (weightDelta > -0.5 && weightDelta < 0.5) {
+                    sb.append("- Your weight has been fairly stable over recent weeks. If fat loss is the goal, try tightening nutrition or adding a bit more cardio time.\n");
+                } else if (weightDelta < -3.0) {
+                    sb.append("- You have lost weight fairly quickly over the last few weeks. Make sure you are recovering well and consider slightly increasing calories if you feel overly fatigued.\n");
+                }
+            }
+
+            // weight trend vs goal – gain / strength
+            if (wantGain || (wantRecomp && !wantLoss)) {
+                if (weightDelta < 0.5) {
+                    sb.append("- Your weight is not increasing much over recent weeks. For muscle/strength gain, you may need a small calorie surplus or one more strength-focused session per week.\n");
+                } else if (weightDelta > 3.0) {
+                    sb.append("- You are gaining weight fairly quickly. If you feel sluggish, consider slightly reducing calories or adding a bit more cardio while keeping strength work heavy.\n");
+                }
+            }
+
+            // endurance goal vs minutes
+            if (wantEndurance) {
+                if (avgMinutes < 60.0) {
+                    sb.append("- Your total weekly minutes at the gym are relatively low for an endurance goal. Try building toward at least 60–90 minutes of cardio per week.\n");
+                }
+            }
+
+            // focus vs goal alignment
+            List<String> lowerFocus = new ArrayList<>();
+            for (String f : focusList) {
+                if (f != null) {
+                    lowerFocus.add(f.toLowerCase(Locale.ROOT));
+                }
+            }
+
+            boolean hasCardioFocus = lowerFocus.stream()
+                    .anyMatch(f -> f.contains("cardio") || f.contains("endurance"));
+            boolean hasStrengthFocus = lowerFocus.stream()
+                    .anyMatch(f -> f.contains("upper body")
+                            || f.contains("lower body")
+                            || f.contains("full body")
+                            || f.contains("core"));
+
+            // cardio mismatch / reinforcement
+            if ((wantLoss || wantRecomp || wantEndurance) && !hasCardioFocus) {
+                sb.append("- Your goal involves fat loss or endurance, but your selected focus areas do not include Cardio/Endurance. Consider adding Cardio/Endurance so your classes match your goal better.\n");
+            } else if ((wantLoss || wantRecomp || wantEndurance)
+                    && hasCardioFocus
+                    && weightDelta > -0.5 && weightDelta < 0.5
+                    && avgMinutes < 60.0) {
+                sb.append("- You are choosing some Cardio/Endurance focus, but your recent progress is still limited. Try increasing total weekly cardio minutes or choosing more cardio-focused classes.\n");
+            }
+
+            // strength mismatch: goal is gain but focus is mostly cardio
+            if (wantGain && hasCardioFocus && !hasStrengthFocus) {
+                sb.append("- Your goal is muscle/strength gain, but most of your focus areas are cardio-based. Consider adding more strength-focused areas like Upper Body, Lower Body, or Full Body.\n");
+            }
+
+            // NEW: data-backed strength reinforcement
+            if ((wantGain || wantRecomp) && hasStrengthFocus) {
+                if (avgMachines < 3.0) {
+                    sb.append("- You selected strength-focused areas, but you are averaging relatively few machine sessions per week. Try adding another strength day or a few extra sets to make those sessions more effective.\n");
+                } else if (avgMachines >= 5.0 && weightDelta < 0.5) {
+                    sb.append("- You are doing a solid number of machine sessions each week, but your weight is not moving much. Consider slightly increasing calories or moving up in weight on key lifts.\n");
+                }
+            }
+
+            String result = sb.toString().trim();
+            return result.isEmpty() ? "" : result;
+
+        } catch (Exception e) {
+            log.info("Progress suggestions failed: " + e.getMessage());
+            return "";
+        }
+    }
+
+
 
     @FXML
     private void handleBack() {

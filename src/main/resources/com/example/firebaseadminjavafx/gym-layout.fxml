@@ -59,7 +59,7 @@
                style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
                text="YES" />
 
-        <!-- Top strength machines: P1, S1, O1 -->
+        <!-- Top strength machines: P1, S1, OB1 -->
         <Label layoutX="433.0" layoutY="98.0"
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
                text="P1" />
@@ -68,7 +68,7 @@
                text="S1" />
         <Label layoutX="622.0" layoutY="98.0"
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
-               text="O1" />
+               text="OB1" />
 
         <!-- Their status labels -->
         <Label fx:id="preacherCurl1StatusLabel"
@@ -118,7 +118,7 @@
                style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
                text="YES" />
 
-        <!-- Chest Press C1 (center area) -->
+        <!-- Chest Press PC1 (center area) -->
         <Label layoutX="309.0" layoutY="266.0"
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
                text="PC1" />
@@ -128,13 +128,13 @@
                style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
                text="YES" />
 
-        <!-- Adductor / Abductor A1, A2 -->
+        <!-- Adductor / Abductor AD1, AB1 -->
         <Label layoutX="472.0" layoutY="301.0"
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
-               text="A1" />
+               text="AD1" />
         <Label layoutX="471.0" layoutY="364.0"
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
-               text="A2" />
+               text="AB1" />
 
         <Label fx:id="adductor1StatusLabel"
                layoutX="520.0" layoutY="299.0"

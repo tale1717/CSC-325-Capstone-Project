@@ -83,7 +83,7 @@ public class GymClass {
         this.focusAreas = (focusAreas != null) ? focusAreas : new ArrayList<>();
     }
 
-    // New: let Firestore map "focusAreasString" without warnings
+
     public void setFocusAreasString(String focusAreasString) {
         this.focusAreasString = focusAreasString;
     }
