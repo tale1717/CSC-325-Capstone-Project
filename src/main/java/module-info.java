@@ -3,19 +3,22 @@ module com.example.firebaseadminjavafx {
     requires javafx.fxml;
     requires javafx.graphics;
 
-    requires firebase.admin;          // firebase-admin JAR
+    requires firebase.admin;
     requires com.google.auth;
-    requires com.google.auth.oauth2;  // google-auth-library-oauth2-http
+    requires com.google.auth.oauth2;
     requires google.cloud.firestore;
-
-    requires com.google.api.apicommon; // com.google.api.core.ApiFuture
+    requires com.google.api.apicommon;
     requires google.cloud.core;
 
     requires java.logging;
+    requires java.desktop;
     requires org.checkerframework.checker.qual;
-    requires java.desktop; // adds updates to intellij logs
 
-    opens com.example.firebaseadminjavafx to javafx.fxml, google.cloud.firestore;
+    opens com.example.firebaseadminjavafx.controllers to javafx.fxml;
+    opens com.example.firebaseadminjavafx.logic to com.google.gson, google.cloud.firestore, javafx.fxml;
+    opens com.example.firebaseadminjavafx.models to com.google.gson, google.cloud.firestore;
 
-    exports com.example.firebaseadminjavafx;
+    exports com.example.firebaseadminjavafx.logic;
+    exports com.example.firebaseadminjavafx.controllers;
+    exports com.example.firebaseadminjavafx.models;
 }

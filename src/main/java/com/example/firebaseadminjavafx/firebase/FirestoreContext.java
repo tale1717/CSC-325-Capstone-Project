@@ -1,4 +1,4 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.firebase;
 
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;

@@ -9,7 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #1B5E20;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.firebaseadminjavafx.ClassScheduler">
+<AnchorPane prefHeight="900.0" prefWidth="1400.0"
+            style="-fx-background-color: #1B5E20;"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.firebaseadminjavafx.controllers.ClassScheduler">
 
     <children>
 
@@ -25,7 +29,8 @@
             </image>
         </ImageView>
 
-        <ImageView fitHeight="900.0" fitWidth="1400.0" preserveRatio="false"
+        <ImageView fitHeight="900.0" fitWidth="1400.0"
+                   preserveRatio="false"
                    scaleY="-1"
                    AnchorPane.bottomAnchor="0"
                    AnchorPane.leftAnchor="0"
@@ -36,40 +41,61 @@
             </image>
         </ImageView>
 
-        <!-- Title -->
-        <Label alignment="CENTER" layoutX="495.0" layoutY="75.0" prefHeight="40.0" prefWidth="370.0" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);" text="View All Classes Below">
+        <Label alignment="CENTER"
+               layoutX="495.0" layoutY="75.0"
+               prefHeight="40.0" prefWidth="370.0"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.8), 2, 0, 0, 1);"
+               text="View All Classes Below">
             <font>
                 <Font name="System Bold" size="32.0" />
             </font>
         </Label>
 
-        <!-- NEW RED Suggested Classes Button -->
-        <Button layoutX="288.0" layoutY="186.0" onAction="#handleSuggestClass" prefHeight="75.0" prefWidth="240.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Suggested Classes">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
+        <Button layoutX="288.0" layoutY="186.0"
+                onAction="#handleSuggestClasses"
+                prefHeight="75.0" prefWidth="240.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Suggested Classes">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
 
-        <!-- Search Field (from OLD version) -->
-        <TextField fx:id="searchField" layoutX="572.0" layoutY="180.0" prefHeight="80.0" prefWidth="270.0" promptText="Enter Class Name..." style="-fx-background-radius: 5;">
-         <font>
-            <Font size="24.0" />
-         </font></TextField>
+        <TextField fx:id="searchField"
+                   layoutX="572.0" layoutY="180.0"
+                   prefHeight="80.0" prefWidth="270.0"
+                   promptText="Enter Class Name..."
+                   style="-fx-background-radius: 5;">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </TextField>
 
-        <!-- NEW RED Search Button -->
-        <Button fx:id="searchClassButton" layoutX="876.0" layoutY="180.0" onAction="#handleSearchClass" prefHeight="75.0" prefWidth="170.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-background-radius: 5;" text="Go">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font></Button>
+        <Button fx:id="searchClassButton"
+                layoutX="876.0" layoutY="180.0"
+                onAction="#handleSearchClass"
+                prefHeight="75.0" prefWidth="170.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-background-radius: 5;"
+                text="Go">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Button>
 
-        <!-- Available Classes List (from OLD version) -->
-        <ListView fx:id="classListView" layoutX="393.0" layoutY="303.0" prefHeight="300.0" prefWidth="600.0" style="-fx-font-size: 24px;">
-        </ListView>
+        <ListView fx:id="classListView"
+                  layoutX="393.0" layoutY="303.0"
+                  prefHeight="300.0" prefWidth="600.0"
+                  style="-fx-font-size: 24px;" />
 
-        <!-- NEW RED Back Button -->
-        <Button fx:id="backButton" layoutX="591.0" layoutY="642.0" onAction="#handleBackToMain" prefHeight="85.0" prefWidth="185.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Back">
-         <font>
-            <Font size="32.0" />
-         </font></Button>
+        <Button fx:id="backButton"
+                layoutX="591.0" layoutY="642.0"
+                onAction="#handleBackToMain"
+                prefHeight="85.0" prefWidth="185.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Back">
+            <font>
+                <Font size="32.0" />
+            </font>
+        </Button>
     </children>
-
 </AnchorPane>

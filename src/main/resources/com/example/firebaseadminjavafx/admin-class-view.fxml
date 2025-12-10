@@ -9,7 +9,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: #1B5E20;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.firebaseadminjavafx.AdminClassController">
+<AnchorPane fx:id="rootPane"
+            prefHeight="900.0" prefWidth="1400.0"
+            style="-fx-background-color: #1B5E20;"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.firebaseadminjavafx.controllers.AdminClassController">
 
     <children>
 
@@ -19,68 +24,96 @@
             </image>
         </ImageView>
 
-        <ImageView fitHeight="420.0" fitWidth="1200.0" layoutX="100.0" layoutY="20.0" preserveRatio="false">
+        <ImageView fitHeight="420.0" fitWidth="1200.0"
+                   layoutX="100.0" layoutY="20.0" preserveRatio="false">
             <image>
                 <Image url="@snowflakes.png" />
             </image>
         </ImageView>
 
-        <ImageView fitHeight="420.0" fitWidth="1200.0" layoutX="100.0" layoutY="480.0" preserveRatio="false">
+        <ImageView fitHeight="420.0" fitWidth="1200.0"
+                   layoutX="100.0" layoutY="480.0" preserveRatio="false">
             <image>
                 <Image url="@snowflakes.png" />
             </image>
         </ImageView>
 
         <!-- Title - Christmas White -->
-        <Label layoutX="440.0" layoutY="120.0" style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;" text="Admin: Manage Gym Classes">
+        <Label layoutX="440.0" layoutY="120.0"
+               style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold;"
+               text="Admin: Manage Gym Classes">
             <font>
                 <Font name="System Bold" size="42.0" />
             </font>
         </Label>
 
         <!-- Table View -->
-        <TableView fx:id="classTable" layoutX="490.0" layoutY="200.0" prefHeight="360.0" prefWidth="420.0">
+        <TableView fx:id="classTable"
+                   layoutX="490.0" layoutY="200.0"
+                   prefHeight="360.0" prefWidth="420.0"
+                   style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-width: 2; -fx-border-radius: 5;">
             <columns>
-                <TableColumn fx:id="titleColumn" prefWidth="105.0" style="-fx-text-fill: black;" text="Class Name" />
-                <TableColumn fx:id="instructorColumn" prefWidth="105.0" style="-fx-text-fill: black;" text="Instructor" />
-                <TableColumn fx:id="timeColumn" prefWidth="105.0" text="Time" />
-                <TableColumn fx:id="capacityColumn" prefWidth="105.0" text="Capacity" />
+                <TableColumn fx:id="titleColumn" prefWidth="105.0"
+                             text="Class Name" />
+                <TableColumn fx:id="instructorColumn" prefWidth="105.0"
+                             text="Instructor" />
+                <TableColumn fx:id="timeColumn" prefWidth="105.0"
+                             text="Time" />
+                <TableColumn fx:id="capacityColumn" prefWidth="105.0"
+                             text="Capacity" />
+                <!-- Focus areas column used by your branch logic -->
+                <TableColumn fx:id="focusColumn" prefWidth="105.0"
+                             text="Focus Areas" />
             </columns>
-            <style>
-                -fx-background-color: white;
-                -fx-border-color: #FFD700;
-                -fx-border-width: 2;
-                -fx-border-radius: 5;
-
-                .column-header .label {
-                    -fx-text-fill: black;
-                    -fx-font-weight: bold;
-                }
-            </style>
         </TableView>
 
-        <!-- Add Class Button - Christmas Red -->
-        <Button fx:id="addButton" layoutX="400.0" layoutY="590.0" onAction="#handleAddClass" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Add Class">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
+        <!-- Add Class Button -->
+        <Button fx:id="addButton"
+                layoutX="400.0" layoutY="590.0"
+                onAction="#handleAddClass"
+                prefHeight="35.0" prefWidth="130.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Add Class">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
 
-        <!-- Edit Class Button - Christmas Red -->
-        <Button fx:id="editButton" layoutX="550.0" layoutY="590.0" onAction="#handleEditClass" prefHeight="35" prefWidth="130.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Edit Class">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
+        <!-- Edit Class Button -->
+        <Button fx:id="editButton"
+                layoutX="550.0" layoutY="590.0"
+                onAction="#handleEditClass"
+                prefHeight="35" prefWidth="130.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Edit Class">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
 
-        <!-- Delete Class Button - Christmas Red -->
-        <Button fx:id="deleteButton" layoutX="700.0" layoutY="590.0" onAction="#handleDeleteClass" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Delete Class">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
+        <!-- Delete Class Button -->
+        <Button fx:id="deleteButton"
+                layoutX="700.0" layoutY="590.0"
+                onAction="#handleDeleteClass"
+                prefHeight="35.0" prefWidth="130.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Delete Class">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
 
-        <!-- Back Button - Christmas Red -->
-        <Button fx:id="backButton" layoutX="850.0" layoutY="590.0" onAction="#handleBackToMain" prefHeight="35" prefWidth="130.0" style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;" text="Back">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
+        <!-- Back Button -->
+        <Button fx:id="backButton"
+                layoutX="850.0" layoutY="590.0"
+                onAction="#handleBackToMain"
+                prefHeight="35" prefWidth="130.0"
+                style="-fx-background-color: #1B5E20; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"
+                text="Back">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Button>
+
     </children>
 </AnchorPane>

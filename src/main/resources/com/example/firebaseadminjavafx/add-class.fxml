@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.firebaseadminjavafx.controllers.AddClassController"
+      spacing="10" alignment="CENTER"
+      prefWidth="320.0" prefHeight="360.0"
+      style="-fx-padding: 20;">
+
+    <Label text="Gym Class Details"
+           style="-fx-font-weight: bold; -fx-font-size: 16px;" />
+
+    <TextField fx:id="nameField" promptText="Class Name"
+               maxWidth="260"/>
+
+    <TextField fx:id="instructorField" promptText="Instructor"
+               maxWidth="260"/>
+
+    <TextField fx:id="timeField" promptText="Time (e.g., Mon 6pm)"
+               maxWidth="260"/>
+
+    <TextField fx:id="capacityField" promptText="Capacity"
+               maxWidth="260"/>
+
+    <TitledPane text="Focus Areas" expanded="true" maxWidth="260">
+        <content>
+            <VBox spacing="4" style="-fx-padding: 5;">
+                <CheckBox fx:id="focusFullBody"     text="Full Body"/>
+                <CheckBox fx:id="focusUpperBody"    text="Upper Body"/>
+                <CheckBox fx:id="focusLowerBody"    text="Lower Body"/>
+                <CheckBox fx:id="focusCardio"       text="Cardio"/>
+                <CheckBox fx:id="focusStrength"     text="Strength / Weights"/>
+                <CheckBox fx:id="focusFlexibility"  text="Flexibility / Mobility"/>
+            </VBox>
+        </content>
+    </TitledPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="saveButton"
+                text="Save"
+                onAction="#handleAddClass"
+                prefWidth="100"/>
+
+        <Button fx:id="cancelButton"
+                text="Cancel"
+                onAction="#handleCancel"
+                prefWidth="100"/>
+    </HBox>
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+</VBox>

@@ -8,11 +8,10 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.ProgressController"
-            style="-fx-background-color: #1B5E20;">
+            fx:controller="com.example.firebaseadminjavafx.controllers.ProgressController"
+            style="-fx-background-color: #1B5E20">
 
     <top>
-        <!-- Title - Christmas White -->
         <Label text="Weekly Workout Progress Tracker"
                BorderPane.alignment="CENTER"
                style="-fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-font-size: 18px;">
@@ -28,7 +27,6 @@
                 <Insets top="10" right="15" bottom="15" left="15" />
             </padding>
 
-            <!-- Back Button - Christmas Red -->
             <HBox spacing="10">
                 <Button fx:id="backButton"
                         text="Back"
@@ -37,14 +35,12 @@
                         style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
             </HBox>
 
-            <!-- Form -->
             <GridPane hgap="10" vgap="10">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="30" />
                     <ColumnConstraints percentWidth="70" />
                 </columnConstraints>
 
-                <!-- All Labels - White text -->
                 <Label text="Week (pick any day):"
                        style="-fx-text-fill: white; -fx-font-weight: bold;"
                        GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -97,7 +93,6 @@
                 </rowConstraints>
             </GridPane>
 
-            <!-- Action Buttons - Christmas Red -->
             <HBox spacing="15">
                 <Button text="Save / Update Week" onAction="#onSaveClicked"
                         prefWidth="140" prefHeight="35"
@@ -110,14 +105,11 @@
                         style="-fx-background-color: #B71C1C; -fx-text-fill: #FFFAFA; -fx-font-weight: bold; -fx-background-radius: 5;"/>
             </HBox>
 
-            <!-- Summary Label - White text -->
             <Label fx:id="lblSummary"
                    style="-fx-text-fill: white; -fx-font-weight: bold;"
                    text="Weeks tracked: 0 | Total gym visits: 0 | Total minutes: 0 | Total calories: 0" />
 
-            <!-- Charts row: side-by-side -->
             <HBox spacing="15">
-                <!-- Weight chart -->
                 <VBox spacing="5" HBox.hgrow="ALWAYS">
                     <LineChart fx:id="lineChartWeight"
                                title="Weight Progress"
@@ -136,7 +128,6 @@
                     </LineChart>
                 </VBox>
 
-                <!-- Gym visits chart + smiley -->
                 <VBox spacing="5" HBox.hgrow="ALWAYS">
                     <BarChart fx:id="barChartGymVisits"
                               title="Gym Visits per Week"
@@ -159,7 +150,6 @@
                 </VBox>
             </HBox>
 
-            <!-- Table -->
             <TableView fx:id="tableProgress" prefHeight="260"
                        style="-fx-background-color: white; -fx-border-color: #FFD700;">
                 <columns>

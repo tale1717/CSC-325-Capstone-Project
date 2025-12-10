@@ -10,7 +10,7 @@
             prefHeight="565.0" prefWidth="861.0"
             xmlns="http://javafx.com/javafx/25"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.firebaseadminjavafx.GymLayoutController">
+            fx:controller="com.example.firebaseadminjavafx.controllers.GymLayoutController">
 
     <children>
         <ImageView fitHeight="556.0" fitWidth="849.0" layoutX="0.0" layoutY="0.0">
@@ -24,7 +24,7 @@
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
                text="T1" />
         <Label fx:id="treadmill1StatusLabel"
-               layoutX="252.0" layoutY="401.0"
+               layoutX="252.0" layoutY="354.0"
                prefHeight="20.0" prefWidth="40.0"
                style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
                text="YES" />
@@ -34,7 +34,7 @@
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
                text="T2" />
         <Label fx:id="treadmill2StatusLabel"
-               layoutX="253.0" layoutY="354.0"
+               layoutX="253.0" layoutY="401.0"
                prefHeight="20.0" prefWidth="40.0"
                style="-fx-border-color: green; -fx-background-color: lightgreen; -fx-font-weight: bold;"
                text="YES" />
@@ -121,7 +121,7 @@
         <!-- Chest Press C1 (center area) -->
         <Label layoutX="309.0" layoutY="266.0"
                style="-fx-font-weight: bold; -fx-border-color: black; -fx-background-color: #424242; -fx-text-fill: white; -fx-background-radius: 4;"
-               text="C1" />
+               text="PC1" />
         <Label fx:id="chestPress1StatusLabel"
                layoutX="302.0" layoutY="298.0"
                prefHeight="20.0" prefWidth="40.0"
