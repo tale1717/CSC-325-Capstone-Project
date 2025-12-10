@@ -7,25 +7,18 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.firebaseadminjavafx.EnterInfoController"
+      fx:controller="com.example.firebaseadminjavafx.controllers.EnterInfoController"
       alignment="TOP_CENTER" spacing="0"
       style="-fx-background-color: white;"
       prefWidth="800" prefHeight="600">
 
     <children>
 
-        <!-- Green Header Bar - Extended to cover everything above the white area -->
         <VBox style="-fx-background-color: #1B5E20;" spacing="0">
-            <!-- Top section with Gym Prototype and navigation -->
             <HBox style="-fx-padding: 15;">
-                <!-- Gym Prototype Title (Left) -->
                 <Label text="Gym Prototype"
                        style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;"/>
-
-                <!-- Spacer to push buttons to the right -->
                 <Region HBox.hgrow="ALWAYS"/>
-
-                <!-- Navigation Buttons (Right, white text) - Home is now clickable -->
                 <HBox alignment="CENTER_RIGHT" spacing="30">
                     <children>
                         <Button text="Home"
@@ -38,18 +31,13 @@
                     </children>
                 </HBox>
             </HBox>
-
-            <!-- Extended green area to cover where the separator would be -->
             <Region style="-fx-background-color: #1B5E20; -fx-min-height: 50;"/>
         </VBox>
 
-        <!-- White content area starts here with Profile title -->
         <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30 0 20 0;">
 
-            <!-- Page Title -->
             <Label text="Profile" style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: black;"/>
 
-            <!-- Profile Picture -->
             <StackPane alignment="CENTER">
                 <children>
                     <Circle radius="70" fill="#e0e0e0" stroke="#c0c0c0" strokeWidth="2"/>
@@ -57,17 +45,14 @@
                 </children>
             </StackPane>
 
-            <!-- Display Name -->
             <Label fx:id="nameField"
                    text="Your name here"
                    style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: black;"/>
 
-            <!-- Display Email -->
             <Label fx:id="emailField"
                    text="Your email here"
                    style="-fx-font-size: 16px; -fx-text-fill: black;"/>
 
-            <!-- Stats Section -->
             <HBox alignment="CENTER" spacing="120">
                 <children>
                     <VBox alignment="CENTER" spacing="10">
@@ -92,9 +77,6 @@
                     </VBox>
                 </children>
             </HBox>
-
         </VBox>
-
     </children>
-
 </VBox>

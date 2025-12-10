@@ -1,4 +1,4 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.logic;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

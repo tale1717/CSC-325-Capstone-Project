@@ -6,7 +6,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.firebaseadminjavafx.WorkoutPlanningController"
+      fx:controller="com.example.firebaseadminjavafx.controllers.WorkoutPlanningController"
       spacing="20" alignment="CENTER"
       prefWidth="1400.0" prefHeight="900.0"
       style="-fx-background-color: #1B5E20;">
@@ -27,35 +27,60 @@
                     <ColumnConstraints halignment="LEFT" />
                 </columnConstraints>
                 <children>
-                    <!-- All Labels - Now Black Text -->
+                    <!-- Name -->
                     <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
                            style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
                     <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
                                prefWidth="300" prefHeight="35"
                                style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
+                    <!-- Height -->
                     <Label text="Height (inches):" GridPane.rowIndex="1" GridPane.columnIndex="0"
                            style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
                     <TextField fx:id="heightField" GridPane.rowIndex="1" GridPane.columnIndex="1"
                                prefWidth="300" prefHeight="35"
                                style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
+                    <!-- Weight -->
                     <Label text="Weight (pounds):" GridPane.rowIndex="2" GridPane.columnIndex="0"
                            style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
                     <TextField fx:id="weightField" GridPane.rowIndex="2" GridPane.columnIndex="1"
                                prefWidth="300" prefHeight="35"
                                style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
+                    <!-- Age -->
                     <Label text="Age:" GridPane.rowIndex="3" GridPane.columnIndex="0"
                            style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
                     <TextField fx:id="ageField" GridPane.rowIndex="3" GridPane.columnIndex="1"
                                prefWidth="300" prefHeight="35"
                                style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3; -fx-font-size: 14px;"/>
 
+                    <!-- Goal -->
                     <Label text="Goal:" GridPane.rowIndex="4" GridPane.columnIndex="0"
                            style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
                     <ComboBox fx:id="goalBox" GridPane.rowIndex="4" GridPane.columnIndex="1"
                               prefWidth="300" prefHeight="35"
+                              style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+
+                    <!-- Experience Level -->
+                    <Label text="Experience level:" GridPane.rowIndex="5" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <ComboBox fx:id="experienceLevelBox" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                              prefWidth="300" prefHeight="35"
+                              style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+
+                    <!-- Sessions per Week -->
+                    <Label text="Sessions per week:" GridPane.rowIndex="6" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <ComboBox fx:id="sessionsPerWeekBox" GridPane.rowIndex="6" GridPane.columnIndex="1"
+                              prefWidth="300" prefHeight="35"
+                              style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
+
+                    <!-- Focus Areas -->
+                    <Label text="Focus areas:" GridPane.rowIndex="7" GridPane.columnIndex="0"
+                           style="-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <ListView fx:id="focusAreasList" GridPane.rowIndex="7" GridPane.columnIndex="1"
+                              prefWidth="300" prefHeight="120"
                               style="-fx-background-color: white; -fx-border-color: #FFD700; -fx-border-radius: 3; -fx-background-radius: 3;"/>
                 </children>
             </GridPane>

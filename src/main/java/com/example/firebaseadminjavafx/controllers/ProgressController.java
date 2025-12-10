@@ -1,7 +1,15 @@
-package com.example.firebaseadminjavafx;
+package com.example.firebaseadminjavafx.controllers;
 
+import com.example.firebaseadminjavafx.logic.Main;
+import com.example.firebaseadminjavafx.logic.ProgressTracker;
+import com.example.firebaseadminjavafx.logic.WeeklyProgress;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -10,7 +18,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -36,10 +43,8 @@ public class ProgressController {
     @FXML private TableColumn<WeeklyProgress, Number> colCalories;
 
     @FXML private Label lblSummary;
-
     @FXML private Button backButton;
 
-    // Charts
     @FXML private LineChart<String, Number> lineChartWeight;
     @FXML private BarChart<String, Number> barChartGymVisits;
     @FXML private Label lblGymSmiley;
@@ -48,21 +53,18 @@ public class ProgressController {
     private final DateTimeFormatter weekFormat =
             DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
-    // Firestore + user
     private Firestore db;
     private String userId;
 
     @FXML
     private void initialize() {
-        // get Firestore + current user from FirestoreContext
-        db = FirestoreContext.fstore;
-        userId = FirestoreContext.currentUserUid;
+        db = Main.fstore;
+        userId = Main.currentUserUid;
 
         if (db == null) {
             System.out.println("Firestore not initialized; skipping Firestore operations.");
         }
 
-        //  Fallback: if no user set, use a default so things still work
         if (userId == null || userId.isEmpty()) {
             userId = "defaultUser";
             System.out.println("No current user set; using fallback userId = " + userId);
@@ -73,7 +75,7 @@ public class ProgressController {
         setupTable();
         setupSelectionListener();
 
-        loadFromFirestore();   // this calls updateAllCharts() at the end
+        loadFromFirestore();
         updateSummary();
     }
 
@@ -116,8 +118,6 @@ public class ProgressController {
                 }
         );
     }
-
-    // BUTTON HANDLERS
 
     @FXML
     private void onSaveClicked() {
@@ -178,17 +178,14 @@ public class ProgressController {
 
     @FXML
     private void handleBack() {
-        Main.setRoot("gymapp-home", backButton);
+        Main.setRoot("gymapp-home.fxml", backButton);
     }
-
-    // FIRESTORE
 
     private CollectionReference getUserProgressCollection() {
         if (db == null) {
             System.out.println("Firestore not initialized; skipping Firestore operations.");
             return null;
         }
-        // userId is always non-null now (either real user or "defaultUser")
         return db.collection("users")
                 .document(userId)
                 .collection("weeklyProgress");
@@ -278,8 +275,6 @@ public class ProgressController {
         }
     }
 
-    // ========= CHART HELPERS =========
-
     private void updateAllCharts() {
         updateWeightChart();
         updateGymVisitsChartAndSmiley();
@@ -287,7 +282,7 @@ public class ProgressController {
 
     private void updateWeightChart() {
         if (lineChartWeight == null) {
-            return; // FXML not loaded or chart not present
+            return;
         }
 
         lineChartWeight.getData().clear();
@@ -295,7 +290,6 @@ public class ProgressController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Weight");
 
-        // Sort entries by week so the graph goes in time order
         List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
         sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
 
@@ -327,12 +321,11 @@ public class ProgressController {
             String weekLabel = wp.getWeekStart().format(weekFormat);
             Number visits = wp.getGymVisits();
             series.getData().add(new XYChart.Data<>(weekLabel, visits));
-            latest = wp; // last in sorted list will be latest week
+            latest = wp;
         }
 
         barChartGymVisits.getData().add(series);
 
-        // Handle smiley: if latest week has 3+ gym visits, show a happy message
         if (lblGymSmiley != null) {
             if (latest != null) {
                 int visits = latest.getGymVisits();
@@ -346,8 +339,6 @@ public class ProgressController {
             }
         }
     }
-
-    // ========= HELPERS =========
 
     private void clearInputs() {
         datePickerWeek.setValue(null);
