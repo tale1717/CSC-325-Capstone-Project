@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.Font?>
@@ -21,13 +22,15 @@
                 <Region HBox.hgrow="ALWAYS"/>
                 <HBox alignment="CENTER_RIGHT" spacing="30">
                     <children>
-                        <Button text="Home"
+                        <Button fx:id="homeButton"
+                                text="Home"
                                 onAction="#handleHome"
                                 style="-fx-font-size: 16px; -fx-text-fill: white; -fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand; -fx-padding: 0;"/>
-                        <Label text="About" style="-fx-font-size: 16px; -fx-text-fill: white;"/>
+                        <!--<Label text="About" style="-fx-font-size: 16px; -fx-text-fill: white;"/>
                         <Label text="Registration" style="-fx-font-size: 16px; -fx-text-fill: white;"/>
                         <Label text="Progress" style="-fx-font-size: 16px; -fx-text-fill: white;"/>
                         <Label text="Sign In" style="-fx-font-size: 16px; -fx-text-fill: white;"/>
+                        -->
                     </children>
                 </HBox>
             </HBox>
@@ -36,14 +39,22 @@
 
         <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 30 0 20 0;">
 
-            <Label text="Profile" style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+            <Label text="Profile"
+                   style="-fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: black;"/>
 
             <StackPane alignment="CENTER">
                 <children>
                     <Circle radius="70" fill="#e0e0e0" stroke="#c0c0c0" strokeWidth="2"/>
-                    <Label text="Profile Pic here" style="-fx-font-size: 14px; -fx-text-fill: black;"/>
+                    <ImageView fx:id="profileImageView"
+                               fitWidth="120"
+                               fitHeight="120"
+                               preserveRatio="true"/>
                 </children>
             </StackPane>
+
+            <Button text="Change Photo"
+                    onAction="#handleChangePhoto"
+                    style="-fx-font-size: 14px; -fx-text-fill: #1B5E20; -fx-background-color: #E0F2F1; -fx-background-radius: 20; -fx-padding: 5 15 5 15;"/>
 
             <Label fx:id="nameField"
                    text="Your name here"
@@ -55,28 +66,44 @@
 
             <HBox alignment="CENTER" spacing="120">
                 <children>
+
                     <VBox alignment="CENTER" spacing="10">
                         <children>
                             <Label text="⏰" style="-fx-font-size: 40px; -fx-text-fill: #FF0000;"/>
-                            <Label text="Total time spent" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+                            <Label text="Total time spent"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+                            <Label fx:id="totalTimeLabel"
+                                   text="0 min"
+                                   style="-fx-font-size: 16px; -fx-text-fill: black;"/>
                         </children>
                     </VBox>
 
                     <VBox alignment="CENTER" spacing="10">
                         <children>
                             <Label text="🔥" style="-fx-font-size: 40px; -fx-text-fill: #FF5722;"/>
-                            <Label text="Calories burned" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+                            <Label text="Calories burned"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+                            <Label fx:id="totalCaloriesLabel"
+                                   text="0 kcal"
+                                   style="-fx-font-size: 16px; -fx-text-fill: black;"/>
                         </children>
                     </VBox>
 
                     <VBox alignment="CENTER" spacing="10">
                         <children>
                             <Label text="💪" style="-fx-font-size: 40px; -fx-text-fill: #FFEB3B;"/>
-                            <Label text="Exercises done" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+                            <Label text="Exercises done"
+                                   style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: black;"/>
+                            <Label fx:id="totalSessionsLabel"
+                                   text="0 sessions"
+                                   style="-fx-font-size: 16px; -fx-text-fill: black;"/>
                         </children>
                     </VBox>
+
                 </children>
             </HBox>
+
         </VBox>
+
     </children>
 </VBox>

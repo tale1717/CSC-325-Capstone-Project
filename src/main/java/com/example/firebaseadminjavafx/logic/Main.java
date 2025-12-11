@@ -42,7 +42,7 @@ public class Main extends Application {
             mainStage.setScene(scene);
             mainStage.setTitle("GymApp");
             mainStage.sizeToScene();
-            mainStage.centerOnScreen();   // center first window
+            mainStage.centerOnScreen();
             mainStage.show();
         } catch (IOException e) {
             log.log(Level.SEVERE, "Failed to load initial view.", e);
@@ -63,6 +63,7 @@ public class Main extends Application {
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setStorageBucket("gymapp-e38b5.appspot.com")
                     .build();
 
             FirebaseApp app = FirebaseApp.getApps().isEmpty()
@@ -105,7 +106,7 @@ public class Main extends Application {
             }
 
             mainStage.sizeToScene();
-            mainStage.centerOnScreen();   // center after each view change
+            mainStage.centerOnScreen();
 
         } catch (IOException e) {
             log.log(Level.SEVERE, "Failed to switch to view: " + fxmlName, e);
@@ -123,7 +124,7 @@ public class Main extends Application {
 
                 if (mainStage != null) {
                     mainStage.sizeToScene();
-                    mainStage.centerOnScreen();   // keep centered in this path too
+                    mainStage.centerOnScreen();
                 }
             } else {
                 setRoot(fxmlName);

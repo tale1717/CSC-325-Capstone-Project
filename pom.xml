@@ -24,11 +24,19 @@
             <version>9.2.0</version>
         </dependency>
 
+
+
         <!-- Firestore client explicit -->
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-firestore</artifactId>
             <version>3.15.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+            <version>2.22.4</version> <!-- or any version compatible with your firebase-admin -->
         </dependency>
 
    <!--     JavaFX -->

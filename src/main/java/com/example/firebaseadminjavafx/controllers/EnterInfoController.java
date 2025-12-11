@@ -4,22 +4,39 @@ import com.example.firebaseadminjavafx.logic.Main;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.SetOptions;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.cloud.StorageClient;
+import com.google.cloud.storage.Bucket;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 public class EnterInfoController {
 
     private static final Logger log = Logger.getLogger(EnterInfoController.class.getName());
 
-    // --- UI elements from enter-info.fxml ---
     @FXML private Label nameField;
     @FXML private Label emailField;
 
-    // Reference to the Home button in the navigation bar
-    @FXML private Button homeButton;  // We need to add fx:id to the button in FXML
+    @FXML private Label totalTimeLabel;
+    @FXML private Label totalCaloriesLabel;
+    @FXML private Label totalSessionsLabel;
+
+    @FXML private Button homeButton;
+    @FXML private ImageView profileImageView;
 
     @FXML
     private void initialize() {
@@ -28,6 +45,8 @@ public class EnterInfoController {
         if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
             nameField.setText("Not signed in");
             emailField.setText("");
+            setStatLabels(0L, 0L, 0L);
+            loadProfilePhoto(null);
             return;
         }
 
@@ -43,35 +62,139 @@ public class EnterInfoController {
 
             if (snapshot.exists()) {
                 displayName = snapshot.getString("name");
+
+                Long totalMinutes = snapshot.getLong("totalMinutesAtGym");
+                Long totalCalories = snapshot.getLong("totalCaloriesBurned");
+                Long totalSessions = snapshot.getLong("totalMachineSessions");
+
+                setStatLabels(
+                        totalMinutes != null ? totalMinutes : 0L,
+                        totalCalories != null ? totalCalories : 0L,
+                        totalSessions != null ? totalSessions : 0L
+                );
+            } else {
+                setStatLabels(0L, 0L, 0L);
             }
 
-            // If Firestore has a name, show it; otherwise placeholder:
             nameField.setText(displayName != null ? displayName : "Your name here");
-
-            // Show email always:
             emailField.setText(email != null ? email : "Your email here");
+
+            loadProfilePhoto(snapshot);
 
         } catch (Exception e) {
             log.warning("Error loading profile: " + e.getMessage());
             nameField.setText("Error loading profile");
             emailField.setText("");
+            setStatLabels(0L, 0L, 0L);
+            loadProfilePhoto(null);
         }
     }
 
-    // Method to navigate to Home page when clicking "Home" in navigation bar
+    private void setStatLabels(Long totalMinutes,
+                               Long totalCalories,
+                               Long totalSessions) {
+        if (totalTimeLabel != null) {
+            totalTimeLabel.setText(totalMinutes + " min");
+        }
+        if (totalCaloriesLabel != null) {
+            totalCaloriesLabel.setText(totalCalories + " kcal");
+        }
+        if (totalSessionsLabel != null) {
+            totalSessionsLabel.setText(totalSessions + " sessions");
+        }
+    }
+
+    private void loadProfilePhoto(DocumentSnapshot snapshot) {
+        if (profileImageView == null) {
+            return;
+        }
+        try {
+            if (snapshot != null && snapshot.exists()) {
+                String url = snapshot.getString("profilePhotoUrl");
+                if (url != null && !url.isEmpty()) {
+                    profileImageView.setImage(new Image(url, true));
+                } else {
+                    profileImageView.setImage(null);
+                }
+            } else {
+                profileImageView.setImage(null);
+            }
+        } catch (Exception e) {
+            log.warning("Error loading profile photo: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleChangePhoto() {
+        try {
+            if (Main.currentUserUid == null || Main.currentUserUid.isEmpty()) {
+                showAlert("Not signed in", "You must be signed in to change your profile picture.");
+                return;
+            }
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose Profile Picture");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+            );
+
+            Window window = null;
+            if (nameField != null && nameField.getScene() != null) {
+                window = nameField.getScene().getWindow();
+            } else if (homeButton != null && homeButton.getScene() != null) {
+                window = homeButton.getScene().getWindow();
+            }
+
+            File file = fileChooser.showOpenDialog(window);
+            if (file == null) {
+                return;
+            }
+
+            String uid = Main.currentUserUid;
+            String objectName = "profilePictures/" + uid + "-" + System.currentTimeMillis();
+
+            Bucket bucket = StorageClient.getInstance().bucket();
+            try (InputStream in = new FileInputStream(file)) {
+                bucket.create(objectName, in, "image/jpeg");
+            }
+
+            String bucketName = FirebaseApp.getInstance().getOptions().getStorageBucket();
+            String publicUrl = "https://storage.googleapis.com/" + bucketName + "/" + objectName;
+
+            DocumentReference userDoc =
+                    Main.fstore.collection("Users").document(uid);
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("profilePhotoUrl", publicUrl);
+            userDoc.set(data, SetOptions.merge()).get();
+
+            if (profileImageView != null) {
+                profileImageView.setImage(new Image(publicUrl, true));
+            }
+
+        } catch (Exception e) {
+            log.warning("Error uploading profile photo: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Upload failed", "Could not upload profile picture.");
+        }
+    }
+
     @FXML
     private void handleHome() {
         try {
             log.info("handleHome() called - navigating to gymapp-home.fxml");
-
-            // We need to pass a Control object to Main.setRoot()
-            // The homeButton is a Control that we can pass
-            // But first, let's use the nameField which is also a Control
             Main.setRoot("gymapp-home.fxml", nameField);
-
         } catch (Exception e) {
             log.severe("Error navigating to home: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

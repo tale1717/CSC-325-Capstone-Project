@@ -4,10 +4,12 @@ module com.example.firebaseadminjavafx {
     requires javafx.graphics;
 
     requires firebase.admin;
+
     requires com.google.auth;
     requires com.google.auth.oauth2;
     requires google.cloud.firestore;
     requires com.google.api.apicommon;
+    requires google.cloud.storage;
     requires google.cloud.core;
 
     requires java.logging;

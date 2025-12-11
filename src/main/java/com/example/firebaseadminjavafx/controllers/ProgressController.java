@@ -9,6 +9,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -48,6 +49,9 @@ public class ProgressController {
     @FXML private LineChart<String, Number> lineChartWeight;
     @FXML private BarChart<String, Number> barChartGymVisits;
     @FXML private Label lblGymSmiley;
+
+    @FXML private BarChart<String, Number> barChartCalories;
+    @FXML private LineChart<String, Number> lineChartMinutes;
 
     private final ProgressTracker tracker = new ProgressTracker();
     private final DateTimeFormatter weekFormat =
@@ -278,6 +282,8 @@ public class ProgressController {
     private void updateAllCharts() {
         updateWeightChart();
         updateGymVisitsChartAndSmiley();
+        updateCaloriesChart();
+        updateMinutesChart();
     }
 
     private void updateWeightChart() {
@@ -340,6 +346,50 @@ public class ProgressController {
         }
     }
 
+    private void updateCaloriesChart() {
+        if (barChartCalories == null) {
+            return;
+        }
+
+        barChartCalories.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Calories");
+
+        List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
+        sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
+
+        for (WeeklyProgress wp : sorted) {
+            String weekLabel = wp.getWeekStart().format(weekFormat);
+            Number calories = wp.getCaloriesBurned();
+            series.getData().add(new XYChart.Data<>(weekLabel, calories));
+        }
+
+        barChartCalories.getData().add(series);
+    }
+
+    private void updateMinutesChart() {
+        if (lineChartMinutes == null) {
+            return;
+        }
+
+        lineChartMinutes.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Minutes at Gym");
+
+        List<WeeklyProgress> sorted = new ArrayList<>(tracker.getEntries());
+        sorted.sort(Comparator.comparing(WeeklyProgress::getWeekStart));
+
+        for (WeeklyProgress wp : sorted) {
+            String weekLabel = wp.getWeekStart().format(weekFormat);
+            Number minutes = wp.getTotalMinutesAtGym();
+            series.getData().add(new XYChart.Data<>(weekLabel, minutes));
+        }
+
+        lineChartMinutes.getData().add(series);
+    }
+
     private void clearInputs() {
         datePickerWeek.setValue(null);
         txtWeight.clear();
@@ -370,10 +420,41 @@ public class ProgressController {
         int totalGymVisits = entries.stream().mapToInt(WeeklyProgress::getGymVisits).sum();
         int totalMinutes = entries.stream().mapToInt(WeeklyProgress::getTotalMinutesAtGym).sum();
         int totalCalories = entries.stream().mapToInt(WeeklyProgress::getCaloriesBurned).sum();
+        int totalMachines = entries.stream().mapToInt(WeeklyProgress::getMachineSessions).sum();
 
         lblSummary.setText(String.format(
                 "Weeks tracked: %d | Total gym visits: %d | Total minutes: %d | Total calories: %d",
                 totalWeeks, totalGymVisits, totalMinutes, totalCalories
         ));
+
+        saveAggregatesToUserDoc(totalMinutes, totalCalories, totalGymVisits, totalMachines);
+    }
+
+    private void saveAggregatesToUserDoc(int totalMinutes,
+                                         int totalCalories,
+                                         int totalGymVisits,
+                                         int totalMachines) {
+        if (db == null) {
+            return;
+        }
+        if (userId == null || userId.isEmpty() || "defaultUser".equals(userId)) {
+            return;
+        }
+
+        try {
+            Map<String, Object> data = new HashMap<>();
+            data.put("totalMinutesAtGym", totalMinutes);
+            data.put("totalCaloriesBurned", totalCalories);
+            data.put("totalGymVisits", totalGymVisits);
+            data.put("totalMachineSessions", totalMachines);
+
+            DocumentReference userDoc =
+                    db.collection("Users").document(userId);
+
+            userDoc.set(data, SetOptions.merge()).get();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

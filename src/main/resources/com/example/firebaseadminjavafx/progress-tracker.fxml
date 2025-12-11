@@ -150,6 +150,43 @@
                 </VBox>
             </HBox>
 
+            <HBox spacing="15">
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <BarChart fx:id="barChartCalories"
+                              title="Calories Burned per Week"
+                              prefHeight="260"
+                              prefWidth="400"
+                              animated="false"
+                              legendVisible="false"
+                              style="-fx-background-color: #FBE9E7; -fx-border-color: #FFAB91; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 10;">
+                        <xAxis>
+                            <CategoryAxis label="Week" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Calories" />
+                        </yAxis>
+                    </BarChart>
+                </VBox>
+
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <LineChart fx:id="lineChartMinutes"
+                               title="Minutes at Gym per Week"
+                               prefHeight="260"
+                               prefWidth="400"
+                               animated="false"
+                               createSymbols="true"
+                               legendVisible="false"
+                               style="-fx-background-color: #E8F5E9; -fx-border-color: #81C784; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 10;">
+                        <xAxis>
+                            <CategoryAxis label="Week" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Minutes" />
+                        </yAxis>
+                    </LineChart>
+                </VBox>
+            </HBox>
+
             <TableView fx:id="tableProgress" prefHeight="260"
                        style="-fx-background-color: white; -fx-border-color: #FFD700;">
                 <columns>
